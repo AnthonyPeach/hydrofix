@@ -1,0 +1,97 @@
+name: Weekly blog post
+
+# Writes ONE new blog post following .claude/blog-playbook.md and opens a Pull
+# Request for review. Nothing publishes automatically — merging the PR (after
+# checking the Netlify Deploy Preview) is the go-live gate.
+
+on:
+  workflow_dispatch: {}          # run manually from the Actions tab any time
+  schedule:
+    # Tuesdays 12:00 UTC ≈ 8am America/New_York during EDT (7am during EST).
+    # GitHub cron has no timezone; change to '0 13 * * 2' if you prefer 8am in winter.
+    - cron: '0 12 * * 2'
+
+permissions:
+  contents: write         # push the post branch
+  pull-requests: write    # open the PR
+
+concurrency:
+  group: weekly-blog
+  cancel-in-progress: false
+
+jobs:
+  write-post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the site
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Cleanly skip (not fail) if the API key hasn't been added yet, so
+      # scheduled runs don't send failure emails before setup is complete.
+      - name: Require ANTHROPIC_API_KEY
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::warning::ANTHROPIC_API_KEY secret not set — skipping this run."
+            echo "skip=true" >> "$GITHUB_ENV"
+          fi
+
+      - name: Stop if skipping
+        if: env.skip == 'true'
+        run: exit 0
+
+      # Generate the post. Claude edits files only — it does not commit/push.
+      # NOTE: verify the action ref/version and the tool-permission flag against
+      # current Anthropic docs on the first manual run (see repo notes / chat).
+      - name: Write the post with Claude
+        if: env.skip != 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_args: '--allowedTools "Read,Write,Edit,Glob,Grep"'
+          prompt: |
+            Follow .claude/blog-playbook.md EXACTLY to publish one new blog post.
+            1. Read .claude/blog-playbook.md and obey its DO NOT list.
+            2. In .claude/blog-topics.md, take the top line that has no [done] prefix.
+               If every line is [done], make no changes and stop.
+            3. Create blog/<slug>.html from the template and make the exact edits
+               the playbook's checklist lists: the new post, blog.html (add the
+               card at the top of the grid and bump the article count everywhere),
+               and sitemap.xml (one new <url>). Meet every SEO requirement.
+            4. Prepend "[done] " to that topic line in .claude/blog-topics.md.
+            Edit files only. Do NOT run git, commit, push, or deploy.
+
+      - name: Open a pull request
+        if: env.skip != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "No changes produced (topic queue may be empty) — nothing to open."
+            exit 0
+          fi
+          slug=$(git status --porcelain -- 'blog/*.html' \
+                 | grep -oE 'blog/[a-z0-9-]+\.html' | head -1 \
+                 | sed -e 's#blog/##' -e 's#\.html##')
+          [ -n "$slug" ] || slug="weekly-$(date +%Y%m%d)"
+          branch="blog/$slug"
+          git config user.name  "hydrofix-blog-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add -A
+          git commit -m "Add blog post: $slug" \
+                     -m "Automated draft via the weekly blog pipeline (.claude/blog-playbook.md). Review the Netlify Deploy Preview before merging." \
+                     -m "Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
+          git push -u origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "Blog: $slug" \
+            --body "$(printf '%s\n' \
+              "Automated weekly draft following \`.claude/blog-playbook.md\`." \
+              "" \
+              "**Before merging:** open the Netlify Deploy Preview linked on this PR, read the post, and confirm the internal links and layout look right. Merging to \`main\` publishes it to myhydrofix.com." \
+              "" \
+              "🤖 Generated with [Claude Code](https://claude.com/claude-code)")"
