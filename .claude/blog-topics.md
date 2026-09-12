@@ -4,7 +4,7 @@ Convention: one topic per line. A run takes the **top line without a `[done]` pr
 writes that post, and prepends `[done] ` to the line when the PR is opened/merged.
 Add new topics at the bottom. Keep ~10+ undone at all times.
 
-Drainage Red Flags to Check Before Buying a Home in the Southeast
+[done] Drainage Red Flags to Check Before Buying a Home in the Southeast
 Preparing Your Property's Drainage for Hurricane Season
 When Your Neighbor's Runoff Floods Your Yard: Causes and Fixes
 Pool Deck and Patio Drainage for Southeast Homes
