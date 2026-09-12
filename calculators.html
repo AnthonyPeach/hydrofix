@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="google-site-verification" content="fE31P88cVNMa42XCJ7lVvl9_YecggaYuQDI_9U91cBw">
+  <meta name="facebook-domain-verification" content="rxgkz3ndxpkz7jjd44he71zfshca52">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/favicon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<title>Free Drainage ROI Calculators | Hydro Fix</title>
+<meta name="description" content="See exactly what poor drainage is costing your golf course, sports complex, or solar farm — and what Hydro Fix recovers. Free interactive calculators.">
+<link rel="canonical" href="https://myhydrofix.com/calculators">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --white:#ffffff;--cream:#f7f3ee;--cream-dark:#ede8df;
+  --navy:#0e1f2f;--navy-mid:#1c3448;
+  --teal:#2d7d6f;--teal-light:#3d9d8d;--teal-pale:#e8f4f2;
+  --text:#0e1f2f;--text-mid:#3d5568;--text-light:#7a94a8;
+  --border:rgba(14,31,47,0.1);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Inter',system-ui,sans-serif;
+  --max:1100px;--r:8px;--r-lg:16px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--white);color:var(--text);line-height:1.65;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:72px;display:flex;align-items:center;padding:0 5%;}
+.nav-inner{max-width:var(--max);margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo-text{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--navy);text-decoration:none;}
+.nav-logo-text span{color:var(--teal);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-size:14px;font-weight:400;color:var(--text-mid);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--navy);}
+.nav-cta{background:var(--navy);color:#fff;font-size:14px;font-weight:500;padding:11px 24px;border-radius:100px;text-decoration:none;transition:background 0.2s;white-space:nowrap;}
+.nav-cta:hover{background:var(--teal);}
+.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;z-index:201;}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--navy);margin:5px 0;transition:0.3s;}
+.mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:20px 5%;z-index:199;max-height:calc(100vh - 72px);overflow-y:auto;}
+.mobile-menu.open{display:block;}
+.mobile-menu a{display:block;padding:12px 0;font-size:16px;color:var(--text-mid);text-decoration:none;border-bottom:1px solid var(--border);}
+.mobile-menu a:last-child{border-bottom:none;}
+.mobile-section-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light);padding:14px 0 6px;}
+.mobile-sub{padding-left:16px!important;font-size:14px!important;color:var(--text-mid)!important;}
+@media(max-width:860px){.nav-links{display:none;}.nav-hamburger{display:block;}}
+
+/* Dropdown */
+.nav-dropdown{position:relative;}
+.nav-dropdown-trigger{display:flex;align-items:center;gap:3px;cursor:pointer;}
+.nav-dropdown-trigger svg{transition:transform 0.2s;}
+.nav-dropdown.open .nav-dropdown-trigger svg{transform:rotate(180deg);}
+.nav-dropdown-menu{display:none;position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%);background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:10px;min-width:260px;box-shadow:0 16px 40px rgba(14,31,47,0.12);list-style:none;z-index:300;}
+.nav-dropdown-menu::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:12px;height:12px;background:var(--white);border-left:1px solid var(--border);border-top:1px solid var(--border);rotate:45deg;}
+.nav-dropdown.open .nav-dropdown-menu{display:block;}
+.nav-dropdown-menu li a{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:var(--r);text-decoration:none;color:var(--text);transition:background 0.15s;font-size:14px;font-weight:400;}
+.nav-dropdown-menu li a:hover{background:var(--cream);}
+.nav-dropdown-menu li a .dd-icon{font-size:18px;width:36px;height:36px;background:var(--teal-pale);border-radius:var(--r);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.nav-dropdown-menu li a div strong{display:block;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:1px;}
+.nav-dropdown-menu li a div span{display:block;font-size:12px;color:var(--text-light);}
+
+/* ── PAGE HERO ── */
+.page-hero{background:var(--navy);padding:140px 5% 88px;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(45,125,111,0.14) 0%,transparent 65%);border-radius:50%;pointer-events:none;}
+.page-hero-inner{max-width:var(--max);margin:0 auto;position:relative;z-index:2;}
+.page-hero h1{color:#fff;font-family:var(--serif);font-size:clamp(38px,5.5vw,68px);line-height:1.06;letter-spacing:-1px;font-weight:700;margin-bottom:18px;max-width:780px;}
+.page-hero h1 em{font-style:italic;color:var(--teal-light);}
+.page-hero .sub{font-size:17px;font-weight:300;color:rgba(255,255,255,0.55);max-width:560px;line-height:1.75;margin-bottom:36px;}
+.label{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.label::before{content:'';width:24px;height:1px;background:var(--teal);}
+.page-hero .label{color:var(--teal-light);}
+.page-hero .label::before{background:var(--teal-light);}
+
+/* ── CALCULATOR TAB SWITCHER ── */
+.calc-page-section{padding:0 5% 80px;}
+.calc-page-inner{max-width:var(--max);margin:0 auto;}
+
+.calc-page-tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:0;position:sticky;top:72px;background:var(--white);z-index:100;padding:0;}
+.calc-page-tab{font-family:var(--sans);font-size:15px;font-weight:500;padding:20px 32px;border:none;background:transparent;color:var(--text-mid);cursor:pointer;transition:all 0.2s;border-bottom:2px solid transparent;margin-bottom:-2px;display:flex;align-items:center;gap:8px;white-space:nowrap;}
+.calc-page-tab:hover{color:var(--navy);}
+.calc-page-tab.active{color:var(--navy);font-weight:600;border-bottom-color:var(--teal);}
+.calc-page-tab .tab-icon{font-size:18px;}
+@media(max-width:600px){
+  .calc-page-tab{padding:16px 18px;font-size:13px;}
+  .calc-page-tab .tab-label{display:none;}
+  .calc-page-tab .tab-icon{font-size:22px;}
+}
+
+.calc-pane{display:none;padding-top:60px;}
+.calc-pane.active{display:block;}
+
+/* ── SHARED LAYOUT ── */
+.inner{max-width:var(--max);margin:0 auto;}
+em{font-style:italic;color:var(--teal);}
+h2{font-family:var(--serif);font-size:clamp(28px,4vw,48px);line-height:1.12;letter-spacing:-0.5px;font-weight:700;margin-bottom:20px;}
+h4{font-family:var(--sans);font-size:15px;font-weight:600;margin-bottom:8px;}
+p{font-size:16px;color:var(--text-mid);line-height:1.8;}
+.lead{font-size:18px;font-weight:300;color:var(--text-mid);line-height:1.8;max-width:600px;margin-bottom:48px;}
+
+/* ── BUTTONS ── */
+.btn{display:inline-block;font-family:var(--sans);font-size:15px;font-weight:500;padding:14px 30px;border-radius:100px;text-decoration:none;transition:all 0.2s;cursor:pointer;border:none;}
+.btn-teal{background:var(--teal);color:#fff;}
+.btn-teal:hover{background:var(--teal-light);transform:translateY(-1px);}
+.btn-lg{padding:17px 36px;font-size:16px;}
+
+/* ── CALCULATOR STYLES ── */
+.calc-tabs{display:flex;gap:4px;background:var(--cream-dark);border-radius:100px;padding:4px;width:fit-content;margin-bottom:36px;}
+.calc-tab{font-family:var(--sans);font-size:14px;font-weight:500;padding:10px 26px;border-radius:100px;border:none;background:transparent;color:var(--text-mid);cursor:pointer;transition:all 0.2s;}
+.calc-tab.active{background:var(--navy);color:#fff;}
+.calc-inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px;}
+@media(max-width:860px){.calc-inputs{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.calc-inputs{grid-template-columns:1fr;}}
+.calc-field{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px 22px;}
+.calc-field label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);display:block;margin-bottom:10px;}
+.calc-field .field-val{font-family:var(--serif);font-size:28px;font-weight:700;color:var(--navy);line-height:1;margin-bottom:14px;}
+.calc-field input[type=range]{width:100%;-webkit-appearance:none;height:4px;background:var(--cream-dark);border-radius:2px;outline:none;cursor:pointer;}
+.calc-field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--teal);cursor:pointer;border:3px solid var(--white);box-shadow:0 1px 6px rgba(14,31,47,0.18);}
+.calc-field input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--teal);border:3px solid var(--white);cursor:pointer;}
+.calc-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px;}
+@media(max-width:680px){.calc-metrics{grid-template-columns:1fr;}}
+.calc-metric{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;}
+.calc-metric-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);margin-bottom:8px;}
+.calc-metric-val{font-family:var(--serif);font-size:34px;font-weight:700;line-height:1;margin-bottom:4px;}
+.calc-metric-sub{font-size:12px;color:var(--text-light);line-height:1.5;}
+.metric-loss{border-top:3px solid #b91c1c;}.metric-loss .calc-metric-val{color:#b91c1c;}
+.metric-warn{border-top:3px solid #92400e;}.metric-warn .calc-metric-val{color:#92400e;}
+.metric-teal{border-top:3px solid var(--teal);}.metric-teal .calc-metric-val{color:var(--teal);}
+.calc-total{background:var(--navy);border-radius:var(--r-lg);padding:26px 32px;display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+.calc-total-label{font-size:14px;font-weight:500;color:rgba(255,255,255,0.55);}
+.calc-total-sub{font-size:12px;color:rgba(255,255,255,0.3);margin-top:3px;}
+.calc-total-val{font-family:var(--serif);font-size:44px;font-weight:700;color:#fca5a5;}
+.calc-total-val.good{color:var(--teal-light);}
+.calc-breakdown{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:24px;}
+.calc-br-row{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;border-bottom:1px solid var(--border);font-size:14px;}
+.calc-br-row:last-child{border-bottom:none;}
+.br-label{color:var(--text-mid);}
+.br-val{font-weight:600;color:var(--navy);}
+.payback-box{background:var(--teal-pale);border:1px solid rgba(45,125,111,0.2);border-left:4px solid var(--teal);border-radius:0 var(--r-lg) var(--r-lg) 0;padding:24px 28px;margin-bottom:24px;}
+.payback-box h4{color:var(--navy);margin-bottom:6px;}
+.payback-box p{font-size:14px;color:var(--text-mid);line-height:1.7;margin:0;}
+.payback-years{font-family:var(--serif);font-size:52px;font-weight:700;color:var(--teal);line-height:1;margin:8px 0;}
+.calc-bottom{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
+@media(max-width:720px){.calc-bottom{grid-template-columns:1fr;}}
+.calc-chart-box{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:24px;}
+.calc-chart-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);margin-bottom:16px;}
+.calc-chart-wrap{position:relative;width:100%;height:220px;}
+.calc-cta-row{text-align:center;margin-top:40px;padding-top:40px;border-top:1px solid var(--cream-dark);}
+.calc-cta-row p{font-size:14px;color:var(--text-light);margin-top:14px;max-width:560px;margin-left:auto;margin-right:auto;}
+
+/* Facility pills (sports) */
+.fac-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.fac-row-label{font-size:12px;font-weight:600;color:var(--text-light);text-transform:uppercase;letter-spacing:0.08em;}
+.fac-pill{font-family:var(--sans);font-size:13px;font-weight:500;padding:8px 18px;border-radius:100px;border:1.5px solid var(--border);background:var(--white);color:var(--text-mid);cursor:pointer;transition:all 0.18s;}
+.fac-pill.active,.fac-pill:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+/* ── SOLAR CALCULATOR (email-style, cream card) ── */
+.solar-shell{max-width:680px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(14,31,47,0.10);}
+.solar-top{background-color:#0e1f2f;padding:28px 40px 36px;}
+.solar-top-tag{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#3d9d8d;margin-bottom:12px;}
+.solar-top h2{font-family:Georgia,'Playfair Display',serif;font-size:clamp(24px,3.5vw,34px);font-weight:700;line-height:1.12;color:#fff;margin-bottom:12px;}
+.solar-top h2 span{color:#3d9d8d;font-style:italic;}
+.solar-top p{font-size:15px;font-weight:300;color:rgba(255,255,255,0.5);line-height:1.8;max-width:480px;margin:0;}
+.solar-body{background:#fff;padding:36px 40px;}
+@media(max-width:560px){.solar-body{padding:28px 20px;}.solar-top{padding:24px 20px 32px;}}
+.solar-input-card{background:#f7f3ee;border:1px solid rgba(14,31,47,.1);border-radius:12px;padding:24px 28px;margin-bottom:24px;}
+.solar-card-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#7a94a8;margin-bottom:18px;}
+.solar-fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:18px;}
+@media(max-width:540px){.solar-fields{grid-template-columns:1fr;}}
+.solar-field-label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#7a94a8;margin-bottom:7px;}
+.solar-field-wrap{position:relative;}
+.solar-field-wrap input[type=number]{width:100%;background:#fff;border:1px solid rgba(14,31,47,.15);border-radius:8px;color:#0e1f2f;font-family:Arial,'Inter',sans-serif;font-size:20px;font-weight:700;padding:11px 46px 11px 14px;outline:none;transition:border-color 0.2s;-moz-appearance:textfield;}
+.solar-field-wrap input[type=number]::-webkit-outer-spin-button,.solar-field-wrap input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
+.solar-field-wrap input[type=number]:focus{border-color:#2d7d6f;}
+.solar-unit{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:700;letter-spacing:.06em;color:#7a94a8;text-transform:uppercase;pointer-events:none;}
+.solar-field-wrap input[type=range]{-webkit-appearance:none;width:100%;height:3px;margin-top:8px;background:rgba(14,31,47,.12);border-radius:2px;outline:none;cursor:pointer;display:block;}
+.solar-field-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:#2d7d6f;box-shadow:0 0 0 3px rgba(45,125,111,.2);}
+.solar-calc-btn{display:block;width:100%;background:#2d7d6f;color:#fff;border:none;border-radius:8px;font-family:Arial,'Inter',sans-serif;font-size:14px;font-weight:700;letter-spacing:.04em;padding:14px;cursor:pointer;transition:background 0.2s;}
+.solar-calc-btn:hover{background:#256b5e;}
+.solar-assumptions{margin-top:12px;font-size:11px;color:#7a94a8;line-height:1.8;}
+
+/* Solar results */
+#solar-results{display:none;}
+#solar-results.show{display:block;animation:solarRise 0.4s ease;}
+@keyframes solarRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.solar-compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+@media(max-width:480px){.solar-compare{grid-template-columns:1fr;}}
+.solar-col{border-radius:10px;overflow:hidden;}
+.solar-col.std{background:rgba(199,92,92,0.07);border:1px solid rgba(199,92,92,0.2);}
+.solar-col.hf{background:rgba(45,125,111,0.07);border:1px solid rgba(45,125,111,0.25);}
+.solar-col-head{padding:14px 18px 12px;}
+.solar-col.std .solar-col-head{background:#fdf4f4;}
+.solar-col.hf .solar-col-head{background:#e8f4f2;}
+.solar-col-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;}
+.solar-col.std .solar-col-tag{color:#b85c5c;}
+.solar-col.hf .solar-col-tag{color:#2d7d6f;}
+.solar-col-title{font-family:Georgia,'Playfair Display',serif;font-size:17px;font-weight:700;color:#0e1f2f;}
+.solar-col-body{background:#fff;padding:0 18px 14px;}
+.solar-metric{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(14,31,47,.05);}
+.solar-metric:last-child{border-bottom:none;}
+.solar-metric-name{font-size:12px;color:#7a94a8;flex:1;padding-right:10px;line-height:1.3;}
+.solar-metric-val{font-size:14px;font-weight:700;color:#0e1f2f;white-space:nowrap;}
+.solar-savings{background:#0e1f2f;border-radius:12px;padding:24px 26px;margin-bottom:14px;}
+.solar-savings-hed{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#3d9d8d;margin-bottom:14px;}
+.solar-savings-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:18px;}
+.solar-saving-num{font-family:Georgia,'Playfair Display',serif;font-size:28px;font-weight:700;color:#3d9d8d;line-height:1;margin-bottom:4px;}
+.solar-saving-desc{font-size:11px;color:rgba(255,255,255,.45);line-height:1.5;}
+.solar-chart-box{background:#f7f3ee;border:1px solid rgba(14,31,47,.1);border-radius:12px;padding:22px 24px;margin-bottom:14px;}
+.solar-bar-row{margin-bottom:14px;}
+.solar-bar-row:last-child{margin-bottom:0;}
+.solar-bar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px;}
+.solar-bar-name{font-size:12px;color:#3d5568;}
+.solar-bar-amount{font-size:13px;font-weight:700;}
+.solar-bar-track{height:8px;background:rgba(14,31,47,.08);border-radius:4px;overflow:hidden;}
+.solar-bar-fill{height:100%;border-radius:4px;transition:width 0.8s cubic-bezier(0.16,1,0.3,1);}
+.solar-pull{background:#f7f3ee;border-left:4px solid #2d7d6f;border-radius:0 12px 12px 0;padding:22px 26px;margin-bottom:14px;}
+.solar-pull-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#2d7d6f;margin-bottom:8px;}
+.solar-pull-body{font-size:13px;color:#3d5568;line-height:1.8;}
+.solar-pull-body strong{color:#0e1f2f;font-weight:600;}
+
+/* Solar email capture */
+.solar-email-cap{background:#f7f3ee;border:1px solid rgba(14,31,47,.1);border-radius:12px;padding:26px 28px;}
+.solar-email-cap-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#7a94a8;margin-bottom:8px;}
+.solar-email-cap h3{font-family:Georgia,'Playfair Display',serif;font-size:19px;font-weight:700;color:#0e1f2f;line-height:1.2;margin-bottom:8px;}
+.solar-email-cap h3 span{color:#2d7d6f;font-style:italic;}
+.solar-email-cap>p{font-size:13px;color:#3d5568;line-height:1.75;margin-bottom:18px;}
+.solar-form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+@media(max-width:480px){.solar-form-row{grid-template-columns:1fr;}}
+.solar-form-field-label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#7a94a8;margin-bottom:5px;}
+.solar-form-input{width:100%;background:#fff;border:1px solid rgba(14,31,47,.15);border-radius:8px;color:#0e1f2f;font-family:Arial,'Inter',sans-serif;font-size:14px;font-weight:500;padding:11px 14px;outline:none;transition:border-color 0.2s;}
+.solar-form-input:focus{border-color:#2d7d6f;}
+.solar-submit-btn{width:100%;background:#2d7d6f;color:#fff;border:none;border-radius:8px;font-family:Arial,'Inter',sans-serif;font-size:14px;font-weight:700;letter-spacing:.03em;padding:14px;cursor:pointer;transition:background 0.2s;margin-top:10px;}
+.solar-submit-btn:hover{background:#256b5e;}
+.solar-form-note{font-size:11px;color:#7a94a8;text-align:center;margin-top:8px;}
+.solar-success{display:none;text-align:center;padding:16px 0 4px;}
+.solar-success p.big{font-family:Georgia,'Playfair Display',serif;font-size:17px;font-weight:700;color:#0e1f2f;margin:0 0 6px 0;}
+.solar-success p.sm{font-size:13px;color:#3d5568;line-height:1.7;margin:0;}
+.solar-success a{color:#2d7d6f;font-weight:600;text-decoration:none;}
+
+/* Solar footer */
+.solar-sig{padding:32px 40px 28px;background:#fff;text-align:center;border-top:1px solid rgba(14,31,47,.08);}
+.solar-footer{background:#0e1f2f;padding:24px 40px;text-align:center;}
+.solar-footer p{font-size:11px;color:rgba(255,255,255,.25);line-height:1.8;margin:0;}
+.solar-footer a{color:rgba(255,255,255,.35);text-decoration:underline;}
+
+/* ── FOOTER ── */
+.footer{background:var(--navy);padding:56px 5% 32px;}
+.footer-inner{max-width:var(--max);margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
+@media(max-width:760px){.footer-top{grid-template-columns:1fr 1fr;gap:28px;}}
+@media(max-width:480px){.footer-top{grid-template-columns:1fr;}}
+.footer-logo{font-family:var(--serif);font-size:22px;font-weight:700;color:#fff;text-decoration:none;display:block;margin-bottom:14px;}
+.footer-logo span{color:var(--teal-light);}
+.footer-desc{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.75;}
+.footer-col h5{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:16px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none;margin-bottom:10px;transition:color 0.2s;}
+.footer-col a:hover{color:#fff;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:12px;color:rgba(255,255,255,0.28);}
+.footer-bottom a{font-size:12px;color:rgba(255,255,255,0.28);text-decoration:none;}
+
+/* ── ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.55s ease,transform 0.55s ease;}
+.reveal.v,.reveal.visible{opacity:1;transform:none;}
+.rd1,.reveal-d1{transition-delay:0.1s;}
+
+/* Sticky mobile CTA */
+.sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:99;background:var(--navy);padding:12px 20px;border-top:1px solid rgba(255,255,255,0.1);}
+.sticky-cta a{display:block;background:var(--teal);color:#fff;text-align:center;font-size:15px;font-weight:500;padding:14px;border-radius:100px;text-decoration:none;}
+@media(max-width:600px){.sticky-cta{display:block;}body{padding-bottom:72px;}}
+
+/* Force reveal elements visible inside calc panes */
+.calc-pane .reveal,
+.calc-pane .reveal * {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+</style>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-13Z2Z6MJXB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-13Z2Z6MJXB');
+  </script>
+    <!-- Facebook Pixel (delayed) -->
+  <script>
+    function loadFBPixel() {
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+      (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init','701492359663771');fbq('track','PageView');
+    }
+    if (document.readyState === 'complete') {
+      setTimeout(loadFBPixel, 3000);
+    } else {
+      window.addEventListener('load', function() { setTimeout(loadFBPixel, 3000); });
+    }
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=701492359663771&ev=PageView&noscript=1"/></noscript>
+  <!-- End Facebook Pixel -->
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TD8Q7FCQ');</script>
+  <!-- End Google Tag Manager -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Hydro Fix">
+  <meta property="og:title" content="Drainage ROI Calculators | Golf, Residential & Commercial | Hydro Fix">
+  <meta property="og:description" content="Interactive calculators to estimate drainage ROI, revenue loss from closures, and cost savings for golf courses, residential, and commercial properties.">
+  <meta property="og:image" content="https://myhydrofix.com/images/hydrofix-logo-header-white-teal.png">
+  <meta property="og:url" content="https://myhydrofix.com/calculators">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Drainage ROI Calculators | Golf, Residential & Commercial | Hydro Fix">
+  <meta name="twitter:description" content="Interactive calculators to estimate drainage ROI, revenue loss from closures, and cost savings for golf courses, residential, and commercial properties.">
+  <meta name="twitter:image" content="https://myhydrofix.com/images/hydrofix-logo-header-white-teal.png">
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Free Drainage ROI Calculators | Golf, Sports &amp; Solar",
+  "description": "See exactly what poor drainage is costing your golf course, sports complex, or solar farm \u2014 and what Hydro Fix recovers. Free interactive calculators.",
+  "url": "https://myhydrofix.com/calculators",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hydro Fix",
+    "url": "https://myhydrofix.com"
+  }
+}
+  </script>
+  <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var s = document.createElement('script');
+        s.id = 'vtag-ai-js'; s.async = true;
+        s.src = 'https://r2.leadsy.ai/tag.js';
+        s.setAttribute('data-pid', 'vKeZZFmg9mRhqlV3');
+        s.setAttribute('data-version', '062024');
+        document.head.appendChild(s);
+      }, 4000);
+    });
+  </script>
+  <meta name="keywords" content="drainage ROI calculator, golf revenue loss calculator, sports complex drainage calculator, stormwater compliance calculator">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TD8Q7FCQ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a aria-label='Hydro Fix home' class='nav-logo' href='/'><svg style="display:block;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="180" height="41" viewBox="0 0 1150 260" xml:space="preserve">
+<desc>HydroFix Alt 1 - HYDRO navy, FIX teal</desc>
+<defs>
+</defs>
+<g transform="matrix(1 0 0 1 640 512)" id="background-logo"  >
+<rect style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-opacity: 0; fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  x="-640" y="-512" rx="0" ry="0" width="1280" height="1024" />
+</g>
+<g transform="matrix(0.902 0 0 0.902 110 130)" id="logo-logo"  >
+<g style=""  paint-order="stroke"   >
+		<g transform="matrix(0.5256105787118807 0 0 0.5256105787118807 0.013186011651896479 -9.548771325538041)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(14,31,47); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-526.2774288334338, -371.8330078)" d="M 389.3052673 511.2958679 C 389.3052673 511.2958679 427.2749023 490.5591736 492.229187 497.4960327 C 557.1834717 504.4328918 620.5611572 542.7528076 620.5611572 542.7528076 L 389.3052673 511.2958679 z M 654.1296387 353.7208252 C 647.0235596 340.58770749999996 638.9212646999999 327.7336426 630.3161011 315.4040222 C 605.357544 321.7782287 575.0913085999999 321.0237732 548.0758056999999 316.96591179999996 C 511.7285461999999 311.69427479999996 474.07687379999993 300.63864129999996 436.19747929999994 296.41067499999997 C 417.5783996999999 320.6579895 399.9741821999999 347.7117614 387.82354739999994 375.3858337 C 473.5455322 355.4011536 565.1539307 322.1629639 654.1296387 353.7208252 z M 616.0635986 297.2537842 C 583.6395874 253.9820557 558.5897216 228.21386719999998 526.2944335999999 200.913208 C 521.3821410999999 205.1785583 489.75311279999994 233.0888977 457.86096189999995 271.5933533 C 471.427063 274.2622986 484.60903929999995 277.70309449999996 497.5655211999999 281.176178 C 535.4984741 291.2707214 575.4211426 303.5532532 616.0635986 297.2537842 z M 679.5233154 428.4390259 C 678.1525268 427.20791629999997 676.7721557 426.0124512 675.3840332 424.8467407 L 678.4067383 422.184906 C 643.9445801 394.45294190000004 594.7324219000001 389.3736572 594.7324219000001 389.3736572 L 594.7308350000001 389.38314820000005 C 524.4056397 378.90563970000005 445.43634040000006 405.79449460000006 376.21566780000006 413.19241330000006 C 372.1201783000001 428.88626100000005 370.63418590000003 446.20452880000005 371.85617070000006 459.29449460000006 C 382.99584970000006 454.55841060000006 393.5561524000001 452.26528930000006 403.68032840000006 451.00341790000004 C 498.03759770000005 436.18862910000007 590.0238648000001 518.7708129 678.3648072000001 474.9994811 C 681.8930054 459.0707092 681.7359619 442.6685181 679.5233154 428.4390259 z" stroke-linecap="round" />
+</g>
+		<g transform="matrix(0.5256105787118807 0 0 0.5256105787118807 0 2.842171e-14)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(61,157,141); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-526.2523417971641, -390.0000153)" d="M 642.4685059 534.4841309 L 643.5454712 534.3754882999999 L 642.7427978999999 535.1014403999999 C 611.1013184 563.7227172999999 569.9592286 579.4851683999999 526.8951415999999 579.4851683999999 C 480.16796869999985 579.4851683999999 436.4987487999999 561.2994383999999 403.9320373999999 528.2782591999999 C 398.5920410999999 522.8639525999998 393.6707458999999 517.1503904999998 389.3052673999999 511.2958677999999 L 388.95843509999986 510.8306272999999 L 389.53024299999987 510.7330930999999 L 389.6646118999999 510.7101743999999 L 389.9236145999999 510.6660764999999 C 391.10055549999987 510.4188840999999 392.2903442999999 510.2279355999999 393.3902283999999 510.0602414999999 C 397.4067688999999 509.31866439999993 401.4993286999999 508.6663205999999 405.83218399999987 507.9754025999999 L 407.82153339999985 507.6580807999999 C 414.70370499999984 506.5714108999999 422.2191468999998 506.0204464999999 430.15884419999986 506.0204464999999 C 436.43276999999983 506.02078219999987 443.0827027999999 506.3648373999999 449.9239198999999 507.04324309999987 C 462.9480897999999 508.3187862999999 477.7373353999999 510.85147059999986 496.4657289999999 515.0138546999999 C 503.3680421999999 516.5455929999999 510.2526552999999 518.1638181 517.5410158999999 519.8768307999999 C 527.0333254999999 522.1077877999999 536.8485109999999 524.4147946999999 546.8730472 526.5559078999999 C 568.5392459 531.1730343999999 585.537659 533.7616573999999 601.9891971 534.9493404999998 C 607.9801639 535.3850704999999 613.9846805 535.6062008999999 619.8360599 535.6062008999999 C 627.4844971 535.6062012 635.098877 535.2288208 642.4685059 534.4841309 z M 469.3257446 350.3189697 C 488.2670898 354.4448547 507.1776428 359.9363708 525.4656372000001 365.24691770000004 C 562.2788086 375.93679810000003 600.3453369000001 386.99078370000007 639.4911499000001 386.99078370000007 C 649.3807983000002 386.99078370000007 659.1810913 386.28115850000006 668.6204834000001 384.88153080000006 L 669.0369873000001 384.81970220000005 L 668.8831787 384.42776490000006 C 659.4993896000001 360.49154660000005 644.8298950000001 334.6990357000001 625.2822876 307.76629640000004 L 625.185791 307.63348390000004 L 625.0215454 307.62823490000005 C 622.1974487 307.53991700000006 619.2369385000001 307.49508670000006 616.2221069000001 307.49508670000006 C 600.1853637 307.49508670000006 583.4134521000001 308.76318360000005 567.1941528000001 309.99005130000006 C 550.5537719000001 311.24835210000003 533.3467407 312.5494995000001 516.4672241000001 312.5494995000001 C 483.9311218000001 312.5494995000001 458.33358760000004 307.50064090000006 435.91085810000004 296.66061400000007 L 435.66482540000004 296.54187010000004 L 435.49896240000004 296.75845340000006 C 424.1116028 311.6262207000001 414.04989620000003 326.3421936000001 405.59362790000006 340.49774170000006 L 405.30505370000003 340.98031620000006 L 405.86712650000004 341.00418090000005 C 424.2264404 341.7812195 447.3561401 345.1762085 469.3257446 350.3189697 z M 451.4226685 279.8872681 L 451.59759529999997 279.9565125 C 467.0176087 285.90292359999995 484.1372987 288.7941285 503.93304449999994 288.7941285 C 523.4464721999999 288.7941285 543.5565185999999 286.0209962 563.0045167 283.3390199 C 575.7227174 281.5851747 588.8739015 279.77185069999996 601.7078247999999 278.7570192 L 602.2843628999999 278.7114259 L 601.9185792 278.2633363 C 574.8612062 245.1151582 554.4155274 224.0879213 526.4812013 200.6808931 L 526.2828980999999 200.51486219999998 L 526.0878907999999 200.68443309999998 C 522.0291138999999 204.2089998 485.44512959999986 236.35981759999999 451.15069599999987 279.3580934 L 450.8923341999999 279.6818849 L 451.2794191999999 279.8298646 L 451.4226685 279.8872681 z M 678.7348633 422.1171875 L 678.6638794 421.7730103 L 678.3233032 421.8603516 C 661.9537964000001 426.0674134 644.9862671000001 428.1121827 626.4512939000001 428.1121827 C 589.9142456000001 428.1121827 552.8455810000002 419.9111024 516.9972534000001 411.9802552 C 481.0582886000001 404.0291138 443.89572140000007 395.8074036 407.1705627000001 395.80673229999996 C 398.14205930000014 395.80642709999995 389.2902221000001 396.3082887 380.8611145000001 397.2976381 L 380.6523743000001 397.32217419999995 L 380.5836487000001 397.52078259999996 C 373.4478150000001 418.10971079999996 370.3050537000001 437.52151499999997 371.24304200000006 455.21667489999993 L 371.52178960000003 459.31704719999993 L 371.55255130000006 459.77017219999993 L 371.97656250000006 459.6072388999999 C 372.49871830000006 459.4060364999999 425.03454590000007 439.49792489999993 496.8182373000001 439.37066659999994 C 559.1991577000001 439.6939087999999 621.8928833000001 452.2944031999999 678.1184692 475.80953989999995 L 678.4855346 475.96298229999996 L 678.5742187000001 475.57495129999995 C 682.3163452 459.2218628 682.374939 439.7374268 678.7348633 422.1171875 z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+<g transform="matrix(1.921 0 0 1.921 659 130)" id="text-logo"  >
+<g style=""  paint-order="stroke"   >
+		<g transform="matrix(1 0 0 1 0 0)" id="text-logo-path-0"  >
+<path style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(14,31,47); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-234.69, 22.4)" d="M 16 -44.8 L 3.2 -44.8 L 3.2 0 L 16 0 L 16 -16.64 L 30.08 -16.64 L 30.08 0 L 42.88 0 L 42.88 -28.16 L 16 -28.16 Z M 42.88 -44.8 L 30.08 -44.8 L 30.08 -33.34 L 42.88 -33.34 Z M 58.37 -44.8 L 75.01 -10.43 L 75.01 0 L 87.81 0 L 87.81 -11.71 L 71.81 -44.8 Z M 91.01 -44.8 L 85.44 -33.34 L 98.88 -33.34 L 104.45 -44.8 Z M 119.87 -28.16 L 119.87 0 L 139.01 0 C 154.94 0 163.01 -7.55 163.01 -22.4 C 163.01 -37.25 154.94 -44.8 139.01 -44.8 L 119.87 -44.8 L 119.87 -33.34 L 139.01 -33.34 C 146.43 -33.34 150.21 -29.7 150.21 -22.4 C 150.21 -15.17 146.43 -11.46 139.01 -11.46 L 132.67 -11.46 L 132.67 -28.16 Z M 201.6 -44.8 L 177.98 -44.8 L 177.98 -33.28 L 200.26 -33.28 C 203.84 -33.28 205.76 -31.62 205.76 -28.16 C 205.76 -24.83 203.84 -23.04 200.26 -23.04 L 184.38 -23.04 L 184.38 -11.52 L 191.04 -11.52 L 200.38 0 L 215.74 0 L 206.14 -11.84 C 214.66 -13.18 219.01 -18.62 219.01 -28.1 C 219.01 -39.17 213.12 -44.8 201.6 -44.8 Z M 258.88 0.64 C 274.82 0.64 282.88 -7.1 282.88 -22.4 C 282.88 -37.7 274.75 -45.44 258.88 -45.44 C 243.01 -45.44 234.88 -37.7 234.88 -22.4 C 234.88 -7.17 242.94 0.64 258.88 0.64 Z M 258.88 -11.65 C 251.46 -11.65 247.68 -15.3 247.68 -22.4 C 247.68 -29.57 251.46 -33.15 258.88 -33.15 C 266.3 -33.15 270.08 -29.57 270.08 -22.4 C 270.08 -15.3 266.3 -11.65 258.88 -11.65 Z" stroke-linecap="round" />
+<path style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(61,157,141); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-234.69, 22.4)" d="M 369.54 -33.28 L 369.54 -44.8 L 337.22 -44.8 L 337.22 -33.28 Z M 350.02 -16.64 L 363.14 -16.64 L 363.14 -28.16 L 337.22 -28.16 L 337.22 0 L 350.02 0 Z M 398.78 -44.8 L 385.98 -44.8 L 385.98 0 L 398.78 0 Z M 429.89 -44.8 L 415.17 -44.8 L 432.64 -22.78 L 414.53 0 L 429.25 0 L 440 -13.57 L 450.82 0 L 465.54 0 Z M 451.46 -44.8 L 442.37 -33.41 L 457.09 -33.41 L 466.18 -44.8 Z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+</svg></a>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="#" class="nav-dropdown-trigger">Services <svg width="11" height="11" viewBox="0 0 12 12" fill="none" style="vertical-align:middle;margin-left:3px"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <ul class="nav-dropdown-menu" style="min-width:220px;">
+          <li><a href='/residential'><span class="dd-icon">🏡</span><div><strong>Residential</strong><span>Homeowner drainage</span></div></a></li>
+          <li><a href='/commercial'><span class="dd-icon">🏢</span><div><strong>Commercial</strong><span>Warehouses &amp; parking lots</span></div></a></li>
+          <li><a href='/golf'><span class="dd-icon">⛳</span><div><strong>Golf Courses</strong><span>Fairways &amp; greens</span></div></a></li>
+          <li><a href='/sports'><span class="dd-icon">🏟️</span><div><strong>Sports Complexes</strong><span>Athletic fields</span></div></a></li>
+        </ul>
+      </li>
+      <li><a class='active' href='/calculators'>Calculators</a></li>
+      <li><a href='/blog'>Blog</a></li>
+      <li><a href='/contact'>Contact</a></li>
+    </ul>
+    <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank" class="nav-cta">Schedule a Call</a>
+    <button class="nav-hamburger" aria-label="Open menu" id="hamburger-btn">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href='/'>Home</a>
+  <div class="mobile-section-label">Services</div>
+  <a class='mobile-sub' href='/residential'>🏡 Residential</a>
+  <a class='mobile-sub' href='/commercial'>🏢 Commercial</a>
+  <a class='mobile-sub' href='/golf'>⛳ Golf Courses</a>
+  <a class='mobile-sub' href='/sports'>🏟️ Sports Complexes</a>
+  <div class="mobile-section-label">Calculators</div>
+  <a class='mobile-sub' href='/calculators#golf'>📊 Golf Revenue Calculator</a>
+  <a class='mobile-sub' href='/calculators#sports'>📊 Sports Complex Calculator</a>
+  <a class='mobile-sub' href='/calculators#solar'>📊 Solar Farm ROI Calculator</a>
+  <a href='/blog'>Blog</a>
+  <a href='/contact'>Contact</a>
+  <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank" style="color:var(--teal);font-weight:600;">Schedule a Call →</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <p class="label">Free Tools</p>
+    <h1>See the numbers <em>before you call.</em></h1>
+    <p class="sub">Three free calculators — golf courses, sports complexes, and solar farms. Enter your details and see exactly what poor drainage is costing you, and what Hydro Fix recovers every year after.</p>
+  </div>
+</div>
+
+<!-- CALCULATOR SECTION -->
+<div class="calc-page-section">
+  <div class="calc-page-inner">
+
+    <!-- TAB BAR -->
+    <div class="calc-page-tabs" id="calc-page-tabs">
+      <button class="calc-page-tab active" data-pane="golf" onclick="switchPane('golf')">
+        <span class="tab-icon">⛳</span>
+        <span class="tab-label">Golf Course</span>
+      </button>
+      <button class="calc-page-tab" data-pane="sports" onclick="switchPane('sports')">
+        <span class="tab-icon">🏟️</span>
+        <span class="tab-label">Sports Complex</span>
+      </button>
+      <button class="calc-page-tab" data-pane="solar" onclick="switchPane('solar')">
+        <span class="tab-icon">☀️</span>
+        <span class="tab-label">Solar Farm</span>
+      </button>
+    </div>
+
+    <!-- ══ GOLF PANE ══ -->
+    <div class="calc-pane active" id="pane-golf">
+      <p class="label">Golf Course Revenue Calculator</p>
+      <h2 class="">How much is poor drainage <em>actually costing you?</em></h2>
+      <p class="lead" style="margin-bottom:32px">Adjust the sliders to match your course. Switch tabs to see your current annual loss and what Hydro Fix recovers.</p>
+
+      <div class="calc-tabs">
+        <button class="calc-tab active" id="golf-tab-loss" onclick="golfSetView('loss')">Current annual loss</button>
+        <button class="calc-tab" id="golf-tab-savings" onclick="golfSetView('savings')">With Hydro Fix</button>
+      </div>
+
+      <div class="calc-inputs reveal">
+        <div class="calc-field"><label>Rounds per year (capacity)</label><div class="field-val" id="g-rounds-val">18,000</div><input type="range" id="g-rounds" min="5000" max="50000" step="1000" value="18000"></div>
+        <div class="calc-field"><label>Average green fee + cart</label><div class="field-val" id="g-fee-val">$75</div><input type="range" id="g-fee" min="25" max="250" step="5" value="75"></div>
+        <div class="calc-field"><label>Closure days per year (rain)</label><div class="field-val" id="g-days-val">28 days</div><input type="range" id="g-days" min="5" max="80" step="1" value="28"></div>
+        <div class="calc-field"><label>Member count</label><div class="field-val" id="g-members-val">320</div><input type="range" id="g-members" min="50" max="1000" step="10" value="320"></div>
+        <div class="calc-field"><label>Annual membership fee</label><div class="field-val" id="g-memfee-val">$3,500</div><input type="range" id="g-memfee" min="500" max="15000" step="250" value="3500"></div>
+        <div class="calc-field"><label>Member attrition from closures</label><div class="field-val" id="g-attrition-val">4%</div><input type="range" id="g-attrition" min="1" max="20" step="1" value="4"></div>
+      </div>
+
+      <div class="calc-metrics reveal">
+        <div class="calc-metric metric-loss"><div class="calc-metric-label">Green fee + F&amp;B lost</div><div class="calc-metric-val" id="g-m-greenfee">—</div><div class="calc-metric-sub" id="g-m-greenfee-sub">—</div></div>
+        <div class="calc-metric metric-warn"><div class="calc-metric-label">Member attrition loss</div><div class="calc-metric-val" id="g-m-member">—</div><div class="calc-metric-sub" id="g-m-member-sub">—</div></div>
+        <div class="calc-metric metric-teal"><div class="calc-metric-label">Rounds lost to closures</div><div class="calc-metric-val" id="g-m-rounds">—</div><div class="calc-metric-sub">rounds per year</div></div>
+      </div>
+
+      <div class="calc-total reveal">
+        <div><div class="calc-total-label" id="g-total-label">Total annual loss from drainage</div><div class="calc-total-sub" id="g-total-sub">green fees + F&amp;B + member attrition + maintenance</div></div>
+        <div class="calc-total-val" id="g-total-val">—</div>
+      </div>
+
+      <div class="calc-bottom">
+        <div>
+          <div class="calc-breakdown reveal" id="g-breakdown-loss">
+            <div class="calc-br-row"><span class="br-label">Green fee revenue lost</span><span class="br-val" id="g-b-gf">—</span></div>
+            <div class="calc-br-row"><span class="br-label">F&amp;B + pro shop (est. 35%)</span><span class="br-val" id="g-b-fnb">—</span></div>
+            <div class="calc-br-row"><span class="br-label">Member attrition</span><span class="br-val" id="g-b-mem">—</span></div>
+            <div class="calc-br-row"><span class="br-label">Annual drainage maintenance (est.)</span><span class="br-val">$8,000–$24,000</span></div>
+          </div>
+          <div class="calc-breakdown reveal" id="g-breakdown-savings" style="display:none">
+            <div class="calc-br-row"><span class="br-label">Green fee revenue recovered</span><span class="br-val" id="g-s-gf">—</span></div>
+            <div class="calc-br-row"><span class="br-label">F&amp;B + pro shop recovered</span><span class="br-val" id="g-s-fnb">—</span></div>
+            <div class="calc-br-row"><span class="br-label">Member retention value</span><span class="br-val" id="g-s-mem">—</span></div>
+            <div class="calc-br-row"><span class="br-label">Maintenance eliminated</span><span class="br-val">$8,000–$24,000/yr</span></div>
+            <div class="calc-br-row"><span class="br-label">Hydro Fix installation (one-time est.)</span><span class="br-val" id="g-s-install">—</span></div>
+          </div>
+          <div class="payback-box" id="g-payback-box" style="display:none">
+            <h4>Estimated payback period</h4>
+            <div class="payback-years" id="g-payback-years">—</div>
+            <p id="g-payback-desc">—</p>
+          </div>
+        </div>
+        <div class="calc-chart-box reveal">
+          <div class="calc-chart-eyebrow" id="g-chart-eyebrow">Annual loss by category</div>
+          <div class="calc-chart-wrap"><canvas id="golfChart" role="img" aria-label="Golf course annual revenue loss by category"></canvas></div>
+        </div>
+      </div>
+
+      <div class="calc-cta-row reveal">
+        <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank" class="btn btn-teal btn-lg">Schedule a Free Course Evaluation</a>
+        <p>We'll walk your course, identify the highest-priority drainage areas, and give you a clear picture of what permanent drainage costs — and recovers every year after.</p>
+      </div>
+    </div>
+
+    <!-- ══ SPORTS PANE ══ -->
+    <div class="calc-pane" id="pane-sports">
+      <p class="label">Sports Complex Revenue Calculator</p>
+      <h2 class="">How much is poor drainage <em>actually costing you?</em></h2>
+      <p class="lead" style="margin-bottom:24px">Adjust the sliders to match your complex. Switch tabs to see your current annual loss and what Hydro Fix recovers.</p>
+
+      <div class="fac-row">
+        <span class="fac-row-label">Facility type:</span>
+        <button class="fac-pill active" data-type="multi">Multi-Sport</button>
+        <button class="fac-pill" data-type="baseball">Baseball / Softball</button>
+        <button class="fac-pill" data-type="soccer">Soccer</button>
+        <button class="fac-pill" data-type="school">School / Municipal</button>
+      </div>
+
+      <div class="calc-tabs">
+        <button class="calc-tab active" id="sp-tab-loss" onclick="spSetView('loss')">Current annual loss</button>
+        <button class="calc-tab" id="sp-tab-savings" onclick="spSetView('savings')">With Hydro Fix</button>
+      </div>
+
+      <div class="calc-inputs reveal">
+        <div class="calc-field"><label>Rain closure days per year</label><div class="field-val" id="sp-days-val">35 days</div><input type="range" id="sp-days" min="5" max="80" step="1" value="35"></div>
+        <div class="calc-field"><label>Tournaments / events per year</label><div class="field-val" id="sp-tourn-val">12</div><input type="range" id="sp-tourn" min="0" max="60" step="1" value="12"></div>
+        <div class="calc-field"><label>Revenue per tournament</label><div class="field-val" id="sp-tournrev-val">$4,500</div><input type="range" id="sp-tournrev" min="500" max="20000" step="250" value="4500"></div>
+        <div class="calc-field"><label>Field rental rate (per slot)</label><div class="field-val" id="sp-rental-val">$120</div><input type="range" id="sp-rental" min="25" max="500" step="5" value="120"></div>
+        <div class="calc-field"><label>Rental slots per week</label><div class="field-val" id="sp-slots-val">18</div><input type="range" id="sp-slots" min="2" max="80" step="1" value="18"></div>
+        <div class="calc-field"><label>Concession revenue per event day</label><div class="field-val" id="sp-concession-val">$650</div><input type="range" id="sp-concession" min="0" max="5000" step="50" value="650"></div>
+      </div>
+
+      <div class="calc-metrics reveal">
+        <div class="calc-metric metric-loss"><div class="calc-metric-label">Game &amp; tournament revenue lost</div><div class="calc-metric-val" id="sp-m-games">—</div><div class="calc-metric-sub" id="sp-m-games-sub">—</div></div>
+        <div class="calc-metric metric-warn"><div class="calc-metric-label">Concession &amp; ancillary lost</div><div class="calc-metric-val" id="sp-m-concession">—</div><div class="calc-metric-sub" id="sp-m-concession-sub">—</div></div>
+        <div class="calc-metric metric-teal"><div class="calc-metric-label">Rain days impacting play</div><div class="calc-metric-val" id="sp-m-days">—</div><div class="calc-metric-sub">days per year</div></div>
+      </div>
+
+      <div class="calc-total reveal">
+        <div><div class="calc-total-label" id="sp-total-label">Total annual loss from drainage</div><div class="calc-total-sub" id="sp-total-sub">games + tournaments + concessions + maintenance</div></div>
+        <div class="calc-total-val" id="sp-total-val">—</div>
+      </div>
+
+      <div class="calc-bottom">
+        <div>
+          <div class="calc-breakdown reveal" id="sp-breakdown-loss">
+            <div class="calc-br-row"><span class="br-label">Tournament revenue lost</span><span class="br-val" id="sp-b-tourn">—</span></div>
+            <div class="calc-br-row"><span class="br-label">Field rental revenue lost</span><span class="br-val" id="sp-b-rental">—</span></div>
+            <div class="calc-br-row"><span class="br-label">Concession revenue lost</span><span class="br-val" id="sp-b-concession">—</span></div>
+            <div class="calc-br-row"><span class="br-label">Annual drainage maintenance (est.)</span><span class="br-val">$8,000–$18,000</span></div>
+          </div>
+          <div class="calc-breakdown reveal" id="sp-breakdown-savings" style="display:none">
+            <div class="calc-br-row"><span class="br-label">Tournament revenue recovered</span><span class="br-val" id="sp-s-tourn">—</span></div>
+            <div class="calc-br-row"><span class="br-label">Field rental revenue recovered</span><span class="br-val" id="sp-s-rental">—</span></div>
+            <div class="calc-br-row"><span class="br-label">Concession revenue recovered</span><span class="br-val" id="sp-s-concession">—</span></div>
+            <div class="calc-br-row"><span class="br-label">Maintenance eliminated</span><span class="br-val">$8,000–$18,000/yr</span></div>
+            <div class="calc-br-row"><span class="br-label">Hydro Fix installation (one-time est.)</span><span class="br-val" id="sp-s-install">—</span></div>
+          </div>
+          <div class="payback-box" id="sp-payback-box" style="display:none">
+            <h4>Estimated payback period</h4>
+            <div class="payback-years" id="sp-payback-years">—</div>
+            <p id="sp-payback-desc">—</p>
+          </div>
+        </div>
+        <div class="calc-chart-box reveal">
+          <div class="calc-chart-eyebrow" id="sp-chart-eyebrow">Annual loss by category</div>
+          <div class="calc-chart-wrap"><canvas id="sportsChart" role="img" aria-label="Sports complex annual revenue loss by category"></canvas></div>
+        </div>
+      </div>
+
+      <div class="calc-cta-row reveal">
+        <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank" class="btn btn-teal btn-lg">Schedule a Free Field Assessment</a>
+        <p>We'll walk your fields, identify the highest-priority drainage areas, and give you a clear picture of what permanent drainage costs — and what it recovers every season after.</p>
+      </div>
+    </div>
+
+    <!-- ══ SOLAR PANE ══ -->
+    <div class="calc-pane" id="pane-solar">
+      <div class="solar-shell">
+
+        <div class="solar-top">
+          <div class="solar-top-tag">— See the numbers for your farm</div>
+          <h2>Find out exactly how much your solar farm could earn with <span>smarter drainage.</span></h2>
+          <p>The Hydro Fix System lets you install rows 40% closer together and cuts maintenance from 260 days a year down to just 12. Enter your details below.</p>
+        </div>
+
+        <div class="solar-body">
+          <p style="font-size:14px;color:#3d5568;line-height:1.85;margin:0 0 16px 0;">Solar farms are leaving significant revenue on the table — not because of the panels, but because of the spacing required to manage drainage between rows.</p>
+          <p style="font-size:14px;color:#3d5568;line-height:1.85;margin:0 0 24px 0;">Without proper subsurface drainage, standard practice requires 25 ft between array rows and a full-time maintenance worker on site five days a week. <strong style="color:#0e1f2f;font-weight:600;">With the Hydro Fix System, rows go in at 15 ft apart — and maintenance drops to one worker, one day a month.</strong></p>
+
+          <!-- INPUT CARD -->
+          <div class="solar-input-card">
+            <div class="solar-card-label">Enter your farm details</div>
+            <div class="solar-fields">
+              <div>
+                <label class="solar-field-label" for="sol-acres">Farm Size</label>
+                <div class="solar-field-wrap">
+                  <input type="number" id="sol-acres" value="100" min="1" max="10000" />
+                  <span class="solar-unit">Acres</span>
+                </div>
+                <div class="solar-field-wrap"><input type="range" id="sol-acres-slider" min="10" max="2000" value="100" /></div>
+              </div>
+              <div>
+                <label class="solar-field-label" for="sol-labor">Daily Labor Rate</label>
+                <div class="solar-field-wrap">
+                  <input type="number" id="sol-labor" value="200" min="50" max="1000" />
+                  <span class="solar-unit">$/Day</span>
+                </div>
+                <div class="solar-field-wrap"><input type="range" id="sol-labor-slider" min="100" max="600" value="200" /></div>
+              </div>
+              <div>
+                <label class="solar-field-label" for="sol-kwh">Energy Revenue</label>
+                <div class="solar-field-wrap">
+                  <input type="number" id="sol-kwh" value="0.07" min="0.01" max="0.30" step="0.01" />
+                  <span class="solar-unit">$/kWh</span>
+                </div>
+                <div class="solar-field-wrap"><input type="range" id="sol-kwh-slider" min="1" max="30" value="7" /></div>
+              </div>
+            </div>
+            <button class="solar-calc-btn" onclick="solarCalculate()">Calculate My ROI →</button>
+            <div class="solar-assumptions"><strong style="color:#3d5568;">Assumptions:</strong> Standard spacing 25 ft · Hydro Fix System spacing 15 ft · ~10W per linear ft · 4.5 peak sun hrs/day · 500 ft avg row length · Standard labor: 5 days/wk × 52 wks = 260 days/yr · Hydro Fix System: 1 day/month = 12 days/yr</div>
+          </div>
+
+          <!-- SOLAR RESULTS -->
+          <div id="solar-results">
+
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#7a94a8;margin-bottom:10px;">Side-by-side comparison</div>
+
+            <div class="solar-compare">
+              <div class="solar-col std">
+                <div class="solar-col-head"><div class="solar-col-tag">Without Hydro Fix System</div><div class="solar-col-title">25 ft Row Spacing</div></div>
+                <div class="solar-col-body">
+                  <div class="solar-metric"><span class="solar-metric-name">Array rows installable</span><span class="solar-metric-val" id="sol-std-rows">—</span></div>
+                  <div class="solar-metric"><span class="solar-metric-name">Annual energy output</span><span class="solar-metric-val" id="sol-std-kwh">—</span></div>
+                  <div class="solar-metric"><span class="solar-metric-name">Annual energy revenue</span><span class="solar-metric-val" id="sol-std-rev">—</span></div>
+                  <div class="solar-metric"><span class="solar-metric-name">Annual maintenance cost</span><span class="solar-metric-val" id="sol-std-labor">—</span></div>
+                  <div class="solar-metric"><span class="solar-metric-name">Labor days on site / yr</span><span class="solar-metric-val">260 days</span></div>
+                  <div class="solar-metric"><span class="solar-metric-name">Net annual income</span><span class="solar-metric-val" id="sol-std-net">—</span></div>
+                </div>
+              </div>
+              <div class="solar-col hf">
+                <div class="solar-col-head"><div class="solar-col-tag">With the Hydro Fix System</div><div class="solar-col-title">15 ft Row Spacing</div></div>
+                <div class="solar-col-body">
+                  <div class="solar-metric"><span class="solar-metric-name">Array rows installable</span><span class="solar-metric-val" id="sol-hf-rows">—</span></div>
+                  <div class="solar-metric"><span class="solar-metric-name">Annual energy output</span><span class="solar-metric-val" id="sol-hf-kwh">—</span></div>
+                  <div class="solar-metric"><span class="solar-metric-name">Annual energy revenue</span><span class="solar-metric-val" id="sol-hf-rev">—</span></div>
+                  <div class="solar-metric"><span class="solar-metric-name">Annual maintenance cost</span><span class="solar-metric-val" id="sol-hf-labor">—</span></div>
+                  <div class="solar-metric"><span class="solar-metric-name">Labor days on site / yr</span><span class="solar-metric-val">12 days</span></div>
+                  <div class="solar-metric"><span class="solar-metric-name">Net annual income</span><span class="solar-metric-val" id="sol-hf-net">—</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="solar-savings">
+              <div class="solar-savings-hed">Your annual Hydro Fix System advantage</div>
+              <div class="solar-savings-grid">
+                <div><div class="solar-saving-num" id="sol-save-rows">—</div><div class="solar-saving-desc">More array rows from 15 ft spacing</div></div>
+                <div><div class="solar-saving-num" id="sol-save-kwh">—</div><div class="solar-saving-desc">Additional kWh generated per year</div></div>
+                <div><div class="solar-saving-num" id="sol-save-rev">—</div><div class="solar-saving-desc">More energy revenue per year</div></div>
+                <div><div class="solar-saving-num" id="sol-save-labor">—</div><div class="solar-saving-desc">Annual labor cost savings</div></div>
+                <div><div class="solar-saving-num" id="sol-save-total">—</div><div class="solar-saving-desc">Total additional net income / year</div></div>
+              </div>
+            </div>
+
+            <div class="solar-chart-box">
+              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#7a94a8;margin-bottom:16px;">Annual net income comparison</div>
+              <div class="solar-bar-row">
+                <div class="solar-bar-top"><span class="solar-bar-name">Standard — 25 ft spacing, 260 labor days/yr</span><span class="solar-bar-amount" id="sol-chart-std" style="color:#b85c5c;">—</span></div>
+                <div class="solar-bar-track"><div class="solar-bar-fill" id="sol-bar-std" style="background:#c97a7a;width:0%"></div></div>
+              </div>
+              <div class="solar-bar-row">
+                <div class="solar-bar-top"><span class="solar-bar-name">Hydro Fix System — 15 ft spacing, 12 labor days/yr</span><span class="solar-bar-amount" id="sol-chart-hf" style="color:#2d7d6f;">—</span></div>
+                <div class="solar-bar-track"><div class="solar-bar-fill" id="sol-bar-hf" style="background:#2d7d6f;width:0%"></div></div>
+              </div>
+              <div class="solar-bar-row">
+                <div class="solar-bar-top"><span class="solar-bar-name">Additional annual gain with Hydro Fix System</span><span class="solar-bar-amount" id="sol-chart-gain" style="color:#3d5568;">—</span></div>
+                <div class="solar-bar-track"><div class="solar-bar-fill" id="sol-bar-gain" style="background:rgba(14,31,47,.18);width:0%"></div></div>
+              </div>
+            </div>
+
+            <div class="solar-pull">
+              <div class="solar-pull-label">What this means for your capital budget</div>
+              <p class="solar-pull-body">Most solar farm operators don't realize drainage spacing is a negotiable variable — until they see the output difference side by side. <strong>The Hydro Fix System install cost is typically recovered within the first year through increased energy revenue alone,</strong> before labor savings are factored in.</p>
+            </div>
+
+            <!-- EMAIL CAPTURE -->
+            <div class="solar-email-cap">
+              <div class="solar-email-cap-label">Take your numbers with you</div>
+              <h3>Want us to send your results <span>directly to your inbox?</span></h3>
+              <p>Drop your details below and we'll send a clean copy of your ROI breakdown, along with notes from our team on what the numbers mean for a site your size. No spam, no pressure.</p>
+
+              <div id="sol-email-form">
+                <div class="solar-form-row">
+                  <div>
+                    <label class="solar-form-field-label">Your Name</label>
+                    <input type="text" id="sol-name" placeholder="First &amp; last name" class="solar-form-input"
+                      onfocus="this.style.borderColor='#2d7d6f'" onblur="this.style.borderColor='rgba(14,31,47,.15)'" />
+                  </div>
+                  <div>
+                    <label class="solar-form-field-label">Phone Number</label>
+                    <input type="tel" id="sol-phone" placeholder="(xxx) xxx-xxxx" class="solar-form-input"
+                      onfocus="this.style.borderColor='#2d7d6f'" onblur="this.style.borderColor='rgba(14,31,47,.15)'" />
+                  </div>
+                </div>
+                <div>
+                  <label class="solar-form-field-label">Email Address</label>
+                  <input type="email" id="sol-email" placeholder="you@yourcompany.com" class="solar-form-input"
+                    onfocus="this.style.borderColor='#2d7d6f'" onblur="this.style.borderColor='rgba(14,31,47,.15)'" />
+                </div>
+                <button class="solar-submit-btn" onclick="solarSubmit()">Send Me My Results →</button>
+                <p class="solar-form-note">We'll also include details on scheduling a free on-site drainage assessment.</p>
+              </div>
+
+              <div class="solar-success" id="sol-success">
+                <div style="font-size:28px;margin-bottom:10px;">✓</div>
+                <p class="big">You're all set — check your inbox.</p>
+                <p class="sm">Your results are on the way. In the meantime, feel free to <a href="https://calendar.app.google/6Egd7sq2ACXp3Pu17" target="_blank">schedule a free site audit</a> or call us at <a href="tel:7704059911">(770) 405-9911</a>.</p>
+              </div>
+            </div>
+
+          </div><!-- /solar-results -->
+
+          <!-- Solar sig -->
+          <div class="solar-sig">
+            <p style="margin:0 0 4px;font-family:Georgia,'Playfair Display',serif;font-size:14px;color:#3d5568;">Warm regards,</p>
+            <p style="margin:0 0 12px;font-family:Georgia,'Playfair Display',serif;font-size:15px;font-weight:bold;color:#0e1f2f;">Your Hydro Fix Team</p>
+            <div style="display:inline-flex;align-items:center;gap:8px;">
+              <div style="width:26px;height:26px;background:#2d7d6f;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;">💧</div>
+              <span style="font-family:Georgia,'Playfair Display',serif;font-size:16px;font-weight:bold;color:#0e1f2f;">Hydro <span style="color:#2d7d6f;">Fix</span></span>
+            </div>
+            <p style="margin:10px 0 0;font-size:12px;color:#7a94a8;line-height:1.8;">(770) 405-9911 &nbsp;·&nbsp; <a href="https://myhydrofix.com" style="color:#2d7d6f;text-decoration:none;">myhydrofix.com</a><br>Serving the Southeast</p>
+          </div>
+        </div><!-- /solar-body -->
+
+        <div class="solar-footer">
+          <p>Hydro Fix · Permanent Drainage Systems · the Southeast · <a href="https://myhydrofix.com">myhydrofix.com</a><br>Made from 100% recycled plastics.</p>
+        </div>
+
+      </div><!-- /solar-shell -->
+    </div><!-- /pane-solar -->
+
+  </div><!-- /calc-page-inner -->
+</div><!-- /calc-page-section -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <a aria-label='Hydro Fix home' class='footer-logo' href='/'><svg style="display:block;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="160" height="36" viewBox="0 0 1150 260" xml:space="preserve">
+<desc>HydroFix Alt 2 - HYDRO white, FIX teal (dark background)</desc>
+<defs>
+</defs>
+<g transform="matrix(1 0 0 1 640 512)" id="background-logo"  >
+<rect style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-opacity: 0; fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  x="-640" y="-512" rx="0" ry="0" width="1280" height="1024" />
+</g>
+<g transform="matrix(0.902 0 0 0.902 110 130)" id="logo-logo"  >
+<g style=""  paint-order="stroke"   >
+		<g transform="matrix(0.5256105787118807 0 0 0.5256105787118807 0.013186011651896479 -9.548771325538041)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-526.2774288334338, -371.8330078)" d="M 389.3052673 511.2958679 C 389.3052673 511.2958679 427.2749023 490.5591736 492.229187 497.4960327 C 557.1834717 504.4328918 620.5611572 542.7528076 620.5611572 542.7528076 L 389.3052673 511.2958679 z M 654.1296387 353.7208252 C 647.0235596 340.58770749999996 638.9212646999999 327.7336426 630.3161011 315.4040222 C 605.357544 321.7782287 575.0913085999999 321.0237732 548.0758056999999 316.96591179999996 C 511.7285461999999 311.69427479999996 474.07687379999993 300.63864129999996 436.19747929999994 296.41067499999997 C 417.5783996999999 320.6579895 399.9741821999999 347.7117614 387.82354739999994 375.3858337 C 473.5455322 355.4011536 565.1539307 322.1629639 654.1296387 353.7208252 z M 616.0635986 297.2537842 C 583.6395874 253.9820557 558.5897216 228.21386719999998 526.2944335999999 200.913208 C 521.3821410999999 205.1785583 489.75311279999994 233.0888977 457.86096189999995 271.5933533 C 471.427063 274.2622986 484.60903929999995 277.70309449999996 497.5655211999999 281.176178 C 535.4984741 291.2707214 575.4211426 303.5532532 616.0635986 297.2537842 z M 679.5233154 428.4390259 C 678.1525268 427.20791629999997 676.7721557 426.0124512 675.3840332 424.8467407 L 678.4067383 422.184906 C 643.9445801 394.45294190000004 594.7324219000001 389.3736572 594.7324219000001 389.3736572 L 594.7308350000001 389.38314820000005 C 524.4056397 378.90563970000005 445.43634040000006 405.79449460000006 376.21566780000006 413.19241330000006 C 372.1201783000001 428.88626100000005 370.63418590000003 446.20452880000005 371.85617070000006 459.29449460000006 C 382.99584970000006 454.55841060000006 393.5561524000001 452.26528930000006 403.68032840000006 451.00341790000004 C 498.03759770000005 436.18862910000007 590.0238648000001 518.7708129 678.3648072000001 474.9994811 C 681.8930054 459.0707092 681.7359619 442.6685181 679.5233154 428.4390259 z" stroke-linecap="round" />
+</g>
+		<g transform="matrix(0.5256105787118807 0 0 0.5256105787118807 0 2.842171e-14)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(61,157,141); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-526.2523417971641, -390.0000153)" d="M 642.4685059 534.4841309 L 643.5454712 534.3754882999999 L 642.7427978999999 535.1014403999999 C 611.1013184 563.7227172999999 569.9592286 579.4851683999999 526.8951415999999 579.4851683999999 C 480.16796869999985 579.4851683999999 436.4987487999999 561.2994383999999 403.9320373999999 528.2782591999999 C 398.5920410999999 522.8639525999998 393.6707458999999 517.1503904999998 389.3052673999999 511.2958677999999 L 388.95843509999986 510.8306272999999 L 389.53024299999987 510.7330930999999 L 389.6646118999999 510.7101743999999 L 389.9236145999999 510.6660764999999 C 391.10055549999987 510.4188840999999 392.2903442999999 510.2279355999999 393.3902283999999 510.0602414999999 C 397.4067688999999 509.31866439999993 401.4993286999999 508.6663205999999 405.83218399999987 507.9754025999999 L 407.82153339999985 507.6580807999999 C 414.70370499999984 506.5714108999999 422.2191468999998 506.0204464999999 430.15884419999986 506.0204464999999 C 436.43276999999983 506.02078219999987 443.0827027999999 506.3648373999999 449.9239198999999 507.04324309999987 C 462.9480897999999 508.3187862999999 477.7373353999999 510.85147059999986 496.4657289999999 515.0138546999999 C 503.3680421999999 516.5455929999999 510.2526552999999 518.1638181 517.5410158999999 519.8768307999999 C 527.0333254999999 522.1077877999999 536.8485109999999 524.4147946999999 546.8730472 526.5559078999999 C 568.5392459 531.1730343999999 585.537659 533.7616573999999 601.9891971 534.9493404999998 C 607.9801639 535.3850704999999 613.9846805 535.6062008999999 619.8360599 535.6062008999999 C 627.4844971 535.6062012 635.098877 535.2288208 642.4685059 534.4841309 z M 469.3257446 350.3189697 C 488.2670898 354.4448547 507.1776428 359.9363708 525.4656372000001 365.24691770000004 C 562.2788086 375.93679810000003 600.3453369000001 386.99078370000007 639.4911499000001 386.99078370000007 C 649.3807983000002 386.99078370000007 659.1810913 386.28115850000006 668.6204834000001 384.88153080000006 L 669.0369873000001 384.81970220000005 L 668.8831787 384.42776490000006 C 659.4993896000001 360.49154660000005 644.8298950000001 334.6990357000001 625.2822876 307.76629640000004 L 625.185791 307.63348390000004 L 625.0215454 307.62823490000005 C 622.1974487 307.53991700000006 619.2369385000001 307.49508670000006 616.2221069000001 307.49508670000006 C 600.1853637 307.49508670000006 583.4134521000001 308.76318360000005 567.1941528000001 309.99005130000006 C 550.5537719000001 311.24835210000003 533.3467407 312.5494995000001 516.4672241000001 312.5494995000001 C 483.9311218000001 312.5494995000001 458.33358760000004 307.50064090000006 435.91085810000004 296.66061400000007 L 435.66482540000004 296.54187010000004 L 435.49896240000004 296.75845340000006 C 424.1116028 311.6262207000001 414.04989620000003 326.3421936000001 405.59362790000006 340.49774170000006 L 405.30505370000003 340.98031620000006 L 405.86712650000004 341.00418090000005 C 424.2264404 341.7812195 447.3561401 345.1762085 469.3257446 350.3189697 z M 451.4226685 279.8872681 L 451.59759529999997 279.9565125 C 467.0176087 285.90292359999995 484.1372987 288.7941285 503.93304449999994 288.7941285 C 523.4464721999999 288.7941285 543.5565185999999 286.0209962 563.0045167 283.3390199 C 575.7227174 281.5851747 588.8739015 279.77185069999996 601.7078247999999 278.7570192 L 602.2843628999999 278.7114259 L 601.9185792 278.2633363 C 574.8612062 245.1151582 554.4155274 224.0879213 526.4812013 200.6808931 L 526.2828980999999 200.51486219999998 L 526.0878907999999 200.68443309999998 C 522.0291138999999 204.2089998 485.44512959999986 236.35981759999999 451.15069599999987 279.3580934 L 450.8923341999999 279.6818849 L 451.2794191999999 279.8298646 L 451.4226685 279.8872681 z M 678.7348633 422.1171875 L 678.6638794 421.7730103 L 678.3233032 421.8603516 C 661.9537964000001 426.0674134 644.9862671000001 428.1121827 626.4512939000001 428.1121827 C 589.9142456000001 428.1121827 552.8455810000002 419.9111024 516.9972534000001 411.9802552 C 481.0582886000001 404.0291138 443.89572140000007 395.8074036 407.1705627000001 395.80673229999996 C 398.14205930000014 395.80642709999995 389.2902221000001 396.3082887 380.8611145000001 397.2976381 L 380.6523743000001 397.32217419999995 L 380.5836487000001 397.52078259999996 C 373.4478150000001 418.10971079999996 370.3050537000001 437.52151499999997 371.24304200000006 455.21667489999993 L 371.52178960000003 459.31704719999993 L 371.55255130000006 459.77017219999993 L 371.97656250000006 459.6072388999999 C 372.49871830000006 459.4060364999999 425.03454590000007 439.49792489999993 496.8182373000001 439.37066659999994 C 559.1991577000001 439.6939087999999 621.8928833000001 452.2944031999999 678.1184692 475.80953989999995 L 678.4855346 475.96298229999996 L 678.5742187000001 475.57495129999995 C 682.3163452 459.2218628 682.374939 439.7374268 678.7348633 422.1171875 z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+<g transform="matrix(1.921 0 0 1.921 659 130)" id="text-logo"  >
+<g style=""  paint-order="stroke"   >
+		<g transform="matrix(1 0 0 1 0 0)" id="text-logo-path-0"  >
+<path style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-234.69, 22.4)" d="M 16 -44.8 L 3.2 -44.8 L 3.2 0 L 16 0 L 16 -16.64 L 30.08 -16.64 L 30.08 0 L 42.88 0 L 42.88 -28.16 L 16 -28.16 Z M 42.88 -44.8 L 30.08 -44.8 L 30.08 -33.34 L 42.88 -33.34 Z M 58.37 -44.8 L 75.01 -10.43 L 75.01 0 L 87.81 0 L 87.81 -11.71 L 71.81 -44.8 Z M 91.01 -44.8 L 85.44 -33.34 L 98.88 -33.34 L 104.45 -44.8 Z M 119.87 -28.16 L 119.87 0 L 139.01 0 C 154.94 0 163.01 -7.55 163.01 -22.4 C 163.01 -37.25 154.94 -44.8 139.01 -44.8 L 119.87 -44.8 L 119.87 -33.34 L 139.01 -33.34 C 146.43 -33.34 150.21 -29.7 150.21 -22.4 C 150.21 -15.17 146.43 -11.46 139.01 -11.46 L 132.67 -11.46 L 132.67 -28.16 Z M 201.6 -44.8 L 177.98 -44.8 L 177.98 -33.28 L 200.26 -33.28 C 203.84 -33.28 205.76 -31.62 205.76 -28.16 C 205.76 -24.83 203.84 -23.04 200.26 -23.04 L 184.38 -23.04 L 184.38 -11.52 L 191.04 -11.52 L 200.38 0 L 215.74 0 L 206.14 -11.84 C 214.66 -13.18 219.01 -18.62 219.01 -28.1 C 219.01 -39.17 213.12 -44.8 201.6 -44.8 Z M 258.88 0.64 C 274.82 0.64 282.88 -7.1 282.88 -22.4 C 282.88 -37.7 274.75 -45.44 258.88 -45.44 C 243.01 -45.44 234.88 -37.7 234.88 -22.4 C 234.88 -7.17 242.94 0.64 258.88 0.64 Z M 258.88 -11.65 C 251.46 -11.65 247.68 -15.3 247.68 -22.4 C 247.68 -29.57 251.46 -33.15 258.88 -33.15 C 266.3 -33.15 270.08 -29.57 270.08 -22.4 C 270.08 -15.3 266.3 -11.65 258.88 -11.65 Z" stroke-linecap="round" />
+<path style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(61,157,141); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-234.69, 22.4)" d="M 369.54 -33.28 L 369.54 -44.8 L 337.22 -44.8 L 337.22 -33.28 Z M 350.02 -16.64 L 363.14 -16.64 L 363.14 -28.16 L 337.22 -28.16 L 337.22 0 L 350.02 0 Z M 398.78 -44.8 L 385.98 -44.8 L 385.98 0 L 398.78 0 Z M 429.89 -44.8 L 415.17 -44.8 L 432.64 -22.78 L 414.53 0 L 429.25 0 L 440 -13.57 L 450.82 0 L 465.54 0 Z M 451.46 -44.8 L 442.37 -33.41 L 457.09 -33.41 L 466.18 -44.8 Z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+</svg></a>
+        <p class="footer-desc">Permanent, pressure-fed drainage systems that never clog, crush, or fail. Made from 100% recycled materials. Serving the Southeast.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a href='/residential'>Residential</a>
+        <a href='/commercial'>Commercial</a>
+        <a href='/golf'>Golf Courses</a>
+        <a href='/sports'>Sports Complexes</a>
+      </div>
+      <div class="footer-col">
+        <h5>Calculators</h5>
+        <a href='/calculators#golf'>Golf Revenue Calculator</a>
+        <a href='/calculators#sports'>Sports Complex Calculator</a>
+        <a href='/calculators#solar'>Solar Farm ROI Calculator</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href='/blog'>Blog</a>
+        <a href='/contact'>Contact Us</a>
+        <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank">Schedule a Call</a>
+        <a href='https://calendar.app.google/yHwfh8ZnLQXPHaW78'>Free Evaluation</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p><div style="display:flex;gap:14px;align-items:center;margin-bottom:12px;">
+          <a href="https://www.facebook.com/hydrofix" target="_blank" rel="noopener" aria-label="Facebook" style="opacity:0.6;transition:opacity 0.2s;display:inline-flex;">
+            <img loading="lazy" src="/img/social/facebook.svg" alt="Facebook" width="20" height="20">
+          </a>
+          <a href="https://www.instagram.com/hydrofix" target="_blank" rel="noopener" aria-label="Instagram" style="opacity:0.6;transition:opacity 0.2s;display:inline-flex;">
+            <img loading="lazy" src="/img/social/instagram.svg" alt="Instagram" width="20" height="20">
+          </a>
+          <a href="https://www.linkedin.com/company/hydrofix" target="_blank" rel="noopener" aria-label="LinkedIn" style="opacity:0.6;transition:opacity 0.2s;display:inline-flex;">
+            <img loading="lazy" src="/img/social/linkedin.svg" alt="LinkedIn" width="20" height="20">
+          </a>
+          <a href="https://x.com/hydrofix" target="_blank" rel="noopener" aria-label="X" style="opacity:0.6;transition:opacity 0.2s;display:inline-flex;">
+            <img loading="lazy" src="/img/social/x.svg" alt="X" width="20" height="20">
+          </a>
+        </div>
+          © 2025 Hydro Fix. the Southeast. All rights reserved.</p>
+      <div style="display:flex;gap:20px;">
+        <a href="/legal/privacy-policy" target="_blank">Privacy</a>
+        <a href="/legal/cookies-policy" target="_blank">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank">Schedule Free Evaluation</a>
+</div>
+
+<!-- Hidden Netlify form -->
+<form hidden method='post' name='solar-roi-results'><input type='hidden' name='form-name' value='solar-roi-results' />
+  <input type="text" name="name"/><input type="email" name="email"/>
+  <input type="text" name="phone"/><input type="text" name="farm-acres"/>
+  <input type="text" name="labor-rate"/><input type="text" name="kwh-rate"/>
+  <input type="text" name="std-net"/><input type="text" name="hf-net"/>
+  <input type="text" name="save-total"/>
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// ── MOBILE MENU (fixed) ──────────────────────────────────────
+document.getElementById('hamburger-btn').addEventListener('click', function(e) {
+  e.stopPropagation();
+  document.getElementById('mobile-menu').classList.toggle('open');
+});
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('mobile-menu');
+  const btn  = document.getElementById('hamburger-btn');
+  if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+});
+
+// ── NAV DROPDOWN ─────────────────────────────────────────────
+document.addEventListener('click', e => {
+  if (!e.target.closest('.nav-dropdown')) document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+});
+document.querySelectorAll('.nav-dropdown-trigger').forEach(t => {
+  t.addEventListener('click', e => {
+    e.preventDefault();
+    const p = t.closest('.nav-dropdown'), was = p.classList.contains('open');
+    document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+    if (!was) p.classList.add('open');
+  });
+});
+
+// ── PANE SWITCHER ─────────────────────────────────────────────
+function switchPane(name) {
+  document.querySelectorAll('.calc-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.calc-page-tab').forEach(t => t.classList.toggle('active', t.dataset.pane === name));
+  document.getElementById('pane-' + name).classList.add('active');
+  window.location.hash = name;
+  // lazy-init charts when pane becomes visible
+  if (name === 'golf'   && !golfChart)   golfUpdate();
+  if (name === 'sports' && !sportsChart) spUpdate();
+}
+
+// Open pane from hash - run after DOM ready
+(function(){
+  function openHashPane() {
+    const h = window.location.hash.replace('#','');
+    if (['golf','sports','solar'].includes(h)) switchPane(h);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', openHashPane);
+  } else {
+    openHashPane();
+  }
+})();
+
+// ── SCROLL REVEAL ─────────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── SHARED FORMATTERS ─────────────────────────────────────────
+const fmt  = n => '$' + Math.round(n).toLocaleString();
+const fmtK = n => { const a=Math.abs(n); if(a>=1000000) return '$'+(n/1000000).toFixed(1)+'M'; if(a>=1000) return '$'+Math.round(n/1000)+'K'; return fmt(n); };
+const fmtKwh = n => { if(n>=1000000) return (n/1000000).toFixed(1)+'M kWh'; if(n>=1000) return Math.round(n/1000)+'K kWh'; return Math.round(n)+' kWh'; };
+
+// ════════════════════════════════════════════════════════════
+// GOLF CALCULATOR
+// ════════════════════════════════════════════════════════════
+let golfChart = null, golfView = 'loss';
+
+function golfVals() {
+  return {
+    rounds: +document.getElementById('g-rounds').value,
+    fee:    +document.getElementById('g-fee').value,
+    days:   +document.getElementById('g-days').value,
+    members:+document.getElementById('g-members').value,
+    memfee: +document.getElementById('g-memfee').value,
+    attrition: +document.getElementById('g-attrition').value / 100
+  };
+}
+function golfCompute(v) {
+  const f=v.days/365, r=Math.round(v.rounds*f), g=r*v.fee, fb=Math.round(g*.35),
+        ml=Math.round(v.members*v.attrition), m=ml*v.memfee, maint=16000,
+        total=g+fb+m+maint, inst=Math.round(Math.max(total*1.8,25000)/5000)*5000;
+  return {roundsLost:r,greenFeeLost:g,fnbLost:fb,membersLost:ml,memberLoss:m,maintCost:maint,total,installEst:inst,paybackYrs:Math.ceil(inst/total)};
+}
+function golfUpdate() {
+  const v=golfVals(), c=golfCompute(v);
+  document.getElementById('g-rounds-val').textContent   = v.rounds.toLocaleString();
+  document.getElementById('g-fee-val').textContent      = '$'+v.fee;
+  document.getElementById('g-days-val').textContent     = v.days+' days';
+  document.getElementById('g-members-val').textContent  = v.members.toLocaleString();
+  document.getElementById('g-memfee-val').textContent   = '$'+v.memfee.toLocaleString();
+  document.getElementById('g-attrition-val').textContent= Math.round(v.attrition*100)+'%';
+  document.getElementById('g-m-greenfee').textContent   = fmtK(c.greenFeeLost+c.fnbLost);
+  document.getElementById('g-m-greenfee-sub').textContent = c.roundsLost.toLocaleString()+' rounds x '+fmt(v.fee);
+  document.getElementById('g-m-member').textContent     = fmtK(c.memberLoss);
+  document.getElementById('g-m-member-sub').textContent = c.membersLost+' members x '+fmt(v.memfee);
+  document.getElementById('g-m-rounds').textContent     = c.roundsLost.toLocaleString();
+  document.getElementById('g-b-gf').textContent  = fmtK(c.greenFeeLost);
+  document.getElementById('g-b-fnb').textContent = fmtK(c.fnbLost);
+  document.getElementById('g-b-mem').textContent = fmtK(c.memberLoss);
+  document.getElementById('g-s-gf').textContent  = fmtK(c.greenFeeLost);
+  document.getElementById('g-s-fnb').textContent = fmtK(c.fnbLost);
+  document.getElementById('g-s-mem').textContent = fmtK(c.memberLoss);
+  document.getElementById('g-s-install').textContent = fmtK(c.installEst)+' est.';
+  if (golfView==='loss') {
+    document.getElementById('g-total-val').textContent = fmtK(c.total);
+    document.getElementById('g-total-val').className   = 'calc-total-val';
+    document.getElementById('g-total-label').textContent = 'Total annual loss from drainage';
+    document.getElementById('g-total-sub').textContent = 'green fees + F&B + member attrition + maintenance';
+  } else {
+    document.getElementById('g-total-val').textContent = fmtK(c.total);
+    document.getElementById('g-total-val').className   = 'calc-total-val good';
+    document.getElementById('g-total-label').textContent = 'Annual savings with Hydro Fix';
+    document.getElementById('g-total-sub').textContent   = 'recovered every year after installation';
+    document.getElementById('g-payback-years').textContent = c.paybackYrs+(c.paybackYrs===1?' year':' years');
+    document.getElementById('g-payback-desc').textContent  = 'Based on '+fmtK(c.installEst)+' installation vs '+fmtK(c.total)+' recovered annually.';
+  }
+  const labels=['Green fees','F&B / pro shop','Member attrition','Maintenance'];
+  const data=[c.greenFeeLost,c.fnbLost,c.memberLoss,c.maintCost];
+  const colors=golfView==='loss'?['#b91c1c','#92400e','#0e1f2f','#7a94a8']:['#2d7d6f','#3d9d8d','#1c3448','#e8f4f2'];
+  if (golfChart) { golfChart.data.datasets[0].data=data; golfChart.data.datasets[0].backgroundColor=colors; golfChart.update(); }
+  else { golfChart=new Chart(document.getElementById('golfChart'),{type:'bar',data:{labels,datasets:[{data,backgroundColor:colors,borderRadius:6,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' '+fmtK(ctx.raw)}}},scales:{x:{ticks:{color:'#7a94a8',font:{size:11,family:"'Inter',system-ui"},autoSkip:false},grid:{display:false},border:{display:false}},y:{ticks:{color:'#7a94a8',font:{size:11,family:"'Inter',system-ui"},callback:v=>fmtK(v)},grid:{color:'rgba(14,31,47,0.06)'},border:{display:false}}}}}); }
+}
+function golfSetView(view) {
+  golfView = view;
+  document.getElementById('golf-tab-loss').classList.toggle('active', view==='loss');
+  document.getElementById('golf-tab-savings').classList.toggle('active', view==='savings');
+  document.getElementById('g-breakdown-loss').style.display    = view==='loss'    ? 'block':'none';
+  document.getElementById('g-breakdown-savings').style.display = view==='savings' ? 'block':'none';
+  document.getElementById('g-payback-box').style.display       = view==='savings' ? 'block':'none';
+  document.getElementById('g-chart-eyebrow').textContent       = view==='loss'    ? 'Annual loss by category':'Annual savings recovered';
+  golfUpdate();
+}
+['g-rounds','g-fee','g-days','g-members','g-memfee','g-attrition'].forEach(id => document.getElementById(id).addEventListener('input', golfUpdate));
+
+// ════════════════════════════════════════════════════════════
+// SPORTS CALCULATOR
+// ════════════════════════════════════════════════════════════
+let sportsChart = null, spView = 'loss';
+const SP_PRESETS = {
+  multi:    {days:35,tourn:12,tournrev:4500,rental:120,slots:18,concession:650},
+  baseball: {days:30,tourn:18,tournrev:3500,rental:100,slots:24,concession:500},
+  soccer:   {days:40,tourn:8, tournrev:5500,rental:130,slots:14,concession:600},
+  school:   {days:25,tourn:4, tournrev:2000,rental:75, slots:10,concession:200}
+};
+function spVals() {
+  return {
+    days:       +document.getElementById('sp-days').value,
+    tourn:      +document.getElementById('sp-tourn').value,
+    tournrev:   +document.getElementById('sp-tournrev').value,
+    rental:     +document.getElementById('sp-rental').value,
+    slots:      +document.getElementById('sp-slots').value,
+    concession: +document.getElementById('sp-concession').value
+  };
+}
+function spCompute(v) {
+  const closureFrac=v.days/365, weeksLost=v.days/7,
+        tournCancelled=Math.round(v.tourn*closureFrac*1.4),
+        tournLoss=tournCancelled*v.tournrev,
+        rentalLost=Math.round(weeksLost*v.slots),
+        rentalLoss=rentalLost*v.rental,
+        impactedDays=Math.round(v.days*0.60),
+        concessionLoss=impactedDays*v.concession,
+        maint=13000, total=tournLoss+rentalLoss+concessionLoss+maint,
+        inst=Math.round(Math.max(total*1.6,20000)/5000)*5000;
+  return {tournCancelled,tournLoss,rentalLost,rentalLoss,impactedDays,concessionLoss,maintCost:maint,total,installEst:inst,paybackYrs:Math.ceil(inst/total)};
+}
+function spUpdate() {
+  const v=spVals(), c=spCompute(v);
+  document.getElementById('sp-days-val').textContent       = v.days+' days';
+  document.getElementById('sp-tourn-val').textContent      = v.tourn;
+  document.getElementById('sp-tournrev-val').textContent   = '$'+v.tournrev.toLocaleString();
+  document.getElementById('sp-rental-val').textContent     = '$'+v.rental;
+  document.getElementById('sp-slots-val').textContent      = v.slots.toLocaleString();
+  document.getElementById('sp-concession-val').textContent = '$'+v.concession.toLocaleString();
+  document.getElementById('sp-m-games').textContent        = fmtK(c.tournLoss+c.rentalLoss);
+  document.getElementById('sp-m-games-sub').textContent    = c.tournCancelled+' tournaments + rental slots lost';
+  document.getElementById('sp-m-concession').textContent   = fmtK(c.concessionLoss);
+  document.getElementById('sp-m-concession-sub').textContent = c.impactedDays+' impacted event days';
+  document.getElementById('sp-m-days').textContent         = v.days;
+  document.getElementById('sp-b-tourn').textContent      = fmtK(c.tournLoss);
+  document.getElementById('sp-b-rental').textContent     = fmtK(c.rentalLoss);
+  document.getElementById('sp-b-concession').textContent = fmtK(c.concessionLoss);
+  document.getElementById('sp-s-tourn').textContent      = fmtK(c.tournLoss);
+  document.getElementById('sp-s-rental').textContent     = fmtK(c.rentalLoss);
+  document.getElementById('sp-s-concession').textContent = fmtK(c.concessionLoss);
+  document.getElementById('sp-s-install').textContent    = fmtK(c.installEst)+' est.';
+  document.getElementById('sp-payback-years').textContent = c.paybackYrs+(c.paybackYrs===1?' year':' years');
+  document.getElementById('sp-payback-desc').textContent  = 'Based on '+fmtK(c.installEst)+' installation vs '+fmtK(c.total)+' recovered annually.';
+  if (spView==='loss') {
+    document.getElementById('sp-total-val').textContent   = fmtK(c.total);
+    document.getElementById('sp-total-val').className     = 'calc-total-val';
+    document.getElementById('sp-total-label').textContent = 'Total annual loss from drainage';
+    document.getElementById('sp-total-sub').textContent   = 'games + tournaments + concessions + maintenance';
+  } else {
+    document.getElementById('sp-total-val').textContent   = fmtK(c.total);
+    document.getElementById('sp-total-val').className     = 'calc-total-val good';
+    document.getElementById('sp-total-label').textContent = 'Annual savings with Hydro Fix';
+    document.getElementById('sp-total-sub').textContent   = 'recovered every year after installation';
+  }
+  const labels=['Tournament\nloss','Rental\nloss','Concession\nloss','Maintenance'];
+  const data=[c.tournLoss,c.rentalLoss,c.concessionLoss,c.maintCost];
+  const colors=spView==='loss'?['#b91c1c','#92400e','#0e1f2f','#7a94a8']:['#2d7d6f','#3d9d8d','#1c3448','#e8f4f2'];
+  if (sportsChart) { sportsChart.data.datasets[0].data=data; sportsChart.data.datasets[0].backgroundColor=colors; sportsChart.update(); }
+  else { sportsChart=new Chart(document.getElementById('sportsChart'),{type:'bar',data:{labels,datasets:[{data,backgroundColor:colors,borderRadius:6,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' '+fmtK(ctx.raw)}}},scales:{x:{ticks:{color:'#7a94a8',font:{size:11,family:"'Inter',system-ui"},autoSkip:false},grid:{display:false},border:{display:false}},y:{ticks:{color:'#7a94a8',font:{size:11,family:"'Inter',system-ui"},callback:v=>fmtK(v)},grid:{color:'rgba(14,31,47,0.06)'},border:{display:false}}}}}); }
+}
+function spSetView(view) {
+  spView = view;
+  document.getElementById('sp-tab-loss').classList.toggle('active', view==='loss');
+  document.getElementById('sp-tab-savings').classList.toggle('active', view==='savings');
+  document.getElementById('sp-breakdown-loss').style.display    = view==='loss'    ? 'block':'none';
+  document.getElementById('sp-breakdown-savings').style.display = view==='savings' ? 'block':'none';
+  document.getElementById('sp-payback-box').style.display       = view==='savings' ? 'block':'none';
+  document.getElementById('sp-chart-eyebrow').textContent       = view==='loss'    ? 'Annual loss by category':'Annual savings recovered';
+  spUpdate();
+}
+document.querySelectorAll('.fac-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.fac-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    const p = SP_PRESETS[pill.dataset.type];
+    Object.entries(p).forEach(([id, val]) => { document.getElementById('sp-'+id).value = val; });
+    spUpdate();
+  });
+});
+['sp-days','sp-tourn','sp-tournrev','sp-rental','sp-slots','sp-concession'].forEach(id => document.getElementById(id).addEventListener('input', spUpdate));
+
+// ════════════════════════════════════════════════════════════
+// SOLAR CALCULATOR
+// ════════════════════════════════════════════════════════════
+const solAcresIn = document.getElementById('sol-acres');
+const solAcresSlider = document.getElementById('sol-acres-slider');
+const solLaborIn = document.getElementById('sol-labor');
+const solLaborSlider = document.getElementById('sol-labor-slider');
+const solKwhIn = document.getElementById('sol-kwh');
+const solKwhSlider = document.getElementById('sol-kwh-slider');
+
+solAcresIn.addEventListener('input', () => solAcresSlider.value = solAcresIn.value);
+solAcresSlider.addEventListener('input', () => solAcresIn.value = solAcresSlider.value);
+solLaborIn.addEventListener('input', () => solLaborSlider.value = solLaborIn.value);
+solLaborSlider.addEventListener('input', () => solLaborIn.value = solLaborSlider.value);
+solKwhIn.addEventListener('input', () => solKwhSlider.value = Math.round(parseFloat(solKwhIn.value)*100));
+solKwhSlider.addEventListener('input', () => solKwhIn.value = (solKwhSlider.value/100).toFixed(2));
+
+function solarCalculate() {
+  const acres = parseFloat(solAcresIn.value)||100;
+  const labor = parseFloat(solLaborIn.value)||200;
+  const kwh   = parseFloat(solKwhIn.value)||0.07;
+  const fw = (acres*43560*0.80)/500;
+  const stdRows = Math.floor(fw/25), hfRows = Math.floor(fw/15);
+  const stdKwh = stdRows*500*10*4.5*365/1000, hfKwh = hfRows*500*10*4.5*365/1000;
+  const stdRev = stdKwh*kwh, hfRev = hfKwh*kwh;
+  const stdLab = 260*labor, hfLab = 12*labor;
+  const stdNet = stdRev-stdLab, hfNet = hfRev-hfLab;
+  const saveRows=hfRows-stdRows, saveKwh=hfKwh-stdKwh, saveRev=hfRev-stdRev, saveLab=stdLab-hfLab, saveTotal=hfNet-stdNet;
+
+  const fmtS = n => { if(n>=1000000) return '$'+(n/1000000).toFixed(2)+'M'; if(n>=1000) return '$'+Math.round(n/1000)+'K'; return '$'+Math.round(n).toLocaleString(); };
+
+  document.getElementById('sol-std-rows').textContent = stdRows.toLocaleString()+' rows';
+  document.getElementById('sol-std-kwh').textContent  = fmtKwh(stdKwh);
+  document.getElementById('sol-std-rev').textContent  = fmtS(stdRev);
+  document.getElementById('sol-std-labor').textContent= fmtS(stdLab);
+  document.getElementById('sol-std-net').textContent  = fmtS(stdNet);
+
+  document.getElementById('sol-hf-rows').textContent = hfRows.toLocaleString()+' rows';
+  document.getElementById('sol-hf-kwh').textContent  = fmtKwh(hfKwh);
+  document.getElementById('sol-hf-rev').textContent  = fmtS(hfRev);
+  document.getElementById('sol-hf-labor').textContent= fmtS(hfLab);
+  document.getElementById('sol-hf-net').textContent  = fmtS(hfNet);
+
+  document.getElementById('sol-save-rows').textContent  = '+'+saveRows;
+  document.getElementById('sol-save-kwh').textContent   = '+'+fmtKwh(saveKwh);
+  document.getElementById('sol-save-rev').textContent   = '+'+fmtS(saveRev);
+  document.getElementById('sol-save-labor').textContent = fmtS(saveLab);
+  document.getElementById('sol-save-total').textContent = '+'+fmtS(saveTotal);
+
+  const mx = Math.max(stdNet,hfNet,1);
+  document.getElementById('sol-bar-std').style.width  = Math.max(4,(stdNet/mx)*80)+'%';
+  document.getElementById('sol-bar-hf').style.width   = Math.max(4,(hfNet/mx)*80)+'%';
+  document.getElementById('sol-bar-gain').style.width = Math.max(4,(saveTotal/mx)*80)+'%';
+  document.getElementById('sol-chart-std').textContent  = fmtS(stdNet);
+  document.getElementById('sol-chart-hf').textContent   = fmtS(hfNet);
+  document.getElementById('sol-chart-gain').textContent = '+'+fmtS(saveTotal);
+
+  const res = document.getElementById('solar-results');
+  res.classList.add('show');
+  setTimeout(() => res.scrollIntoView({behavior:'smooth',block:'start'}), 80);
+}
+
+function solarSubmit() {
+  const email = document.getElementById('sol-email').value.trim();
+  if (!email || !email.includes('@')) {
+    document.getElementById('sol-email').style.borderColor = '#b85c5c';
+    return;
+  }
+  const body = new URLSearchParams({
+    'form-name': 'solar-roi-results',
+    'name':  document.getElementById('sol-name').value.trim(),
+    'phone': document.getElementById('sol-phone').value.trim(),
+    'email': email,
+    'farm-acres': document.getElementById('sol-acres').value,
+    'labor-rate': document.getElementById('sol-labor').value,
+    'kwh-rate':   document.getElementById('sol-kwh').value,
+    'std-net':    document.getElementById('sol-std-net').textContent,
+    'hf-net':     document.getElementById('sol-hf-net').textContent,
+    'save-total': document.getElementById('sol-save-total').textContent
+  });
+  fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: body.toString()}).catch(()=>{});
+  document.getElementById('sol-email-form').style.display = 'none';
+  document.getElementById('sol-success').style.display    = 'block';
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+golfUpdate();
+</script>
+</body>
+</html>

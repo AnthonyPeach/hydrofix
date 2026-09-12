@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="google-site-verification" content="fE31P88cVNMa42XCJ7lVvl9_YecggaYuQDI_9U91cBw">
+  <meta name="facebook-domain-verification" content="rxgkz3ndxpkz7jjd44he71zfshca52">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/favicon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<title>Solar Farm ROI Calculator | Hydro Fix</title>
+<meta name="description" content="See how the Hydro Fix System lets solar farms install array rows 40% closer together and cut maintenance from 260 days a year to just 12. Free...">
+<link rel="canonical" href="https://myhydrofix.com/solar-calculator">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --white:      #ffffff;
+  --cream:      #f7f3ee;
+  --cream-dark: #ede8df;
+  --navy:       #0e1f2f;
+  --navy-mid:   #1c3448;
+  --teal:       #2d7d6f;
+  --teal-light: #3d9d8d;
+  --teal-pale:  #e8f4f2;
+  --text:       #0e1f2f;
+  --text-mid:   #3d5568;
+  --text-light: #7a94a8;
+  --border:     rgba(14,31,47,0.1);
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'Inter', system-ui, sans-serif;
+  --max:   1100px;
+  --r:     8px;
+  --r-lg:  16px;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--white); color: var(--text); line-height: 1.65; overflow-x: hidden; }
+a { color: inherit; }
+em { font-style: italic; color: var(--teal); }
+
+h1 { font-family: var(--serif); font-size: clamp(38px, 5.5vw, 68px); line-height: 1.06; letter-spacing: -1px; font-weight: 700; }
+h2 { font-family: var(--serif); font-size: clamp(28px, 4vw, 48px); line-height: 1.12; letter-spacing: -0.5px; font-weight: 700; margin-bottom: 20px; }
+h4 { font-family: var(--sans); font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+p { font-size: 16px; color: var(--text-mid); line-height: 1.8; }
+
+/* NAV */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); height: 72px; display: flex; align-items: center; padding: 0 5%; }
+.nav-inner { max-width: var(--max); margin: 0 auto; width: 100%; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo-text { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--navy); text-decoration: none; }
+.nav-logo-text span { color: var(--teal); }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 14px; font-weight: 400; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--navy); }
+.nav-cta { background: var(--navy); color: #fff; font-size: 14px; font-weight: 500; padding: 11px 24px; border-radius: 100px; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
+.nav-cta:hover { background: var(--teal); }
+.nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); margin: 5px 0; transition: 0.3s; }
+.mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--border); padding: 20px 5%; z-index: 199; max-height: calc(100vh - 72px); overflow-y: auto; }
+.mobile-menu.open { display: block; }
+.mobile-menu a { display: block; padding: 12px 0; font-size: 16px; color: var(--text-mid); text-decoration: none; border-bottom: 1px solid var(--border); }
+.mobile-menu a:last-child { border-bottom: none; }
+@media (max-width: 860px) { .nav-links { display: none; } .nav-hamburger { display: block; } }
+
+/* SHARED */
+.section { padding: 96px 5%; }
+.inner { max-width: var(--max); margin: 0 auto; }
+.label { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.label::before { content: ''; width: 24px; height: 1px; background: var(--teal); }
+.lead { font-size: 18px; font-weight: 300; color: var(--text-mid); line-height: 1.8; max-width: 600px; margin-bottom: 48px; }
+
+/* BUTTONS */
+.btn { display: inline-block; font-family: var(--sans); font-size: 15px; font-weight: 500; padding: 14px 30px; border-radius: 100px; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+.btn-dark { background: var(--navy); color: #fff; }
+.btn-dark:hover { background: var(--teal); }
+.btn-teal { background: var(--teal); color: #fff; }
+.btn-teal:hover { background: var(--teal-light); transform: translateY(-1px); }
+.btn-outline-white { background: transparent; color: rgba(255,255,255,0.85); border: 1.5px solid rgba(255,255,255,0.4); }
+.btn-outline-white:hover { border-color: rgba(255,255,255,0.8); color: #fff; }
+.btn-lg { padding: 17px 36px; font-size: 16px; }
+
+/* PAGE HERO */
+.page-hero { background: var(--navy); padding: 140px 5% 88px; position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; top: -20%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(45,125,111,0.14) 0%, transparent 65%); border-radius: 50%; pointer-events: none; }
+.page-hero-inner { max-width: var(--max); margin: 0 auto; position: relative; z-index: 2; }
+.page-hero h1 { color: #fff; margin-bottom: 18px; max-width: 780px; }
+.page-hero h1 em { color: var(--teal-light); }
+.page-hero .sub { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.58); max-width: 580px; line-height: 1.75; margin-bottom: 36px; }
+.page-hero .label { color: var(--teal-light); }
+.page-hero .label::before { background: var(--teal-light); }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* CALCULATOR */
+.calc-section { background: var(--cream); padding: 96px 5%; }
+
+/* VIEW TABS */
+.calc-tabs { display: flex; gap: 4px; background: var(--cream-dark); border-radius: 100px; padding: 4px; width: fit-content; margin-bottom: 36px; }
+.calc-tab { font-family: var(--sans); font-size: 14px; font-weight: 500; padding: 10px 26px; border-radius: 100px; border: none; background: transparent; color: var(--text-mid); cursor: pointer; transition: all 0.2s; }
+.calc-tab.active { background: var(--navy); color: #fff; }
+
+/* SLIDER GRID */
+.calc-inputs { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 40px; }
+@media(max-width:860px){ .calc-inputs { grid-template-columns: repeat(2,1fr); } }
+@media(max-width:560px){ .calc-inputs { grid-template-columns: 1fr; } }
+
+.calc-field { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px 22px; }
+.calc-field label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); display: block; margin-bottom: 10px; }
+.calc-field .field-val { font-family: var(--serif); font-size: 28px; font-weight: 700; color: var(--navy); line-height: 1; margin-bottom: 14px; }
+.calc-field input[type=range] { width: 100%; -webkit-appearance: none; height: 4px; background: var(--cream-dark); border-radius: 2px; outline: none; cursor: pointer; }
+.calc-field input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--teal); cursor: pointer; border: 3px solid var(--white); box-shadow: 0 1px 6px rgba(14,31,47,0.18); }
+.calc-field input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--teal); border: 3px solid var(--white); cursor: pointer; }
+
+/* METRIC CARDS */
+.calc-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px; }
+@media(max-width:680px){ .calc-metrics { grid-template-columns: 1fr; } }
+.calc-metric { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 22px; }
+.calc-metric-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 8px; }
+.calc-metric-val { font-family: var(--serif); font-size: 34px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+.calc-metric-sub { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+.metric-gain  { border-top: 3px solid var(--teal); }
+.metric-gain  .calc-metric-val { color: var(--teal); }
+.metric-save  { border-top: 3px solid #2d6b2f; }
+.metric-save  .calc-metric-val { color: #2d6b2f; }
+.metric-days  { border-top: 3px solid #92400e; }
+.metric-days  .calc-metric-val { color: #92400e; }
+
+/* TOTAL BAR */
+.calc-total { background: var(--navy); border-radius: var(--r-lg); padding: 26px 32px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+.calc-total-label { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.55); }
+.calc-total-sub { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 3px; }
+.calc-total-val { font-family: var(--serif); font-size: 44px; font-weight: 700; color: var(--teal-light); }
+
+/* BOTTOM GRID */
+.calc-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+@media(max-width:720px){ .calc-bottom { grid-template-columns: 1fr; } }
+
+/* BREAKDOWN */
+.calc-breakdown { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; margin-bottom: 24px; }
+.calc-br-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 22px; border-bottom: 1px solid var(--border); font-size: 14px; }
+.calc-br-row:last-child { border-bottom: none; }
+.br-label { color: var(--text-mid); }
+.br-val { font-weight: 600; color: var(--navy); }
+.br-val.pos { color: var(--teal); }
+
+/* PAYBACK */
+.payback-box { background: var(--teal-pale); border: 1px solid rgba(45,125,111,0.2); border-left: 4px solid var(--teal); border-radius: 0 var(--r-lg) var(--r-lg) 0; padding: 24px 28px; margin-bottom: 24px; }
+.payback-box h4 { color: var(--navy); margin-bottom: 6px; }
+.payback-box p { font-size: 14px; color: var(--text-mid); line-height: 1.7; margin: 0; }
+.payback-years { font-family: var(--serif); font-size: 52px; font-weight: 700; color: var(--teal); line-height: 1; margin: 8px 0; }
+
+/* CHART */
+.calc-chart-box { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; }
+.calc-chart-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 16px; }
+.calc-chart-wrap { position: relative; width: 100%; height: 220px; }
+
+/* CTA ROW */
+.calc-cta-row { text-align: center; margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--cream-dark); }
+.calc-cta-row p { font-size: 14px; color: var(--text-light); margin-top: 14px; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+/* EMAIL CAPTURE */
+.email-capture { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px; margin-top: 24px; }
+.email-capture-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 10px; }
+.email-capture h3 { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.email-capture h3 em { color: var(--teal); }
+.email-capture > p { font-size: 14px; color: var(--text-mid); line-height: 1.75; margin-bottom: 20px; max-width: 500px; }
+.email-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+@media(max-width:560px){ .email-fields { grid-template-columns: 1fr; } }
+.email-field-label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-light); margin-bottom: 6px; }
+.email-input { width: 100%; padding: 13px 16px; border: 1.5px solid var(--border); border-radius: var(--r); font-family: var(--sans); font-size: 15px; color: var(--text); background: var(--white); outline: none; transition: border-color 0.2s; }
+.email-input:focus { border-color: var(--teal); }
+.email-full { grid-column: 1 / -1; }
+.email-submit { width: 100%; background: var(--teal); color: #fff; border: none; border-radius: 100px; font-family: var(--sans); font-size: 15px; font-weight: 600; padding: 15px; cursor: pointer; transition: background 0.2s, transform 0.15s; margin-top: 4px; }
+.email-submit:hover { background: var(--teal-light); transform: translateY(-1px); }
+.email-fine { font-size: 12px; color: var(--text-light); text-align: center; margin-top: 10px; }
+.email-success { display: none; text-align: center; padding: 24px 0 8px; }
+.email-success-icon { font-size: 36px; margin-bottom: 12px; }
+.email-success h4 { font-family: var(--serif); font-size: 20px; color: var(--navy); margin-bottom: 8px; }
+.email-success p { font-size: 14px; color: var(--text-mid); }
+.email-success a { color: var(--teal); font-weight: 600; text-decoration: none; }
+
+/* CARDS */
+.card-grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+@media(max-width:900px){ .card-grid-3 { grid-template-columns: repeat(2,1fr); } }
+@media(max-width:560px){ .card-grid-3 { grid-template-columns: 1fr; } }
+.card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 28px; transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(14,31,47,0.07); }
+.card-teal { border-top: 3px solid var(--teal); }
+.card-icon { width: 44px; height: 44px; background: var(--teal-pale); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+.card h4 { color: var(--navy); }
+.card p { font-size: 14px; }
+
+/* DARK SECTION */
+.dark { background: var(--navy); }
+.dark h2 { color: #fff; }
+.dark h2 em { color: var(--teal-light); }
+.dark .label { color: var(--teal-light); }
+.dark .label::before { background: var(--teal-light); }
+.dark p { color: rgba(255,255,255,0.58); }
+.feature-list { display: flex; flex-direction: column; gap: 12px; }
+.feature { display: flex; gap: 16px; align-items: flex-start; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--r); padding: 20px; }
+.feature-icon { width: 38px; height: 38px; background: rgba(45,125,111,0.2); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.feature h4 { color: #fff; margin-bottom: 3px; }
+.feature p { font-size: 13px; color: rgba(255,255,255,0.5); }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+@media(max-width:800px){ .split { grid-template-columns: 1fr; gap: 36px; } }
+.split-img { border-radius: var(--r-lg); overflow: hidden; min-height: 400px; background: rgba(45,125,111,0.1); display: flex; align-items: center; justify-content: center; font-size: 80px; }
+
+/* BIG STAT */
+.big-stat-section { background: var(--navy); }
+.big-stat-section h2 { color: #fff; }
+.big-stat-section h2 em { color: var(--teal-light); }
+.big-stat-section .label { color: var(--teal-light); }
+.big-stat-section .label::before { background: var(--teal-light); }
+.big-stat-section p { color: rgba(255,255,255,0.58); }
+.big-stat { font-family: var(--serif); font-size: clamp(72px,12vw,120px); line-height: 1; color: var(--teal-light); letter-spacing: -0.03em; font-weight: 700; }
+.big-stat-sub { font-size: 16px; color: rgba(255,255,255,0.55); margin-top: 8px; line-height: 1.5; }
+
+/* CTA SECTION */
+.cta-section { background: var(--navy); text-align: center; padding: 100px 5%; position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(45,125,111,0.12) 0%, transparent 70%); pointer-events: none; }
+.cta-section > * { position: relative; z-index: 2; }
+.cta-section h2 { color: #fff; }
+.cta-section h2 em { color: var(--teal-light); }
+.cta-section .sub { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.55); max-width: 500px; margin: 0 auto 40px; line-height: 1.75; }
+
+/* FOOTER */
+.footer { background: var(--navy); padding: 56px 5% 32px; }
+.footer-inner { max-width: var(--max); margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+@media(max-width:760px){ .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; } }
+@media(max-width:480px){ .footer-top { grid-template-columns: 1fr; } }
+.footer-logo { font-family: var(--serif); font-size: 22px; font-weight: 700; color: #fff; text-decoration: none; display: block; margin-bottom: 14px; }
+.footer-logo span { color: var(--teal-light); }
+.footer-desc { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.75; }
+.footer-col h5 { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 16px; }
+.footer-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.55); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
+.footer-col a:hover { color: #fff; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.28); }
+.footer-bottom a { font-size: 12px; color: rgba(255,255,255,0.28); text-decoration: none; }
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.v { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+
+/* STICKY CTA */
+.sticky-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 99; background: var(--navy); padding: 12px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+.sticky-cta a { display: block; background: var(--teal); color: #fff; text-align: center; font-size: 15px; font-weight: 500; padding: 14px; border-radius: 100px; text-decoration: none; }
+@media(max-width:600px){ .sticky-cta { display: block; } body { padding-bottom: 72px; } }
+
+/* NAV DROPDOWN */
+.nav-dropdown { position: relative; }
+.nav-dropdown-trigger { display: flex; align-items: center; gap: 3px; cursor: pointer; }
+.nav-dropdown-trigger svg { transition: transform 0.2s; }
+.nav-dropdown.open .nav-dropdown-trigger svg { transform: rotate(180deg); }
+.nav-dropdown-menu { display: none; position: absolute; top: calc(100% + 16px); left: 50%; transform: translateX(-50%); background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 10px; min-width: 260px; box-shadow: 0 16px 40px rgba(14,31,47,0.12); list-style: none; z-index: 300; }
+.nav-dropdown-menu::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 12px; height: 12px; background: var(--white); border-left: 1px solid var(--border); border-top: 1px solid var(--border); rotate: 45deg; }
+.nav-dropdown.open .nav-dropdown-menu { display: block; }
+.nav-dropdown-menu li a { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: var(--r); text-decoration: none; color: var(--text); transition: background 0.15s; font-size: 14px; }
+.nav-dropdown-menu li a:hover { background: var(--cream); }
+.nav-dropdown-menu li a .dd-icon { font-size: 18px; width: 36px; height: 36px; background: var(--teal-pale); border-radius: var(--r); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.nav-dropdown-menu li a div strong { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 1px; }
+.nav-dropdown-menu li a div span { display: block; font-size: 12px; color: var(--text-light); }
+.mobile-section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); padding: 14px 0 6px; }
+.mobile-sub { padding-left: 16px !important; font-size: 14px !important; color: var(--text-mid) !important; }
+</style>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-13Z2Z6MJXB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-13Z2Z6MJXB');
+  </script>
+    <!-- Facebook Pixel (delayed) -->
+  <script>
+    function loadFBPixel() {
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+      (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init','701492359663771');fbq('track','PageView');
+    }
+    if (document.readyState === 'complete') {
+      setTimeout(loadFBPixel, 3000);
+    } else {
+      window.addEventListener('load', function() { setTimeout(loadFBPixel, 3000); });
+    }
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=701492359663771&ev=PageView&noscript=1"/></noscript>
+  <!-- End Facebook Pixel -->
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TD8Q7FCQ');</script>
+  <!-- End Google Tag Manager -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Hydro Fix">
+  <meta property="og:title" content="Solar Farm Drainage ROI Calculator | Stormwater Cost Savings | Hydro Fix">
+  <meta property="og:description" content="Calculate 10-year stormwater management savings for your Georgia solar farm. NPDES compliance and erosion control ROI analysis.">
+  <meta property="og:image" content="https://myhydrofix.com/images/hydrofix-logo-header-white-teal.png">
+  <meta property="og:url" content="https://myhydrofix.com/solar/calculator">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Solar Farm Drainage ROI Calculator | Stormwater Cost Savings | Hydro Fix">
+  <meta name="twitter:description" content="Calculate 10-year stormwater management savings for your Georgia solar farm. NPDES compliance and erosion control ROI analysis.">
+  <meta name="twitter:image" content="https://myhydrofix.com/images/hydrofix-logo-header-white-teal.png">
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Solar Farm ROI Calculator",
+  "description": "See how the Hydro Fix System lets solar farms install array rows 40% closer together and cut maintenance from 260 days a year to just 12. Free interactive ROI calculator.",
+  "url": "https://myhydrofix.com/solar-calculator",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hydro Fix",
+    "url": "https://myhydrofix.com"
+  }
+}
+  </script>
+  <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var s = document.createElement('script');
+        s.id = 'vtag-ai-js'; s.async = true;
+        s.src = 'https://r2.leadsy.ai/tag.js';
+        s.setAttribute('data-pid', 'vKeZZFmg9mRhqlV3');
+        s.setAttribute('data-version', '062024');
+        document.head.appendChild(s);
+      }, 4000);
+    });
+  </script>
+  <meta name="keywords" content="solar farm drainage calculator, solar site stormwater ROI, NPDES compliance cost calculator">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TD8Q7FCQ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a aria-label='Hydro Fix home' class='nav-logo' href='/'><svg style="display:block;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="180" height="41" viewBox="0 0 1150 260" xml:space="preserve">
+<desc>HydroFix Alt 1 - HYDRO navy, FIX teal</desc>
+<defs>
+</defs>
+<g transform="matrix(1 0 0 1 640 512)" id="background-logo"  >
+<rect style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-opacity: 0; fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  x="-640" y="-512" rx="0" ry="0" width="1280" height="1024" />
+</g>
+<g transform="matrix(0.902 0 0 0.902 110 130)" id="logo-logo"  >
+<g style=""  paint-order="stroke"   >
+		<g transform="matrix(0.5256105787118807 0 0 0.5256105787118807 0.013186011651896479 -9.548771325538041)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(14,31,47); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-526.2774288334338, -371.8330078)" d="M 389.3052673 511.2958679 C 389.3052673 511.2958679 427.2749023 490.5591736 492.229187 497.4960327 C 557.1834717 504.4328918 620.5611572 542.7528076 620.5611572 542.7528076 L 389.3052673 511.2958679 z M 654.1296387 353.7208252 C 647.0235596 340.58770749999996 638.9212646999999 327.7336426 630.3161011 315.4040222 C 605.357544 321.7782287 575.0913085999999 321.0237732 548.0758056999999 316.96591179999996 C 511.7285461999999 311.69427479999996 474.07687379999993 300.63864129999996 436.19747929999994 296.41067499999997 C 417.5783996999999 320.6579895 399.9741821999999 347.7117614 387.82354739999994 375.3858337 C 473.5455322 355.4011536 565.1539307 322.1629639 654.1296387 353.7208252 z M 616.0635986 297.2537842 C 583.6395874 253.9820557 558.5897216 228.21386719999998 526.2944335999999 200.913208 C 521.3821410999999 205.1785583 489.75311279999994 233.0888977 457.86096189999995 271.5933533 C 471.427063 274.2622986 484.60903929999995 277.70309449999996 497.5655211999999 281.176178 C 535.4984741 291.2707214 575.4211426 303.5532532 616.0635986 297.2537842 z M 679.5233154 428.4390259 C 678.1525268 427.20791629999997 676.7721557 426.0124512 675.3840332 424.8467407 L 678.4067383 422.184906 C 643.9445801 394.45294190000004 594.7324219000001 389.3736572 594.7324219000001 389.3736572 L 594.7308350000001 389.38314820000005 C 524.4056397 378.90563970000005 445.43634040000006 405.79449460000006 376.21566780000006 413.19241330000006 C 372.1201783000001 428.88626100000005 370.63418590000003 446.20452880000005 371.85617070000006 459.29449460000006 C 382.99584970000006 454.55841060000006 393.5561524000001 452.26528930000006 403.68032840000006 451.00341790000004 C 498.03759770000005 436.18862910000007 590.0238648000001 518.7708129 678.3648072000001 474.9994811 C 681.8930054 459.0707092 681.7359619 442.6685181 679.5233154 428.4390259 z" stroke-linecap="round" />
+</g>
+		<g transform="matrix(0.5256105787118807 0 0 0.5256105787118807 0 2.842171e-14)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(61,157,141); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-526.2523417971641, -390.0000153)" d="M 642.4685059 534.4841309 L 643.5454712 534.3754882999999 L 642.7427978999999 535.1014403999999 C 611.1013184 563.7227172999999 569.9592286 579.4851683999999 526.8951415999999 579.4851683999999 C 480.16796869999985 579.4851683999999 436.4987487999999 561.2994383999999 403.9320373999999 528.2782591999999 C 398.5920410999999 522.8639525999998 393.6707458999999 517.1503904999998 389.3052673999999 511.2958677999999 L 388.95843509999986 510.8306272999999 L 389.53024299999987 510.7330930999999 L 389.6646118999999 510.7101743999999 L 389.9236145999999 510.6660764999999 C 391.10055549999987 510.4188840999999 392.2903442999999 510.2279355999999 393.3902283999999 510.0602414999999 C 397.4067688999999 509.31866439999993 401.4993286999999 508.6663205999999 405.83218399999987 507.9754025999999 L 407.82153339999985 507.6580807999999 C 414.70370499999984 506.5714108999999 422.2191468999998 506.0204464999999 430.15884419999986 506.0204464999999 C 436.43276999999983 506.02078219999987 443.0827027999999 506.3648373999999 449.9239198999999 507.04324309999987 C 462.9480897999999 508.3187862999999 477.7373353999999 510.85147059999986 496.4657289999999 515.0138546999999 C 503.3680421999999 516.5455929999999 510.2526552999999 518.1638181 517.5410158999999 519.8768307999999 C 527.0333254999999 522.1077877999999 536.8485109999999 524.4147946999999 546.8730472 526.5559078999999 C 568.5392459 531.1730343999999 585.537659 533.7616573999999 601.9891971 534.9493404999998 C 607.9801639 535.3850704999999 613.9846805 535.6062008999999 619.8360599 535.6062008999999 C 627.4844971 535.6062012 635.098877 535.2288208 642.4685059 534.4841309 z M 469.3257446 350.3189697 C 488.2670898 354.4448547 507.1776428 359.9363708 525.4656372000001 365.24691770000004 C 562.2788086 375.93679810000003 600.3453369000001 386.99078370000007 639.4911499000001 386.99078370000007 C 649.3807983000002 386.99078370000007 659.1810913 386.28115850000006 668.6204834000001 384.88153080000006 L 669.0369873000001 384.81970220000005 L 668.8831787 384.42776490000006 C 659.4993896000001 360.49154660000005 644.8298950000001 334.6990357000001 625.2822876 307.76629640000004 L 625.185791 307.63348390000004 L 625.0215454 307.62823490000005 C 622.1974487 307.53991700000006 619.2369385000001 307.49508670000006 616.2221069000001 307.49508670000006 C 600.1853637 307.49508670000006 583.4134521000001 308.76318360000005 567.1941528000001 309.99005130000006 C 550.5537719000001 311.24835210000003 533.3467407 312.5494995000001 516.4672241000001 312.5494995000001 C 483.9311218000001 312.5494995000001 458.33358760000004 307.50064090000006 435.91085810000004 296.66061400000007 L 435.66482540000004 296.54187010000004 L 435.49896240000004 296.75845340000006 C 424.1116028 311.6262207000001 414.04989620000003 326.3421936000001 405.59362790000006 340.49774170000006 L 405.30505370000003 340.98031620000006 L 405.86712650000004 341.00418090000005 C 424.2264404 341.7812195 447.3561401 345.1762085 469.3257446 350.3189697 z M 451.4226685 279.8872681 L 451.59759529999997 279.9565125 C 467.0176087 285.90292359999995 484.1372987 288.7941285 503.93304449999994 288.7941285 C 523.4464721999999 288.7941285 543.5565185999999 286.0209962 563.0045167 283.3390199 C 575.7227174 281.5851747 588.8739015 279.77185069999996 601.7078247999999 278.7570192 L 602.2843628999999 278.7114259 L 601.9185792 278.2633363 C 574.8612062 245.1151582 554.4155274 224.0879213 526.4812013 200.6808931 L 526.2828980999999 200.51486219999998 L 526.0878907999999 200.68443309999998 C 522.0291138999999 204.2089998 485.44512959999986 236.35981759999999 451.15069599999987 279.3580934 L 450.8923341999999 279.6818849 L 451.2794191999999 279.8298646 L 451.4226685 279.8872681 z M 678.7348633 422.1171875 L 678.6638794 421.7730103 L 678.3233032 421.8603516 C 661.9537964000001 426.0674134 644.9862671000001 428.1121827 626.4512939000001 428.1121827 C 589.9142456000001 428.1121827 552.8455810000002 419.9111024 516.9972534000001 411.9802552 C 481.0582886000001 404.0291138 443.89572140000007 395.8074036 407.1705627000001 395.80673229999996 C 398.14205930000014 395.80642709999995 389.2902221000001 396.3082887 380.8611145000001 397.2976381 L 380.6523743000001 397.32217419999995 L 380.5836487000001 397.52078259999996 C 373.4478150000001 418.10971079999996 370.3050537000001 437.52151499999997 371.24304200000006 455.21667489999993 L 371.52178960000003 459.31704719999993 L 371.55255130000006 459.77017219999993 L 371.97656250000006 459.6072388999999 C 372.49871830000006 459.4060364999999 425.03454590000007 439.49792489999993 496.8182373000001 439.37066659999994 C 559.1991577000001 439.6939087999999 621.8928833000001 452.2944031999999 678.1184692 475.80953989999995 L 678.4855346 475.96298229999996 L 678.5742187000001 475.57495129999995 C 682.3163452 459.2218628 682.374939 439.7374268 678.7348633 422.1171875 z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+<g transform="matrix(1.921 0 0 1.921 659 130)" id="text-logo"  >
+<g style=""  paint-order="stroke"   >
+		<g transform="matrix(1 0 0 1 0 0)" id="text-logo-path-0"  >
+<path style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(14,31,47); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-234.69, 22.4)" d="M 16 -44.8 L 3.2 -44.8 L 3.2 0 L 16 0 L 16 -16.64 L 30.08 -16.64 L 30.08 0 L 42.88 0 L 42.88 -28.16 L 16 -28.16 Z M 42.88 -44.8 L 30.08 -44.8 L 30.08 -33.34 L 42.88 -33.34 Z M 58.37 -44.8 L 75.01 -10.43 L 75.01 0 L 87.81 0 L 87.81 -11.71 L 71.81 -44.8 Z M 91.01 -44.8 L 85.44 -33.34 L 98.88 -33.34 L 104.45 -44.8 Z M 119.87 -28.16 L 119.87 0 L 139.01 0 C 154.94 0 163.01 -7.55 163.01 -22.4 C 163.01 -37.25 154.94 -44.8 139.01 -44.8 L 119.87 -44.8 L 119.87 -33.34 L 139.01 -33.34 C 146.43 -33.34 150.21 -29.7 150.21 -22.4 C 150.21 -15.17 146.43 -11.46 139.01 -11.46 L 132.67 -11.46 L 132.67 -28.16 Z M 201.6 -44.8 L 177.98 -44.8 L 177.98 -33.28 L 200.26 -33.28 C 203.84 -33.28 205.76 -31.62 205.76 -28.16 C 205.76 -24.83 203.84 -23.04 200.26 -23.04 L 184.38 -23.04 L 184.38 -11.52 L 191.04 -11.52 L 200.38 0 L 215.74 0 L 206.14 -11.84 C 214.66 -13.18 219.01 -18.62 219.01 -28.1 C 219.01 -39.17 213.12 -44.8 201.6 -44.8 Z M 258.88 0.64 C 274.82 0.64 282.88 -7.1 282.88 -22.4 C 282.88 -37.7 274.75 -45.44 258.88 -45.44 C 243.01 -45.44 234.88 -37.7 234.88 -22.4 C 234.88 -7.17 242.94 0.64 258.88 0.64 Z M 258.88 -11.65 C 251.46 -11.65 247.68 -15.3 247.68 -22.4 C 247.68 -29.57 251.46 -33.15 258.88 -33.15 C 266.3 -33.15 270.08 -29.57 270.08 -22.4 C 270.08 -15.3 266.3 -11.65 258.88 -11.65 Z" stroke-linecap="round" />
+<path style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(61,157,141); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-234.69, 22.4)" d="M 369.54 -33.28 L 369.54 -44.8 L 337.22 -44.8 L 337.22 -33.28 Z M 350.02 -16.64 L 363.14 -16.64 L 363.14 -28.16 L 337.22 -28.16 L 337.22 0 L 350.02 0 Z M 398.78 -44.8 L 385.98 -44.8 L 385.98 0 L 398.78 0 Z M 429.89 -44.8 L 415.17 -44.8 L 432.64 -22.78 L 414.53 0 L 429.25 0 L 440 -13.57 L 450.82 0 L 465.54 0 Z M 451.46 -44.8 L 442.37 -33.41 L 457.09 -33.41 L 466.18 -44.8 Z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+</svg></a>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="#" class="nav-dropdown-trigger">Services <svg width="11" height="11" viewBox="0 0 12 12" fill="none" style="vertical-align:middle;margin-left:3px"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <ul class="nav-dropdown-menu" style="min-width:220px;">
+          <li><a href='/residential'><span class="dd-icon">🏡</span><div><strong>Residential</strong><span>Homeowner drainage solutions</span></div></a></li>
+          <li><a href='/commercial'><span class="dd-icon">🏢</span><div><strong>Commercial</strong><span>Warehouses, parking lots & more</span></div></a></li>
+          <li><a href='/golf'><span class="dd-icon">⛳</span><div><strong>Golf Courses</strong><span>Fairways, greens & cart paths</span></div></a></li>
+          <li><a href='/sports'><span class="dd-icon">🏟️</span><div><strong>Sports Complexes</strong><span>Athletic fields & facilities</span></div></a></li>
+        </ul>
+      </li>
+      <li class="nav-dropdown">
+        <a href="#" class="nav-dropdown-trigger">Calculators <svg width="11" height="11" viewBox="0 0 12 12" fill="none" style="vertical-align:middle;margin-left:3px"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <ul class="nav-dropdown-menu" style="min-width:240px;">
+          <li><a href='/golf-calculator'><span class="dd-icon">⛳</span><div><strong>Golf Course</strong><span>See what rain closures cost annually</span></div></a></li>
+          <li><a href='/sports-calculator'><span class="dd-icon">🏟️</span><div><strong>Sports Complex</strong><span>See what poor drainage costs your complex</span></div></a></li>
+          <li><a href='/solar-calculator'><span class="dd-icon">☀️</span><div><strong>Solar Farm</strong><span>See your ROI with the Hydro Fix System</span></div></a></li>
+        </ul>
+      </li>
+      <li><a href='/blog'>Blog</a></li>
+      <li><a href='/contact'>Contact</a></li>
+    </ul>
+    <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank" class="nav-cta">Schedule a Call</a>
+    <button class="nav-hamburger" aria-label="Menu" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu">
+  <a href='/'>Home</a>
+  <div class="mobile-section-label">Services</div>
+  <a class='mobile-sub' href='/residential'>🏡 Residential</a>
+  <a class='mobile-sub' href='/commercial'>🏢 Commercial</a>
+  <a class='mobile-sub' href='/golf'>⛳ Golf Courses</a>
+  <a class='mobile-sub' href='/sports'>🏟️ Sports Complexes</a>
+  <div class="mobile-section-label">Calculators</div>
+  <a class='mobile-sub' href='/golf-calculator'>⛳ Golf Course Calculator</a>
+  <a class='mobile-sub' href='/sports-calculator'>🏟️ Sports Complex Calculator</a>
+  <a class='mobile-sub' href='/solar-calculator'>☀️ Solar Farm Calculator</a>
+  <a href='/blog'>Blog</a>
+  <a href='/contact'>Contact</a>
+  <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank" style="color:var(--teal);font-weight:600;">Schedule a Call →</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <p class="label" style="color:var(--teal-light)">Solar Farm Drainage</p>
+    <h1>More rows. More output. <em>Far less maintenance.</em></h1>
+    <p class="sub">The Hydro Fix System lets you install solar array rows at 15 ft spacing instead of 25 ft — and cuts on-site maintenance from 260 days a year down to just 12. See what that's worth on your farm.</p>
+    <div class="hero-btns">
+      <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank" class="btn btn-teal btn-lg">Schedule a Free Site Assessment</a>
+      <a class='btn btn-outline-white' href='/contact'>Contact Us</a>
+    </div>
+  </div>
+</div>
+
+<!-- CALCULATOR -->
+<section class="calc-section">
+  <div class="inner">
+    <p class="label reveal">Solar Farm ROI Calculator</p>
+    <h2 class="reveal">How much more could your farm <em>actually earn?</em></h2>
+    <p class="lead reveal" style="margin-bottom:32px">Adjust the sliders to match your farm. See your current output versus what the Hydro Fix System makes possible.</p>
+
+    <div class="calc-inputs reveal">
+      <div class="calc-field">
+        <label>Farm Size</label>
+        <div class="field-val" id="acres-val">100 acres</div>
+        <input type="range" id="acres" min="1" max="100" step="1" value="50">
+      </div>
+      <div class="calc-field">
+        <label>Daily Labor Rate</label>
+        <div class="field-val" id="labor-val">$200 / day</div>
+        <input type="range" id="labor" min="100" max="600" step="10" value="200">
+      </div>
+      <div class="calc-field">
+        <label>Energy Revenue Rate</label>
+        <div class="field-val" id="kwh-val">$0.07 / kWh</div>
+        <input type="range" id="kwh" min="3" max="25" step="1" value="7">
+      </div>
+    </div>
+
+    <div class="calc-metrics reveal">
+      <div class="calc-metric metric-gain">
+        <div class="calc-metric-label">Additional array rows</div>
+        <div class="calc-metric-val" id="m-rows">—</div>
+        <div class="calc-metric-sub" id="m-rows-sub">—</div>
+      </div>
+      <div class="calc-metric metric-save">
+        <div class="calc-metric-label">Additional annual revenue</div>
+        <div class="calc-metric-val" id="m-revenue">—</div>
+        <div class="calc-metric-sub" id="m-revenue-sub">—</div>
+      </div>
+      <div class="calc-metric metric-days">
+        <div class="calc-metric-label">Annual labor cost savings</div>
+        <div class="calc-metric-val" id="m-labor">—</div>
+        <div class="calc-metric-sub">260 days → 12 days on site</div>
+      </div>
+    </div>
+
+    <div class="calc-total reveal">
+      <div>
+        <div class="calc-total-label">Total additional annual net income with Hydro Fix System</div>
+        <div class="calc-total-sub">more rows + more energy revenue + labor savings</div>
+      </div>
+      <div class="calc-total-val" id="total-val">—</div>
+    </div>
+
+    <div class="calc-bottom" style="grid-template-columns:1fr;">
+      <div>
+        <div class="calc-breakdown reveal">
+          <div class="calc-br-row"><span class="br-label">Standard rows (25 ft spacing)</span><span class="br-val" id="b-std-rows">—</span></div>
+          <div class="calc-br-row"><span class="br-label">Hydro Fix rows (15 ft spacing)</span><span class="br-val pos" id="b-hf-rows">—</span></div>
+          <div class="calc-br-row"><span class="br-label">Standard annual energy output</span><span class="br-val" id="b-std-kwh">—</span></div>
+          <div class="calc-br-row"><span class="br-label">Hydro Fix annual energy output</span><span class="br-val pos" id="b-hf-kwh">—</span></div>
+          <div class="calc-br-row"><span class="br-label">Standard annual energy revenue</span><span class="br-val" id="b-std-rev">—</span></div>
+          <div class="calc-br-row"><span class="br-label">Hydro Fix annual energy revenue</span><span class="br-val pos" id="b-hf-rev">—</span></div>
+          <div class="calc-br-row"><span class="br-label">Standard maintenance cost (260 days)</span><span class="br-val" id="b-std-lab">—</span></div>
+          <div class="calc-br-row"><span class="br-label">Hydro Fix maintenance cost (12 days)</span><span class="br-val pos" id="b-hf-lab">—</span></div>
+        </div>
+
+        <div class="payback-box reveal">
+          <h4>Standard net income vs. Hydro Fix net income</h4>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px;">
+            <div>
+              <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);margin-bottom:4px;">Without Hydro Fix</div>
+              <div class="payback-years" style="font-size:36px;" id="b-std-net">—</div>
+              <div style="font-size:12px;color:var(--text-light);">net annual income</div>
+            </div>
+            <div>
+              <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">With Hydro Fix System</div>
+              <div class="payback-years" id="b-hf-net">—</div>
+              <div style="font-size:12px;color:var(--text-light);">net annual income</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <!-- EMAIL CAPTURE -->
+        <div class="email-capture reveal" id="email-section" style="display:none;">
+          <div class="email-capture-label">Take your numbers with you</div>
+          <h3>Want these results <em>sent to your inbox?</em></h3>
+          <p>Drop your details and we'll send a clean copy of your ROI breakdown along with notes on what the numbers mean for a site your size.</p>
+          <div id="email-form">
+            <div class="email-fields">
+              <div>
+                <label class="email-field-label">Your Name</label>
+                <input type="text" id="cap-name" placeholder="First & last name" class="email-input" />
+              </div>
+              <div>
+                <label class="email-field-label">Phone Number</label>
+                <input type="tel" id="cap-phone" placeholder="(xxx) xxx-xxxx" class="email-input" />
+              </div>
+              <div class="email-full">
+                <label class="email-field-label">Email Address</label>
+                <input type="email" id="cap-email" placeholder="you@yourcompany.com" class="email-input" />
+              </div>
+            </div>
+            <button class="email-submit" onclick="submitCapture()">Send Me My Results →</button>
+            <p class="email-fine">We'll also include details on scheduling a free on-site drainage assessment. No spam.</p>
+          </div>
+          <div class="email-success" id="email-success">
+            <div class="email-success-icon">✓</div>
+            <h4>You're all set — check your inbox.</h4>
+            <p>Your results are on the way. In the meantime, <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank">schedule a free site audit</a> or call us at <a href="tel:7704059911">(770) 405-9911</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-cta-row reveal">
+      <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank" class="btn btn-teal btn-lg">Schedule a Free Site Assessment</a>
+      <p>We'll walk your farm, evaluate soil and drainage conditions, and give you a clear picture of what the Hydro Fix System costs — and what it recovers every year after.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM SECTION -->
+<section class="section">
+  <div class="inner">
+    <p class="label reveal">The Solar Farm Problem</p>
+    <h2 class="reveal">Poor drainage is costing you <em>rows, revenue, and time.</em></h2>
+    <p class="lead reveal">Without proper subsurface drainage, solar developers are forced to space rows farther apart than necessary — and operators spend five days a week managing the consequences.</p>
+    <div class="card-grid-3 reveal">
+      <div class="card card-teal"><div class="card-icon">📐</div><h4>Forced Wide Spacing</h4><p>Without drainage, rows must be spaced at 25 ft or more to allow equipment access for maintenance. Every extra foot of spacing is a row you're not generating revenue from.</p></div>
+      <div class="card card-teal"><div class="card-icon">🔧</div><h4>Constant Maintenance</h4><p>Standing water, erosion, and soil saturation around panels creates a year-round maintenance burden. Industry standard is five days a week — every week.</p></div>
+      <div class="card card-teal"><div class="card-icon">🌧️</div><h4>Erosion & Panel Damage</h4><p>Unmanaged runoff between rows undermines panel footings, erodes soil, and accelerates infrastructure degradation — driving up repair costs over time.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY HYDRO FIX -->
+<section class="section dark">
+  <div class="inner">
+    <div class="split reveal">
+      <div>
+        <p class="label">Why the Hydro Fix System Works for Solar</p>
+        <h2>Pressure-fed drainage built for <em>solar infrastructure.</em></h2>
+        <p class="lead" style="color:rgba(255,255,255,0.58)">No gravel, no fabric, no clogging. Installs with minimal excavation and starts working immediately — without disrupting existing panel infrastructure.</p>
+        <div class="feature-list">
+          <div class="feature"><div class="feature-icon">📐</div><div><h4>Enables 15 ft row spacing</h4><p>Proper drainage eliminates the need for wide row clearance, letting you add up to 67% more rows on the same acreage.</p></div></div>
+          <div class="feature"><div class="feature-icon">💧</div><div><h4>Works without slope</h4><p>Solar farms are often graded flat for panel efficiency. The Hydro Fix System moves water via pressure, not gravity.</p></div></div>
+          <div class="feature"><div class="feature-icon">♾️</div><div><h4>Reduces maintenance to 1 day/month</h4><p>Once installed, the system eliminates the standing water and erosion that drives daily maintenance needs. 260 days becomes 12.</p></div></div>
+          <div class="feature"><div class="feature-icon">♻️</div><div><h4>Made from 100% recycled plastics</h4><p>Aligns with the sustainability goals of solar energy projects. Never clogs, never crushes, zero maintenance required.</p></div></div>
+        </div>
+      </div>
+      <div class="split-img">☀️</div>
+    </div>
+  </div>
+</section>
+
+<!-- BIG STAT -->
+<section class="section big-stat-section">
+  <div class="inner split reveal">
+    <div>
+      <div class="big-stat">67%</div>
+      <div class="big-stat-sub">more array rows possible<br>at 15 ft vs. 25 ft spacing</div>
+    </div>
+    <div>
+      <p class="label">The Business Case</p>
+      <h2>Every row you can't install is <em>revenue you'll never recover.</em></h2>
+      <p style="margin-bottom:20px">Spacing decisions made during design — or forced by poor drainage — determine your farm's revenue ceiling for its entire 25-year lifespan. The Hydro Fix System changes what's possible on day one.</p>
+      <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank" class="btn btn-dark">Schedule a Site Assessment</a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <p class="label" style="color:var(--teal-light);justify-content:center">Maximize Your Solar Output</p>
+  <h2>Solve drainage before it <em>costs you another row.</em></h2>
+  <p class="sub">We'll evaluate your site, assess spacing feasibility, and design a drainage system that maximizes your energy output from day one.</p>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+    <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank" class="btn btn-teal btn-lg">Schedule a Free Site Assessment</a>
+    <a class='btn btn-outline-white btn-lg' href='/contact'>Get in Touch</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <a aria-label='Hydro Fix home' class='footer-logo' href='/'><svg style="display:block;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="160" height="36" viewBox="0 0 1150 260" xml:space="preserve">
+<desc>HydroFix Alt 2 - HYDRO white, FIX teal (dark background)</desc>
+<defs>
+</defs>
+<g transform="matrix(1 0 0 1 640 512)" id="background-logo"  >
+<rect style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-opacity: 0; fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  x="-640" y="-512" rx="0" ry="0" width="1280" height="1024" />
+</g>
+<g transform="matrix(0.902 0 0 0.902 110 130)" id="logo-logo"  >
+<g style=""  paint-order="stroke"   >
+		<g transform="matrix(0.5256105787118807 0 0 0.5256105787118807 0.013186011651896479 -9.548771325538041)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-526.2774288334338, -371.8330078)" d="M 389.3052673 511.2958679 C 389.3052673 511.2958679 427.2749023 490.5591736 492.229187 497.4960327 C 557.1834717 504.4328918 620.5611572 542.7528076 620.5611572 542.7528076 L 389.3052673 511.2958679 z M 654.1296387 353.7208252 C 647.0235596 340.58770749999996 638.9212646999999 327.7336426 630.3161011 315.4040222 C 605.357544 321.7782287 575.0913085999999 321.0237732 548.0758056999999 316.96591179999996 C 511.7285461999999 311.69427479999996 474.07687379999993 300.63864129999996 436.19747929999994 296.41067499999997 C 417.5783996999999 320.6579895 399.9741821999999 347.7117614 387.82354739999994 375.3858337 C 473.5455322 355.4011536 565.1539307 322.1629639 654.1296387 353.7208252 z M 616.0635986 297.2537842 C 583.6395874 253.9820557 558.5897216 228.21386719999998 526.2944335999999 200.913208 C 521.3821410999999 205.1785583 489.75311279999994 233.0888977 457.86096189999995 271.5933533 C 471.427063 274.2622986 484.60903929999995 277.70309449999996 497.5655211999999 281.176178 C 535.4984741 291.2707214 575.4211426 303.5532532 616.0635986 297.2537842 z M 679.5233154 428.4390259 C 678.1525268 427.20791629999997 676.7721557 426.0124512 675.3840332 424.8467407 L 678.4067383 422.184906 C 643.9445801 394.45294190000004 594.7324219000001 389.3736572 594.7324219000001 389.3736572 L 594.7308350000001 389.38314820000005 C 524.4056397 378.90563970000005 445.43634040000006 405.79449460000006 376.21566780000006 413.19241330000006 C 372.1201783000001 428.88626100000005 370.63418590000003 446.20452880000005 371.85617070000006 459.29449460000006 C 382.99584970000006 454.55841060000006 393.5561524000001 452.26528930000006 403.68032840000006 451.00341790000004 C 498.03759770000005 436.18862910000007 590.0238648000001 518.7708129 678.3648072000001 474.9994811 C 681.8930054 459.0707092 681.7359619 442.6685181 679.5233154 428.4390259 z" stroke-linecap="round" />
+</g>
+		<g transform="matrix(0.5256105787118807 0 0 0.5256105787118807 0 2.842171e-14)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(61,157,141); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-526.2523417971641, -390.0000153)" d="M 642.4685059 534.4841309 L 643.5454712 534.3754882999999 L 642.7427978999999 535.1014403999999 C 611.1013184 563.7227172999999 569.9592286 579.4851683999999 526.8951415999999 579.4851683999999 C 480.16796869999985 579.4851683999999 436.4987487999999 561.2994383999999 403.9320373999999 528.2782591999999 C 398.5920410999999 522.8639525999998 393.6707458999999 517.1503904999998 389.3052673999999 511.2958677999999 L 388.95843509999986 510.8306272999999 L 389.53024299999987 510.7330930999999 L 389.6646118999999 510.7101743999999 L 389.9236145999999 510.6660764999999 C 391.10055549999987 510.4188840999999 392.2903442999999 510.2279355999999 393.3902283999999 510.0602414999999 C 397.4067688999999 509.31866439999993 401.4993286999999 508.6663205999999 405.83218399999987 507.9754025999999 L 407.82153339999985 507.6580807999999 C 414.70370499999984 506.5714108999999 422.2191468999998 506.0204464999999 430.15884419999986 506.0204464999999 C 436.43276999999983 506.02078219999987 443.0827027999999 506.3648373999999 449.9239198999999 507.04324309999987 C 462.9480897999999 508.3187862999999 477.7373353999999 510.85147059999986 496.4657289999999 515.0138546999999 C 503.3680421999999 516.5455929999999 510.2526552999999 518.1638181 517.5410158999999 519.8768307999999 C 527.0333254999999 522.1077877999999 536.8485109999999 524.4147946999999 546.8730472 526.5559078999999 C 568.5392459 531.1730343999999 585.537659 533.7616573999999 601.9891971 534.9493404999998 C 607.9801639 535.3850704999999 613.9846805 535.6062008999999 619.8360599 535.6062008999999 C 627.4844971 535.6062012 635.098877 535.2288208 642.4685059 534.4841309 z M 469.3257446 350.3189697 C 488.2670898 354.4448547 507.1776428 359.9363708 525.4656372000001 365.24691770000004 C 562.2788086 375.93679810000003 600.3453369000001 386.99078370000007 639.4911499000001 386.99078370000007 C 649.3807983000002 386.99078370000007 659.1810913 386.28115850000006 668.6204834000001 384.88153080000006 L 669.0369873000001 384.81970220000005 L 668.8831787 384.42776490000006 C 659.4993896000001 360.49154660000005 644.8298950000001 334.6990357000001 625.2822876 307.76629640000004 L 625.185791 307.63348390000004 L 625.0215454 307.62823490000005 C 622.1974487 307.53991700000006 619.2369385000001 307.49508670000006 616.2221069000001 307.49508670000006 C 600.1853637 307.49508670000006 583.4134521000001 308.76318360000005 567.1941528000001 309.99005130000006 C 550.5537719000001 311.24835210000003 533.3467407 312.5494995000001 516.4672241000001 312.5494995000001 C 483.9311218000001 312.5494995000001 458.33358760000004 307.50064090000006 435.91085810000004 296.66061400000007 L 435.66482540000004 296.54187010000004 L 435.49896240000004 296.75845340000006 C 424.1116028 311.6262207000001 414.04989620000003 326.3421936000001 405.59362790000006 340.49774170000006 L 405.30505370000003 340.98031620000006 L 405.86712650000004 341.00418090000005 C 424.2264404 341.7812195 447.3561401 345.1762085 469.3257446 350.3189697 z M 451.4226685 279.8872681 L 451.59759529999997 279.9565125 C 467.0176087 285.90292359999995 484.1372987 288.7941285 503.93304449999994 288.7941285 C 523.4464721999999 288.7941285 543.5565185999999 286.0209962 563.0045167 283.3390199 C 575.7227174 281.5851747 588.8739015 279.77185069999996 601.7078247999999 278.7570192 L 602.2843628999999 278.7114259 L 601.9185792 278.2633363 C 574.8612062 245.1151582 554.4155274 224.0879213 526.4812013 200.6808931 L 526.2828980999999 200.51486219999998 L 526.0878907999999 200.68443309999998 C 522.0291138999999 204.2089998 485.44512959999986 236.35981759999999 451.15069599999987 279.3580934 L 450.8923341999999 279.6818849 L 451.2794191999999 279.8298646 L 451.4226685 279.8872681 z M 678.7348633 422.1171875 L 678.6638794 421.7730103 L 678.3233032 421.8603516 C 661.9537964000001 426.0674134 644.9862671000001 428.1121827 626.4512939000001 428.1121827 C 589.9142456000001 428.1121827 552.8455810000002 419.9111024 516.9972534000001 411.9802552 C 481.0582886000001 404.0291138 443.89572140000007 395.8074036 407.1705627000001 395.80673229999996 C 398.14205930000014 395.80642709999995 389.2902221000001 396.3082887 380.8611145000001 397.2976381 L 380.6523743000001 397.32217419999995 L 380.5836487000001 397.52078259999996 C 373.4478150000001 418.10971079999996 370.3050537000001 437.52151499999997 371.24304200000006 455.21667489999993 L 371.52178960000003 459.31704719999993 L 371.55255130000006 459.77017219999993 L 371.97656250000006 459.6072388999999 C 372.49871830000006 459.4060364999999 425.03454590000007 439.49792489999993 496.8182373000001 439.37066659999994 C 559.1991577000001 439.6939087999999 621.8928833000001 452.2944031999999 678.1184692 475.80953989999995 L 678.4855346 475.96298229999996 L 678.5742187000001 475.57495129999995 C 682.3163452 459.2218628 682.374939 439.7374268 678.7348633 422.1171875 z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+<g transform="matrix(1.921 0 0 1.921 659 130)" id="text-logo"  >
+<g style=""  paint-order="stroke"   >
+		<g transform="matrix(1 0 0 1 0 0)" id="text-logo-path-0"  >
+<path style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-234.69, 22.4)" d="M 16 -44.8 L 3.2 -44.8 L 3.2 0 L 16 0 L 16 -16.64 L 30.08 -16.64 L 30.08 0 L 42.88 0 L 42.88 -28.16 L 16 -28.16 Z M 42.88 -44.8 L 30.08 -44.8 L 30.08 -33.34 L 42.88 -33.34 Z M 58.37 -44.8 L 75.01 -10.43 L 75.01 0 L 87.81 0 L 87.81 -11.71 L 71.81 -44.8 Z M 91.01 -44.8 L 85.44 -33.34 L 98.88 -33.34 L 104.45 -44.8 Z M 119.87 -28.16 L 119.87 0 L 139.01 0 C 154.94 0 163.01 -7.55 163.01 -22.4 C 163.01 -37.25 154.94 -44.8 139.01 -44.8 L 119.87 -44.8 L 119.87 -33.34 L 139.01 -33.34 C 146.43 -33.34 150.21 -29.7 150.21 -22.4 C 150.21 -15.17 146.43 -11.46 139.01 -11.46 L 132.67 -11.46 L 132.67 -28.16 Z M 201.6 -44.8 L 177.98 -44.8 L 177.98 -33.28 L 200.26 -33.28 C 203.84 -33.28 205.76 -31.62 205.76 -28.16 C 205.76 -24.83 203.84 -23.04 200.26 -23.04 L 184.38 -23.04 L 184.38 -11.52 L 191.04 -11.52 L 200.38 0 L 215.74 0 L 206.14 -11.84 C 214.66 -13.18 219.01 -18.62 219.01 -28.1 C 219.01 -39.17 213.12 -44.8 201.6 -44.8 Z M 258.88 0.64 C 274.82 0.64 282.88 -7.1 282.88 -22.4 C 282.88 -37.7 274.75 -45.44 258.88 -45.44 C 243.01 -45.44 234.88 -37.7 234.88 -22.4 C 234.88 -7.17 242.94 0.64 258.88 0.64 Z M 258.88 -11.65 C 251.46 -11.65 247.68 -15.3 247.68 -22.4 C 247.68 -29.57 251.46 -33.15 258.88 -33.15 C 266.3 -33.15 270.08 -29.57 270.08 -22.4 C 270.08 -15.3 266.3 -11.65 258.88 -11.65 Z" stroke-linecap="round" />
+<path style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(61,157,141); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-234.69, 22.4)" d="M 369.54 -33.28 L 369.54 -44.8 L 337.22 -44.8 L 337.22 -33.28 Z M 350.02 -16.64 L 363.14 -16.64 L 363.14 -28.16 L 337.22 -28.16 L 337.22 0 L 350.02 0 Z M 398.78 -44.8 L 385.98 -44.8 L 385.98 0 L 398.78 0 Z M 429.89 -44.8 L 415.17 -44.8 L 432.64 -22.78 L 414.53 0 L 429.25 0 L 440 -13.57 L 450.82 0 L 465.54 0 Z M 451.46 -44.8 L 442.37 -33.41 L 457.09 -33.41 L 466.18 -44.8 Z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+</svg></a>
+        <p class="footer-desc">Permanent, pressure-fed drainage systems that never clog, crush, or fail. Made from 100% recycled materials. Serving the Southeast.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a href='/residential'>Residential</a>
+        <a href='/commercial'>Commercial</a>
+        <a href='/golf'>Golf Courses</a>
+        <a href='/sports'>Sports Complexes</a>
+      </div>
+      <div class="footer-col">
+        <h5>Calculators</h5>
+        <a href='/golf-calculator'>Golf Course</a>
+        <a href='/sports-calculator'>Sports Complex</a>
+        <a href='/solar-calculator'>Solar Farm</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href='/blog'>Blog</a>
+        <a href='/contact'>Contact Us</a>
+        <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank">Schedule a Call</a>
+        <a href='https://calendar.app.google/yHwfh8ZnLQXPHaW78'>Free Evaluation</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p><div style="display:flex;gap:14px;align-items:center;margin-bottom:12px;">
+          <a href="https://www.facebook.com/hydrofix" target="_blank" rel="noopener" aria-label="Facebook" style="opacity:0.6;transition:opacity 0.2s;display:inline-flex;">
+            <img loading="lazy" src="/img/social/facebook.svg" alt="Facebook" width="20" height="20">
+          </a>
+          <a href="https://www.instagram.com/hydrofix" target="_blank" rel="noopener" aria-label="Instagram" style="opacity:0.6;transition:opacity 0.2s;display:inline-flex;">
+            <img loading="lazy" src="/img/social/instagram.svg" alt="Instagram" width="20" height="20">
+          </a>
+          <a href="https://www.linkedin.com/company/hydrofix" target="_blank" rel="noopener" aria-label="LinkedIn" style="opacity:0.6;transition:opacity 0.2s;display:inline-flex;">
+            <img loading="lazy" src="/img/social/linkedin.svg" alt="LinkedIn" width="20" height="20">
+          </a>
+          <a href="https://x.com/hydrofix" target="_blank" rel="noopener" aria-label="X" style="opacity:0.6;transition:opacity 0.2s;display:inline-flex;">
+            <img loading="lazy" src="/img/social/x.svg" alt="X" width="20" height="20">
+          </a>
+        </div>
+          © 2025 Hydro Fix. the Southeast. All rights reserved.</p>
+      <div style="display:flex;gap:20px;">
+        <a href="/legal/privacy-policy" target="_blank">Privacy</a>
+        <a href="/legal/cookies-policy" target="_blank">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank">Schedule Free Site Assessment</a>
+</div>
+
+<!-- Hidden Netlify form -->
+<form hidden method='post' name='solar-roi-results'><input type='hidden' name='form-name' value='solar-roi-results' />
+  <input type="text" name="name"/><input type="email" name="email"/>
+  <input type="text" name="phone"/><input type="text" name="farm-acres"/>
+  <input type="text" name="labor-rate"/><input type="text" name="kwh-rate"/>
+  <input type="text" name="std-net"/><input type="text" name="hf-net"/>
+  <input type="text" name="save-total"/>
+</form>
+
+<script>
+  const fmtK = n => {
+    const a = Math.abs(n);
+    if (a >= 1000000) return '$' + (n/1000000).toFixed(2) + 'M';
+    if (a >= 1000)    return '$' + Math.round(n/1000) + 'K';
+    return '$' + Math.round(n).toLocaleString();
+  };
+  const fmtKwh = n => {
+    if (n >= 1000000) return (n/1000000).toFixed(1) + 'M kWh';
+    if (n >= 1000)    return Math.round(n/1000) + 'K kWh';
+    return Math.round(n) + ' kWh';
+  };
+
+  function getVals() {
+    return {
+      acres: +document.getElementById('acres').value,
+      labor: +document.getElementById('labor').value,
+      kwh:   +document.getElementById('kwh').value / 100
+    };
+  }
+
+  function compute(v) {
+    const sqft      = v.acres * 43560 * 0.80;
+    const rowLength = 500;
+    const fieldWidth = sqft / rowLength;
+    const stdRows = Math.floor(fieldWidth / 25);
+    const hfRows  = Math.floor(fieldWidth / 15);
+    const stdKwh  = stdRows * rowLength * 10 * 4.5 * 365 / 1000;
+    const hfKwh   = hfRows  * rowLength * 10 * 4.5 * 365 / 1000;
+    const stdRev  = stdKwh * v.kwh;
+    const hfRev   = hfKwh  * v.kwh;
+    const stdLab  = 260 * v.labor;
+    const hfLab   = 12  * v.labor;
+    const stdNet  = stdRev - stdLab;
+    const hfNet   = hfRev  - hfLab;
+    return { stdRows, hfRows, stdKwh, hfKwh, stdRev, hfRev, stdLab, hfLab, stdNet, hfNet,
+             extraRows: hfRows - stdRows, extraRev: hfRev - stdRev, labSave: stdLab - hfLab,
+             totalGain: hfNet - stdNet };
+  }
+
+  function update() {
+    const v = getVals(), c = compute(v);
+    document.getElementById('acres-val').textContent = v.acres + ' acres';
+    document.getElementById('labor-val').textContent = '$' + v.labor + ' / day';
+    document.getElementById('kwh-val').textContent   = '$' + v.kwh.toFixed(2) + ' / kWh';
+
+    document.getElementById('m-rows').textContent       = '+' + c.extraRows + ' rows';
+    document.getElementById('m-rows-sub').textContent   = c.stdRows + ' → ' + c.hfRows + ' total rows';
+    document.getElementById('m-revenue').textContent    = fmtK(c.extraRev);
+    document.getElementById('m-revenue-sub').textContent= fmtKwh(c.hfKwh - c.stdKwh) + ' more per year';
+    document.getElementById('m-labor').textContent      = fmtK(c.labSave);
+    document.getElementById('total-val').textContent    = fmtK(c.totalGain);
+
+    document.getElementById('b-std-rows').textContent = c.stdRows.toLocaleString() + ' rows';
+    document.getElementById('b-hf-rows').textContent  = c.hfRows.toLocaleString()  + ' rows';
+    document.getElementById('b-std-kwh').textContent  = fmtKwh(c.stdKwh);
+    document.getElementById('b-hf-kwh').textContent   = fmtKwh(c.hfKwh);
+    document.getElementById('b-std-rev').textContent  = fmtK(c.stdRev);
+    document.getElementById('b-hf-rev').textContent   = fmtK(c.hfRev);
+    document.getElementById('b-std-lab').textContent  = fmtK(c.stdLab);
+    document.getElementById('b-hf-lab').textContent   = fmtK(c.hfLab);
+    document.getElementById('b-std-net').textContent  = fmtK(c.stdNet);
+    document.getElementById('b-hf-net').textContent   = fmtK(c.hfNet);
+
+    // Show email capture once numbers are populated
+    document.getElementById('email-section').style.display = 'block';
+  }
+
+  function submitCapture() {
+    const email = document.getElementById('cap-email').value.trim();
+    if (!email || !email.includes('@')) {
+      document.getElementById('cap-email').style.borderColor = '#b91c1c';
+      return;
+    }
+    const v = getVals(), c = compute(v);
+    const body = new URLSearchParams({
+      'form-name': 'solar-roi-results',
+      'name':       document.getElementById('cap-name').value.trim(),
+      'phone':      document.getElementById('cap-phone').value.trim(),
+      'email':      email,
+      'farm-acres': v.acres,
+      'labor-rate': v.labor,
+      'kwh-rate':   v.kwh,
+      'std-net':    fmtK(c.stdNet),
+      'hf-net':     fmtK(c.hfNet),
+      'save-total': fmtK(c.totalGain)
+    });
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() }).catch(() => {});
+    document.getElementById('email-form').style.display    = 'none';
+    document.getElementById('email-success').style.display = 'block';
+  }
+
+  // Nav dropdown
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.nav-dropdown')) document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+  });
+  document.querySelectorAll('.nav-dropdown-trigger').forEach(t => {
+    t.addEventListener('click', e => {
+      e.preventDefault();
+      const p = t.closest('.nav-dropdown'), was = p.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+      if (!was) p.classList.add('open');
+    });
+  });
+
+  // Mobile menu
+  document.querySelector('.nav-hamburger').addEventListener('click', function(e) {
+    e.stopPropagation();
+    document.querySelector('.mobile-menu').classList.toggle('open');
+  });
+  document.addEventListener('click', e => {
+    const menu = document.querySelector('.mobile-menu');
+    if (menu && menu.classList.contains('open') && !menu.contains(e.target) && !e.target.closest('.nav-hamburger')) {
+      menu.classList.remove('open');
+    }
+  });
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Slider listeners
+  ['acres', 'labor', 'kwh'].forEach(id => document.getElementById(id).addEventListener('input', update));
+
+  // Init
+  update();
+</script>
+</body>
+</html>

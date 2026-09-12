@@ -1,0 +1,42 @@
+# ── JH&J ENTERPRISES · Netlify configuration ──────────────────────
+# Static site (no build step). This folder is the publish root.
+
+[build]
+  publish = "."
+  command = ""
+
+# ── Security headers (all pages) ──────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# ── Long cache for static assets (fingerprint-free, so revalidate CSS/JS lightly) ──
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+
+# ── Canonical host: force www (matches the canonical tags in the pages) ──
+# Takes effect once the custom domain is attached in Netlify.
+[[redirects]]
+  from = "https://jhjenterprises.net/*"
+  to = "https://www.jhjenterprises.net/:splat"
+  status = 301
+  force = true
+
+# Note: Netlify serves clean URLs automatically (/kitchen-bath → kitchen-bath.html)
+# and serves 404.html for unknown paths — no extra redirects needed.

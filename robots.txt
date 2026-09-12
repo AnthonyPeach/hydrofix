@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Utility/campaign pages are kept out of the index via a noindex meta tag
+# (crawlable so Google can actually SEE the noindex — do NOT also Disallow them).
+# Only non-page asset dirs are blocked here.
+Disallow: /img/social/
+
+# Sitemap
+Sitemap: https://myhydrofix.com/sitemap.xml

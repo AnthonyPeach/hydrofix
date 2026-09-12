@@ -1,0 +1,17 @@
+# Local Claude Code settings (keep the blog playbook + topic queue tracked)
+.claude/settings.local.json
+
+# Netlify local state / drop-deploy artifacts (repo is the source of truth)
+.netlify/
+deploy-*.zip
+
+# Runner logs
+logs/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+
+# Node (only ever fetched as a disposable portable copy; never committed)
+node_modules/

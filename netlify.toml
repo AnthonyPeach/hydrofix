@@ -1,0 +1,1134 @@
+[functions]
+
+  [functions.emails]
+  included_files = [
+    "./emails/**",
+    "./emails/**",
+    "./emails/**",
+    "./emails/**",
+    "./emails/**",
+    "./emails/**",
+    "./emails/**",
+    "./emails/**",
+    "./emails/**"
+  ]
+
+[build]
+publish = "."
+
+[[headers]]
+for = "/css/*"
+
+  [headers.values]
+  Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "/js/*"
+
+  [headers.values]
+  Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "/img/*"
+
+  [headers.values]
+  Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "/*.html"
+
+  [headers.values]
+  Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+for = "/*"
+
+  [headers.values]
+  X-Frame-Options = "DENY"
+  X-Content-Type-Options = "nosniff"
+  Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Retire the stale "active deploy" duplicate tree (a full copy of the site that
+# was accidentally published as a subdirectory). Forced 301s consolidate it back
+# to the canonical URLs so it stops competing for indexing. The request path is
+# percent-encoded (%20), so the encoded form is the one that actually matches;
+# the literal-space variants are kept as a fallback.
+[[redirects]]
+from = "/active%20deploy/*"
+to = "/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "/active%20deploy"
+to = "/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/active deploy/*"
+to = "/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "/active deploy"
+to = "/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/residential/funnel"
+to = "/residential-funnel.html"
+status = 200
+
+[[redirects]]
+from = "/cities/alpharetta"
+to = "/cities/alpharetta.html"
+status = 200
+
+[[redirects]]
+from = "/cities/canton"
+to = "/cities/canton.html"
+status = 200
+
+[[redirects]]
+from = "/cities/cumming"
+to = "/cities/cumming.html"
+status = 200
+
+[[redirects]]
+from = "/cities/johns-creek"
+to = "/cities/johns-creek.html"
+status = 200
+
+[[redirects]]
+from = "/cities/marietta"
+to = "/cities/marietta.html"
+status = 200
+
+[[redirects]]
+from = "/cities/roswell"
+to = "/cities/roswell.html"
+status = 200
+
+[[redirects]]
+from = "/cities/woodstock"
+to = "/cities/woodstock.html"
+status = 200
+
+[[redirects]]
+from = "/residential"
+to = "/residential.html"
+status = 200
+
+[[redirects]]
+from = "/commercial"
+to = "/commercial.html"
+status = 200
+
+[[redirects]]
+from = "/golf"
+to = "/golf.html"
+status = 200
+
+[[redirects]]
+from = "/sports"
+to = "/sports.html"
+status = 200
+
+[[redirects]]
+from = "/contact"
+to = "/contact.html"
+status = 200
+
+[[redirects]]
+from = "/blog"
+to = "/blog.html"
+status = 200
+
+[[redirects]]
+from = "/service-areas"
+to = "/service-areas.html"
+status = 200
+
+[[redirects]]
+from = "/calculators"
+to = "/calculators.html"
+status = 200
+
+[[redirects]]
+from = "/golf/calculator"
+to = "/golf-calculator.html"
+status = 200
+
+[[redirects]]
+from = "/solar/calculator"
+to = "/solar-calculator.html"
+status = 200
+
+[[redirects]]
+from = "/sports/calculator"
+to = "/sports-calculator.html"
+status = 200
+
+[[redirects]]
+from = "/residential/funnel"
+to = "/residential"
+status = 301
+
+[[redirects]]
+from = "/residential/checklist"
+to = "/residential-checklist.html"
+status = 200
+
+[[redirects]]
+from = "/howwehelp"
+to = "/howwehelp.html"
+status = 200
+
+# Retired the entire Canton RSVP flow (June 16 event passed). Forced 301s
+# override the stale live files the additive Netlify deploy leaves behind, so
+# the RSVP page, its .html path, the confirmation page, and the calendar .ics
+# all consolidate to the homepage.
+[[redirects]]
+from = "/canton-rsvp"
+to = "/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/canton-rsvp.html"
+to = "/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/canton-rsvp-confirmed"
+to = "/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/canton-rsvp-confirmed.html"
+to = "/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/hydrofix-canton-june16.ics"
+to = "/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/locations/georgia"
+to = "/locations/georgia.html"
+status = 200
+
+[[redirects]]
+from = "/locations/florida"
+to = "/locations/florida.html"
+status = 200
+
+[[redirects]]
+from = "/locations/north-carolina"
+to = "/locations/north-carolina.html"
+status = 200
+
+[[redirects]]
+from = "/locations/south-carolina"
+to = "/locations/south-carolina.html"
+status = 200
+
+[[redirects]]
+from = "/locations/tennessee"
+to = "/locations/tennessee.html"
+status = 200
+
+[[redirects]]
+from = "/locations/alachua-county-fl"
+to = "/locations/alachua-county-fl.html"
+status = 200
+
+[[redirects]]
+from = "/locations/beaufort-county-sc"
+to = "/locations/beaufort-county-sc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/berkeley-county-sc"
+to = "/locations/berkeley-county-sc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/brevard-county-fl"
+to = "/locations/brevard-county-fl.html"
+status = 200
+
+[[redirects]]
+from = "/locations/cabarrus-county-nc"
+to = "/locations/cabarrus-county-nc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/charleston-county-sc"
+to = "/locations/charleston-county-sc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/chatham-county-nc"
+to = "/locations/chatham-county-nc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/collier-county-fl"
+to = "/locations/collier-county-fl.html"
+status = 200
+
+[[redirects]]
+from = "/locations/currituck-county-nc"
+to = "/locations/currituck-county-nc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/dare-county-nc"
+to = "/locations/dare-county-nc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/davidson-county-tn"
+to = "/locations/davidson-county-tn.html"
+status = 200
+
+[[redirects]]
+from = "/locations/dorchester-county-sc"
+to = "/locations/dorchester-county-sc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/durham-county-nc"
+to = "/locations/durham-county-nc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/fayette-county-tn"
+to = "/locations/fayette-county-tn.html"
+status = 200
+
+[[redirects]]
+from = "/locations/greenville-county-sc"
+to = "/locations/greenville-county-sc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/hillsborough-county-fl"
+to = "/locations/hillsborough-county-fl.html"
+status = 200
+
+[[redirects]]
+from = "/locations/horry-county-sc"
+to = "/locations/horry-county-sc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/knox-county-tn"
+to = "/locations/knox-county-tn.html"
+status = 200
+
+[[redirects]]
+from = "/locations/lancaster-county-sc"
+to = "/locations/lancaster-county-sc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/lexington-county-sc"
+to = "/locations/lexington-county-sc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/martin-county-fl"
+to = "/locations/martin-county-fl.html"
+status = 200
+
+[[redirects]]
+from = "/locations/mecklenburg-county-nc"
+to = "/locations/mecklenburg-county-nc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/montgomery-county-tn"
+to = "/locations/montgomery-county-tn.html"
+status = 200
+
+[[redirects]]
+from = "/locations/moore-county-nc"
+to = "/locations/moore-county-nc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/orange-county-fl"
+to = "/locations/orange-county-fl.html"
+status = 200
+
+[[redirects]]
+from = "/locations/orange-county-nc"
+to = "/locations/orange-county-nc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/palm-beach-county-fl"
+to = "/locations/palm-beach-county-fl.html"
+status = 200
+
+[[redirects]]
+from = "/locations/rutherford-county-tn"
+to = "/locations/rutherford-county-tn.html"
+status = 200
+
+[[redirects]]
+from = "/locations/sarasota-county-fl"
+to = "/locations/sarasota-county-fl.html"
+status = 200
+
+[[redirects]]
+from = "/locations/seminole-county-fl"
+to = "/locations/seminole-county-fl.html"
+status = 200
+
+[[redirects]]
+from = "/locations/shelby-county-tn"
+to = "/locations/shelby-county-tn.html"
+status = 200
+
+[[redirects]]
+from = "/locations/st-johns-county-fl"
+to = "/locations/st-johns-county-fl.html"
+status = 200
+
+[[redirects]]
+from = "/locations/sumner-county-tn"
+to = "/locations/sumner-county-tn.html"
+status = 200
+
+[[redirects]]
+from = "/locations/union-county-nc"
+to = "/locations/union-county-nc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/wake-county-nc"
+to = "/locations/wake-county-nc.html"
+status = 200
+
+[[redirects]]
+from = "/locations/williamson-county-tn"
+to = "/locations/williamson-county-tn.html"
+status = 200
+
+[[redirects]]
+from = "/locations/wilson-county-tn"
+to = "/locations/wilson-county-tn.html"
+status = 200
+
+[[redirects]]
+from = "/locations/york-county-sc"
+to = "/locations/york-county-sc.html"
+status = 200
+
+[[redirects]]
+from = "/legal/privacy-policy"
+to = "/legal/privacy-policy.html"
+status = 200
+
+[[redirects]]
+from = "/legal/cookies-policy"
+to = "/legal/cookies-policy.html"
+status = 200
+
+[[redirects]]
+from = "/blog/flat-ground-drainage.html"
+to = "/blog/flat-ground-drainage"
+status = 301
+
+[[redirects]]
+from = "/blog/hydrofix-vs-french-drains.html"
+to = "/blog/hydrofix-vs-french-drains"
+status = 301
+
+[[redirects]]
+from = "/blog/why-recycled-plastics.html"
+to = "/blog/why-recycled-plastics"
+status = 301
+
+[[redirects]]
+from = "/blog/french-drain-alternatives-homeowners"
+to = "/blog/french-drain-alternatives-homeowners.html"
+status = 200
+
+[[redirects]]
+from = "/blog/multifamily-property-drainage"
+to = "/blog/multifamily-property-drainage.html"
+status = 200
+
+[[redirects]]
+from = "/blog/tee-box-drainage"
+to = "/blog/tee-box-drainage.html"
+status = 200
+
+[[redirects]]
+from = "/blog/tile-drainage-alternatives-farms"
+to = "/blog/tile-drainage-alternatives-farms.html"
+status = 200
+
+[[redirects]]
+from = "/blog/commercial-drainage-roi"
+to = "/blog/commercial-drainage-roi.html"
+status = 200
+
+[[redirects]]
+from = "/blog/parking-lot-stormwater-compliance"
+to = "/blog/parking-lot-stormwater-compliance.html"
+status = 200
+
+[[redirects]]
+from = "/blog/loading-dock-drainage-solutions"
+to = "/blog/loading-dock-drainage-solutions.html"
+status = 200
+
+[[redirects]]
+from = "/blog/retail-center-water-management"
+to = "/blog/retail-center-water-management.html"
+status = 200
+
+[[redirects]]
+from = "/blog/property-manager-drainage-guide"
+to = "/blog/property-manager-drainage-guide.html"
+status = 200
+
+[[redirects]]
+from = "/blog/foundation-waterproofing-drainage"
+to = "/blog/foundation-waterproofing-drainage.html"
+status = 200
+
+[[redirects]]
+from = "/blog/downspout-management-guide"
+to = "/blog/downspout-management-guide.html"
+status = 200
+
+[[redirects]]
+from = "/blog/basement-moisture-drainage-connection"
+to = "/blog/basement-moisture-drainage-connection.html"
+status = 200
+
+[[redirects]]
+from = "/blog/yard-flooding-root-causes"
+to = "/blog/yard-flooding-root-causes.html"
+status = 200
+
+[[redirects]]
+from = "/blog/crawl-space-drainage-guide"
+to = "/blog/crawl-space-drainage-guide.html"
+status = 200
+
+[[redirects]]
+from = "/blog/golf-fairway-drainage-design"
+to = "/blog/golf-fairway-drainage-design.html"
+status = 200
+
+[[redirects]]
+from = "/blog/golf-green-drainage-systems"
+to = "/blog/golf-green-drainage-systems.html"
+status = 200
+
+[[redirects]]
+from = "/blog/bunker-drainage-solutions"
+to = "/blog/bunker-drainage-solutions.html"
+status = 200
+
+[[redirects]]
+from = "/blog/cart-path-erosion-drainage"
+to = "/blog/cart-path-erosion-drainage.html"
+status = 200
+
+[[redirects]]
+from = "/blog/golf-course-drainage-roi"
+to = "/blog/golf-course-drainage-roi.html"
+status = 200
+
+[[redirects]]
+from = "/blog/synthetic-turf-drainage"
+to = "/blog/synthetic-turf-drainage.html"
+status = 200
+
+[[redirects]]
+from = "/blog/baseball-infield-drainage"
+to = "/blog/baseball-infield-drainage.html"
+status = 200
+
+[[redirects]]
+from = "/blog/multi-use-field-drainage"
+to = "/blog/multi-use-field-drainage.html"
+status = 200
+
+[[redirects]]
+from = "/blog/running-track-drainage"
+to = "/blog/running-track-drainage.html"
+status = 200
+
+[[redirects]]
+from = "/blog/school-athletic-field-compliance"
+to = "/blog/school-athletic-field-compliance.html"
+status = 200
+
+[[redirects]]
+from = "/blog/drainage-for-solar-farms"
+to = "/blog/drainage-for-solar-farms.html"
+status = 200
+
+[[redirects]]
+from = "/blog/what-makes-drainage-non-clogging"
+to = "/blog/what-makes-drainage-non-clogging.html"
+status = 200
+
+[[redirects]]
+from = "/blog/circular-economy-drainage"
+to = "/blog/circular-economy-drainage.html"
+status = 200
+
+[[redirects]]
+from = "/blog/engineering-behind-hydrofix"
+to = "/blog/engineering-behind-hydrofix.html"
+status = 200
+
+[[redirects]]
+from = "/blog/how-pressure-based-drainage-works"
+to = "/blog/how-pressure-based-drainage-works.html"
+status = 200
+
+[[redirects]]
+from = "/blog/green-infrastructure-hydro-fix"
+to = "/blog/green-infrastructure-hydro-fix.html"
+status = 200
+
+[[redirects]]
+from = "/blog/why-traditional-yard-drainage-fails"
+to = "/blog/why-traditional-yard-drainage-fails.html"
+status = 200
+
+[[redirects]]
+from = "/blog/roadside-drainage-without-road-closures"
+to = "/blog/roadside-drainage-without-road-closures.html"
+status = 200
+
+[[redirects]]
+from = "/blog/municipal-sustainability-directors"
+to = "/blog/municipal-sustainability-directors.html"
+status = 200
+
+[[redirects]]
+from = "/blog/soil-percolation-test"
+to = "/blog/soil-percolation-test.html"
+status = 200
+
+[[redirects]]
+from = "/blog/public-parks-athletic-fields"
+to = "/blog/public-parks-athletic-fields.html"
+status = 200
+
+[[redirects]]
+from = "/blog/subsurface-drainage-agriculture"
+to = "/blog/subsurface-drainage-agriculture.html"
+status = 200
+
+[[redirects]]
+from = "/blog/leed-esg-climate-resilience"
+to = "/blog/leed-esg-climate-resilience.html"
+status = 200
+
+[[redirects]]
+from = "/blog/smart-city-drainage-checklist"
+to = "/blog/smart-city-drainage-checklist.html"
+status = 200
+
+[[redirects]]
+from = "/blog/transition-boxes-drainage"
+to = "/blog/transition-boxes-drainage.html"
+status = 200
+
+[[redirects]]
+from = "/blog/architects-drainage-design-flexibility"
+to = "/blog/architects-drainage-design-flexibility.html"
+status = 200
+
+[[redirects]]
+from = "/blog/why-contractors-love-hydroplank"
+to = "/blog/why-contractors-love-hydroplank.html"
+status = 200
+
+[[redirects]]
+from = "/blog/from-landfill-to-lifeline"
+to = "/blog/from-landfill-to-lifeline.html"
+status = 200
+
+[[redirects]]
+from = "/blog/municipalities-upgrading-drainage"
+to = "/blog/municipalities-upgrading-drainage.html"
+status = 200
+
+[[redirects]]
+from = "/blog/smarter-stormwater-municipalities"
+to = "/blog/smarter-stormwater-municipalities.html"
+status = 200
+
+[[redirects]]
+from = "/blog/agricultural-drainage-soil-erosion"
+to = "/blog/agricultural-drainage-soil-erosion.html"
+status = 200
+
+[[redirects]]
+from = "/blog/driving-range-drainage"
+to = "/blog/driving-range-drainage.html"
+status = 200
+
+[[redirects]]
+from = "/blog/field-drainage-crop-yields"
+to = "/blog/field-drainage-crop-yields.html"
+status = 200
+
+[[redirects]]
+from = "/blog/hoa-drainage-responsibilities"
+to = "/blog/hoa-drainage-responsibilities.html"
+status = 200
+
+[[redirects]]
+from = "/blog/retaining-wall-drainage"
+to = "/blog/retaining-wall-drainage.html"
+status = 200
+
+[[redirects]]
+from = "/blog/sidewalk-trail-drainage"
+to = "/blog/sidewalk-trail-drainage.html"
+status = 200
+
+[[redirects]]
+from = "/blog/solar-farm-stormwater-compliance"
+to = "/blog/solar-farm-stormwater-compliance.html"
+status = 200
+
+[[redirects]]
+from = "/blog/solar-site-erosion-control"
+to = "/blog/solar-site-erosion-control.html"
+status = 200
+
+[[redirects]]
+from = "/golf-audit"
+to = "/golf-audit.html"
+status = 200
+
+[[redirects]]
+from = "/cities/powder-springs"
+to = "/cities/powder-springs.html"
+status = 200
+
+[[redirects]]
+from = "/cities/duluth"
+to = "/cities/duluth.html"
+status = 200
+
+[[redirects]]
+from = "/cities/lawrenceville"
+to = "/cities/lawrenceville.html"
+status = 200
+
+[[redirects]]
+from = "/cities/holly-springs"
+to = "/cities/holly-springs.html"
+status = 200
+
+[[redirects]]
+from = "/cities/atlanta"
+to = "/cities/atlanta.html"
+status = 200
+
+[[redirects]]
+from = "/cities/buford"
+to = "/cities/buford.html"
+status = 200
+
+[[redirects]]
+from = "/cities/acworth"
+to = "/cities/acworth.html"
+status = 200
+
+[[redirects]]
+from = "/cities/suwanee"
+to = "/cities/suwanee.html"
+status = 200
+
+[[redirects]]
+from = "/cities/dunwoody"
+to = "/cities/dunwoody.html"
+status = 200
+
+[[redirects]]
+from = "/cities/peachtree-corners"
+to = "/cities/peachtree-corners.html"
+status = 200
+
+[[redirects]]
+from = "/cities/ball-ground"
+to = "/cities/ball-ground.html"
+status = 200
+
+[[redirects]]
+from = "/cities/sandy-springs"
+to = "/cities/sandy-springs.html"
+status = 200
+
+[[redirects]]
+from = "/cities/norcross"
+to = "/cities/norcross.html"
+status = 200
+
+[[redirects]]
+from = "/cities/brookhaven"
+to = "/cities/brookhaven.html"
+status = 200
+
+[[redirects]]
+from = "/cities/milton"
+to = "/cities/milton.html"
+status = 200
+
+[[redirects]]
+from = "/cities/decatur"
+to = "/cities/decatur.html"
+status = 200
+
+[[redirects]]
+from = "/cities/smyrna"
+to = "/cities/smyrna.html"
+status = 200
+
+[[redirects]]
+from = "/cities/sugar-hill"
+to = "/cities/sugar-hill.html"
+status = 200
+
+[[redirects]]
+from = "/cities/kennesaw"
+to = "/cities/kennesaw.html"
+status = 200
+
+[[redirects]]
+from = "/guides/sportscomplex"
+to = "/guides/sportscomplex.html"
+status = 200
+
+[[redirects]]
+from = "/guides/solar"
+to = "/guides/solar.html"
+status = 200
+
+[[redirects]]
+from = "/guides/golf"
+to = "/guides/golf.html"
+status = 200
+
+[[redirects]]
+from = "/guides/commercial"
+to = "/guides/commercial.html"
+status = 200
+
+[[redirects]]
+from = "/guides/residential"
+to = "/guides/residential.html"
+status = 200
+
+[[redirects]]
+from = "/guide/sportscomplex"
+to = "/guide/sportscomplex.html"
+status = 200
+
+[[redirects]]
+from = "/guide/solar"
+to = "/guide/solar.html"
+status = 200
+
+[[redirects]]
+from = "/guide/golf"
+to = "/guide/golf.html"
+status = 200
+
+[[redirects]]
+from = "/guide/commercial"
+to = "/guide/commercial.html"
+status = 200
+
+[[redirects]]
+from = "/guide/residential"
+to = "/guide/residential.html"
+status = 200
+
+[[redirects]]
+from = "/blog/public-parks-athletic-fields-and-playgrounds-drainage-solutions-that-last"
+to = "/blog/public-parks-athletic-fields"
+status = 301
+
+[[redirects]]
+from = "/blog/why-recycled-plastics-are-the-future-of-drainage-infrastructure"
+to = "/blog/why-recycled-plastics"
+status = 301
+
+[[redirects]]
+from = "/blog/flat-ground-drainage-solved-how-hydroblox-moves-water-without-slope"
+to = "/blog/flat-ground-drainage"
+status = 301
+
+[[redirects]]
+from = "/blog/why-contractors-love-installing-hydroblox-and-what-makes-it-so-fast"
+to = "/blog/why-contractors-love-hydroplank"
+status = 301
+
+[[redirects]]
+from = "/blog/why-municipalities-are-upgrading-aging-drainage-systems-with-hydroblox"
+to = "/blog/municipalities-upgrading-drainage"
+status = 301
+
+[[redirects]]
+from = "/educate/how-to-perform-a-soil-percolation-test-before-choosing-a-drainage-solution"
+to = "/blog/soil-percolation-test"
+status = 301
+
+[[redirects]]
+from = "/educate/public-parks-athletic-fields-and-playgrounds-drainage-solutions-that-last"
+to = "/blog/public-parks-athletic-fields"
+status = 301
+
+[[redirects]]
+from = "/educate"
+to = "/blog"
+status = 301
+
+[[redirects]]
+from = "/who-we-serve"
+to = "/service-areas"
+status = 301
+
+[[redirects]]
+from = "/services/digital-transformation"
+to = "/commercial"
+status = 301
+
+[[redirects]]
+from = "/services"
+to = "/service-areas"
+status = 301
+
+[[redirects]]
+from = "/services/residential"
+to = "/residential"
+status = 301
+
+[[redirects]]
+from = "/services/commercial"
+to = "/commercial"
+status = 301
+
+[[redirects]]
+from = "/services/golf"
+to = "/golf"
+status = 301
+
+[[redirects]]
+from = "/services/sports"
+to = "/sports"
+status = 301
+
+[[redirects]]
+from = "/about"
+to = "/howwehelp"
+status = 301
+
+[[redirects]]
+from = "/about-us"
+to = "/howwehelp"
+status = 301
+
+[[redirects]]
+from = "/contact-us"
+to = "/contact"
+status = 301
+
+[[redirects]]
+from = "/drainage-solutions"
+to = "/residential"
+status = 301
+
+[[redirects]]
+from = "/educate/*"
+to = "/blog"
+status = 301
+
+[[redirects]]
+from = "/services/*"
+to = "/service-areas"
+status = 301
+
+[[redirects]]
+from = "https://www.myhydrofix.com/*"
+to = "https://myhydrofix.com/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "/our-successes/*"
+to = "/service-areas"
+status = 301
+
+[[redirects]]
+from = "/our-successes"
+to = "/service-areas"
+status = 301
+
+[[redirects]]
+from = "/blog/roadside-drainage-without-road-closures-a-new-approach-for-public-works"
+to = "/blog/roadside-drainage-without-road-closures"
+status = 301
+
+[[redirects]]
+from = "/blog/municipal-sustainability-directors-choosing-hydroblox"
+to = "/blog/municipal-sustainability-directors"
+status = 301
+
+[[redirects]]
+from = "/golf-calculator"
+to = "/golf-calculator.html"
+status = 200
+
+[[redirects]]
+from = "/sports-calculator"
+to = "/sports-calculator.html"
+status = 200
+
+[[redirects]]
+from = "/solar-calculator"
+to = "/solar-calculator.html"
+status = 200
+
+[[redirects]]
+from = "/blog/apartment-courtyard-drainage"
+to = "/blog/multifamily-property-drainage"
+status = 301
+
+[[redirects]]
+from = "/blog/coastal-links-course-drainage"
+to = "/blog/golf-fairway-drainage-design"
+status = 301
+
+[[redirects]]
+from = "/blog/commercial-foundation-drainage"
+to = "/blog/commercial-drainage-roi"
+status = 301
+
+[[redirects]]
+from = "/blog/driveway-walkway-drainage"
+to = "/blog/sidewalk-trail-drainage"
+status = 301
+
+[[redirects]]
+from = "/blog/golf-turf-disease-drainage"
+to = "/blog/golf-green-drainage-systems"
+status = 301
+
+[[redirects]]
+from = "/blog/neighborhood-flooding-public-works"
+to = "/blog/municipalities-upgrading-drainage"
+status = 301
+
+[[redirects]]
+from = "/blog/pasture-livestock-drainage"
+to = "/blog/field-drainage-crop-yields"
+status = 301
+
+[[redirects]]
+from = "/blog/patio-hardscape-drainage"
+to = "/blog/retaining-wall-drainage"
+status = 301
+
+[[redirects]]
+from = "/blog/reducing-golf-rain-closures"
+to = "/blog/golf-course-drainage-roi"
+status = 301
+
+[[redirects]]
+from = "/blog/solar-access-road-drainage"
+to = "/blog/solar-site-erosion-control"
+status = 301
+
+[[redirects]]
+from = "/blog/solar-racking-foundation-drainage"
+to = "/blog/solar-farm-stormwater-compliance"
+status = 301
+
+[[redirects]]
+from = "/blog/stormwater-retrofits-aging-cities"
+to = "/blog/municipalities-upgrading-drainage"
+status = 301
+
+[[redirects]]
+from = "/blog/vineyard-orchard-drainage"
+to = "/blog/agricultural-drainage-soil-erosion"
+status = 301
+
+[context]
+
+  [context.production]
+
+    [context.production.functions]
+
+      [context.production.functions.emails]
+      included_files = [
+        "./emails/**",
+        "./emails/**",
+        "./emails/**",
+        "./emails/**",
+        "./emails/**",
+        "./emails/**",
+        "./emails/**",
+        "./emails/**",
+        "./emails/**"
+      ]
+
+  [context.master]
+
+    [context.master.functions]
+
+      [context.master.functions.emails]
+      included_files = [
+        "./emails/**",
+        "./emails/**",
+        "./emails/**",
+        "./emails/**",
+        "./emails/**",
+        "./emails/**",
+        "./emails/**"
+      ]
+
+  [context.main]
+
+    [context.main.functions]
+
+      [context.main.functions.emails]
+      included_files = [
+        "./emails/**",
+        "./emails/**",
+        "./emails/**",
+        "./emails/**",
+        "./emails/**",
+        "./emails/**",
+        "./emails/**",
+        "./emails/**",
+        "./emails/**"
+      ]

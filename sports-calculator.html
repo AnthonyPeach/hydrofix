@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="google-site-verification" content="fE31P88cVNMa42XCJ7lVvl9_YecggaYuQDI_9U91cBw">
+  <meta name="facebook-domain-verification" content="rxgkz3ndxpkz7jjd44he71zfshca52">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/favicon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<title>Sports Complex Revenue Loss Calculator | Hydro Fix</title>
+<meta name="description" content="Calculate how much poor drainage is costing your Georgia sports complex annually in lost games, tournaments, concessions, and maintenance — and see your...">
+<link rel="canonical" href="https://myhydrofix.com/sports-calculator">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --white:      #ffffff;
+  --cream:      #f7f3ee;
+  --cream-dark: #ede8df;
+  --navy:       #0e1f2f;
+  --navy-mid:   #1c3448;
+  --teal:       #2d7d6f;
+  --teal-light: #3d9d8d;
+  --teal-pale:  #e8f4f2;
+  --text:       #0e1f2f;
+  --text-mid:   #3d5568;
+  --text-light: #7a94a8;
+  --border:     rgba(14,31,47,0.1);
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'Inter', system-ui, sans-serif;
+  --max:   1100px;
+  --r:     8px;
+  --r-lg:  16px;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--white); color: var(--text); line-height: 1.65; overflow-x: hidden; }
+a { color: inherit; }
+em { font-style: italic; color: var(--teal); }
+
+h1 { font-family: var(--serif); font-size: clamp(38px, 5.5vw, 68px); line-height: 1.06; letter-spacing: -1px; font-weight: 700; }
+h2 { font-family: var(--serif); font-size: clamp(28px, 4vw, 48px); line-height: 1.12; letter-spacing: -0.5px; font-weight: 700; margin-bottom: 20px; }
+h4 { font-family: var(--sans); font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+p { font-size: 16px; color: var(--text-mid); line-height: 1.8; }
+
+/* NAV */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); height: 72px; display: flex; align-items: center; padding: 0 5%; }
+.nav-inner { max-width: var(--max); margin: 0 auto; width: 100%; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo-text { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--navy); text-decoration: none; }
+.nav-logo-text span { color: var(--teal); }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 14px; font-weight: 400; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--navy); }
+.nav-cta { background: var(--navy); color: #fff; font-size: 14px; font-weight: 500; padding: 11px 24px; border-radius: 100px; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
+.nav-cta:hover { background: var(--teal); }
+.nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); margin: 5px 0; }
+.mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--border); padding: 20px 5%; z-index: 199; }
+.mobile-menu.open { display: block; }
+.mobile-menu a { display: block; padding: 12px 0; font-size: 16px; color: var(--text-mid); text-decoration: none; border-bottom: 1px solid var(--border); }
+.mobile-menu a:last-child { border-bottom: none; }
+@media (max-width: 860px) { .nav-links { display: none; } .nav-hamburger { display: block; } }
+
+/* SHARED */
+.section { padding: 96px 5%; }
+.inner { max-width: var(--max); margin: 0 auto; }
+.label { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.label::before { content: ''; width: 24px; height: 1px; background: var(--teal); }
+.lead { font-size: 18px; font-weight: 300; color: var(--text-mid); line-height: 1.8; max-width: 600px; margin-bottom: 48px; }
+
+/* BUTTONS */
+.btn { display: inline-block; font-family: var(--sans); font-size: 15px; font-weight: 500; padding: 14px 30px; border-radius: 100px; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+.btn-dark { background: var(--navy); color: #fff; }
+.btn-dark:hover { background: var(--teal); }
+.btn-teal { background: var(--teal); color: #fff; }
+.btn-teal:hover { background: var(--teal-light); transform: translateY(-1px); }
+.btn-outline-white { background: transparent; color: rgba(255,255,255,0.85); border: 1.5px solid rgba(255,255,255,0.4); }
+.btn-outline-white:hover { border-color: rgba(255,255,255,0.8); color: #fff; }
+.btn-lg { padding: 17px 36px; font-size: 16px; }
+
+/* PAGE HERO */
+.page-hero { background: var(--navy); padding: 140px 5% 88px; position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; top: -20%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(45,125,111,0.14) 0%, transparent 65%); border-radius: 50%; pointer-events: none; }
+.page-hero-inner { max-width: var(--max); margin: 0 auto; position: relative; z-index: 2; }
+.page-hero h1 { color: #fff; margin-bottom: 18px; max-width: 780px; }
+.page-hero h1 em { color: var(--teal-light); }
+.page-hero .sub { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.58); max-width: 580px; line-height: 1.75; margin-bottom: 36px; }
+.page-hero .label { color: var(--teal-light); }
+.page-hero .label::before { background: var(--teal-light); }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* CALCULATOR */
+.calc-section { background: var(--cream); padding: 96px 5%; }
+
+/* FACILITY TYPE TABS (small pill row above sliders) */
+.fac-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+.fac-row-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); white-space: nowrap; }
+.fac-pill { font-family: var(--sans); font-size: 13px; font-weight: 500; padding: 7px 18px; border-radius: 100px; border: 1.5px solid var(--border); background: var(--white); color: var(--text-mid); cursor: pointer; transition: all 0.18s; }
+.fac-pill:hover { border-color: var(--teal); color: var(--teal); }
+.fac-pill.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+
+/* VIEW TABS */
+.calc-tabs { display: flex; gap: 4px; background: var(--cream-dark); border-radius: 100px; padding: 4px; width: fit-content; margin-bottom: 36px; }
+.calc-tab { font-family: var(--sans); font-size: 14px; font-weight: 500; padding: 10px 26px; border-radius: 100px; border: none; background: transparent; color: var(--text-mid); cursor: pointer; transition: all 0.2s; }
+.calc-tab.active { background: var(--navy); color: #fff; }
+
+/* SLIDER GRID */
+.calc-inputs { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 40px; }
+@media(max-width:860px){ .calc-inputs { grid-template-columns: repeat(2,1fr); } }
+@media(max-width:560px){ .calc-inputs { grid-template-columns: 1fr; } }
+
+.calc-field { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px 22px; }
+.calc-field label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); display: block; margin-bottom: 10px; }
+.calc-field .field-val { font-family: var(--serif); font-size: 28px; font-weight: 700; color: var(--navy); line-height: 1; margin-bottom: 14px; }
+.calc-field input[type=range] { width: 100%; -webkit-appearance: none; height: 4px; background: var(--cream-dark); border-radius: 2px; outline: none; cursor: pointer; }
+.calc-field input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--teal); cursor: pointer; border: 3px solid var(--white); box-shadow: 0 1px 6px rgba(14,31,47,0.18); }
+.calc-field input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--teal); border: 3px solid var(--white); cursor: pointer; }
+
+/* METRIC CARDS */
+.calc-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px; }
+@media(max-width:680px){ .calc-metrics { grid-template-columns: 1fr; } }
+.calc-metric { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 22px; }
+.calc-metric-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 8px; }
+.calc-metric-val { font-family: var(--serif); font-size: 34px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+.calc-metric-sub { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+.metric-loss  { border-top: 3px solid #b91c1c; }
+.metric-loss  .calc-metric-val { color: #b91c1c; }
+.metric-warn  { border-top: 3px solid #92400e; }
+.metric-warn  .calc-metric-val { color: #92400e; }
+.metric-teal  { border-top: 3px solid var(--teal); }
+.metric-teal  .calc-metric-val { color: var(--teal); }
+
+/* TOTAL BAR */
+.calc-total { background: var(--navy); border-radius: var(--r-lg); padding: 26px 32px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+.calc-total-label { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.55); }
+.calc-total-sub { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 3px; }
+.calc-total-val { font-family: var(--serif); font-size: 44px; font-weight: 700; color: #fca5a5; }
+.calc-total-val.good { color: var(--teal-light); }
+
+/* BOTTOM GRID */
+.calc-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+@media(max-width:720px){ .calc-bottom { grid-template-columns: 1fr; } }
+
+/* BREAKDOWN */
+.calc-breakdown { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; margin-bottom: 24px; }
+.calc-br-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 22px; border-bottom: 1px solid var(--border); font-size: 14px; }
+.calc-br-row:last-child { border-bottom: none; }
+.br-label { color: var(--text-mid); }
+.br-val { font-weight: 600; color: var(--navy); }
+
+/* PAYBACK */
+.payback-box { background: var(--teal-pale); border: 1px solid rgba(45,125,111,0.2); border-left: 4px solid var(--teal); border-radius: 0 var(--r-lg) var(--r-lg) 0; padding: 24px 28px; margin-bottom: 24px; }
+.payback-box h4 { color: var(--navy); margin-bottom: 6px; }
+.payback-box p { font-size: 14px; color: var(--text-mid); line-height: 1.7; margin: 0; }
+.payback-years { font-family: var(--serif); font-size: 52px; font-weight: 700; color: var(--teal); line-height: 1; margin: 8px 0; }
+
+/* CHART */
+.calc-chart-box { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; }
+.calc-chart-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 16px; }
+.calc-chart-wrap { position: relative; width: 100%; height: 220px; }
+
+/* CTA ROW */
+.calc-cta-row { text-align: center; margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--cream-dark); }
+.calc-cta-row p { font-size: 14px; color: var(--text-light); margin-top: 14px; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+/* CARDS */
+.card-grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+@media(max-width:900px){ .card-grid-3 { grid-template-columns: repeat(2,1fr); } }
+@media(max-width:560px){ .card-grid-3 { grid-template-columns: 1fr; } }
+.card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 28px; transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(14,31,47,0.07); }
+.card-teal { border-top: 3px solid var(--teal); }
+.card-icon { width: 44px; height: 44px; background: var(--teal-pale); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+.card h4 { color: var(--navy); }
+.card p { font-size: 14px; }
+
+/* DARK SECTION */
+.dark { background: var(--navy); }
+.dark h2 { color: #fff; }
+.dark h2 em { color: var(--teal-light); }
+.dark .label { color: var(--teal-light); }
+.dark .label::before { background: var(--teal-light); }
+.dark p { color: rgba(255,255,255,0.58); }
+.feature-list { display: flex; flex-direction: column; gap: 12px; }
+.feature { display: flex; gap: 16px; align-items: flex-start; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--r); padding: 20px; }
+.feature-icon { width: 38px; height: 38px; background: rgba(45,125,111,0.2); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.feature h4 { color: #fff; margin-bottom: 3px; }
+.feature p { font-size: 13px; color: rgba(255,255,255,0.5); }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+@media(max-width:800px){ .split { grid-template-columns: 1fr; gap: 36px; } }
+.split-img { border-radius: var(--r-lg); overflow: hidden; min-height: 400px; background: rgba(45,125,111,0.1); display: flex; align-items: center; justify-content: center; font-size: 80px; }
+
+/* CTA SECTION */
+.cta-section { background: var(--navy); text-align: center; padding: 100px 5%; position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(45,125,111,0.12) 0%, transparent 70%); pointer-events: none; }
+.cta-section > * { position: relative; z-index: 2; }
+.cta-section h2 { color: #fff; }
+.cta-section h2 em { color: var(--teal-light); }
+.cta-section .sub { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.55); max-width: 500px; margin: 0 auto 40px; line-height: 1.75; }
+
+/* FOOTER */
+.footer { background: var(--navy); padding: 56px 5% 32px; }
+.footer-inner { max-width: var(--max); margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+@media(max-width:760px){ .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; } }
+@media(max-width:480px){ .footer-top { grid-template-columns: 1fr; } }
+.footer-logo { font-family: var(--serif); font-size: 22px; font-weight: 700; color: #fff; text-decoration: none; display: block; margin-bottom: 14px; }
+.footer-logo span { color: var(--teal-light); }
+.footer-desc { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.75; }
+.footer-col h5 { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 16px; }
+.footer-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.55); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
+.footer-col a:hover { color: #fff; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.28); }
+.footer-bottom a { font-size: 12px; color: rgba(255,255,255,0.28); text-decoration: none; }
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.v { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+
+/* STICKY CTA */
+.sticky-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 99; background: var(--navy); padding: 12px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+.sticky-cta a { display: block; background: var(--teal); color: #fff; text-align: center; font-size: 15px; font-weight: 500; padding: 14px; border-radius: 100px; text-decoration: none; }
+@media(max-width:600px){ .sticky-cta { display: block; } body { padding-bottom: 72px; } }
+
+/* NAV DROPDOWN */
+.nav-dropdown { position: relative; }
+.nav-dropdown-trigger { display: flex; align-items: center; gap: 3px; cursor: pointer; }
+.nav-dropdown-trigger svg { transition: transform 0.2s; }
+.nav-dropdown.open .nav-dropdown-trigger svg { transform: rotate(180deg); }
+.nav-dropdown-menu { display: none; position: absolute; top: calc(100% + 16px); left: 50%; transform: translateX(-50%); background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 10px; min-width: 260px; box-shadow: 0 16px 40px rgba(14,31,47,0.12); list-style: none; z-index: 300; }
+.nav-dropdown-menu::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 12px; height: 12px; background: var(--white); border-left: 1px solid var(--border); border-top: 1px solid var(--border); rotate: 45deg; }
+.nav-dropdown.open .nav-dropdown-menu { display: block; }
+.nav-dropdown-menu li a { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: var(--r); text-decoration: none; color: var(--text); transition: background 0.15s; font-size: 14px; }
+.nav-dropdown-menu li a:hover { background: var(--cream); }
+.nav-dropdown-menu li a .dd-icon { font-size: 18px; width: 36px; height: 36px; background: var(--teal-pale); border-radius: var(--r); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.nav-dropdown-menu li a div strong { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 1px; }
+.nav-dropdown-menu li a div span { display: block; font-size: 12px; color: var(--text-light); }
+.mobile-section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); padding: 14px 0 6px; }
+.mobile-sub { padding-left: 16px !important; font-size: 14px !important; color: var(--text-mid) !important; }
+
+/* BIG STAT */
+.big-stat-section { background: var(--navy); }
+.big-stat-section h2 { color: #fff; }
+.big-stat-section h2 em { color: var(--teal-light); }
+.big-stat-section .label { color: var(--teal-light); }
+.big-stat-section .label::before { background: var(--teal-light); }
+.big-stat-section p { color: rgba(255,255,255,0.58); }
+.big-stat { font-family: var(--serif); font-size: clamp(72px,12vw,120px); line-height: 1; color: var(--teal-light); letter-spacing: -0.03em; font-weight: 700; }
+.big-stat-sub { font-size: 16px; color: rgba(255,255,255,0.55); margin-top: 8px; line-height: 1.5; }
+</style>
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','701492359663771');fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=701492359663771&ev=PageView&noscript=1"/></noscript>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-13Z2Z6MJXB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-13Z2Z6MJXB');
+  </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TD8Q7FCQ');</script>
+  <!-- End Google Tag Manager -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Hydro Fix">
+  <meta property="og:title" content="Sports Complex Drainage ROI Calculator | Field Closure Impact | Hydro Fix">
+  <meta property="og:description" content="Calculate the revenue and operational cost of drainage failures at your Georgia sports complex or athletic facility.">
+  <meta property="og:image" content="https://myhydrofix.com/images/hydrofix-logo-header-white-teal.png">
+  <meta property="og:url" content="https://myhydrofix.com/sports/calculator">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sports Complex Drainage ROI Calculator | Field Closure Impact | Hydro Fix">
+  <meta name="twitter:description" content="Calculate the revenue and operational cost of drainage failures at your Georgia sports complex or athletic facility.">
+  <meta name="twitter:image" content="https://myhydrofix.com/images/hydrofix-logo-header-white-teal.png">
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Sports Complex Revenue Loss Calculator",
+  "description": "Calculate how much poor drainage is costing your Georgia sports complex annually in lost games, tournaments, concessions, and maintenance \u2014 and see your Hydro Fix payback period.",
+  "url": "https://myhydrofix.com/sports-calculator",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hydro Fix",
+    "url": "https://myhydrofix.com"
+  }
+}
+  </script>
+  <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var s = document.createElement('script');
+        s.id = 'vtag-ai-js'; s.async = true;
+        s.src = 'https://r2.leadsy.ai/tag.js';
+        s.setAttribute('data-pid', 'vKeZZFmg9mRhqlV3');
+        s.setAttribute('data-version', '062024');
+        document.head.appendChild(s);
+      }, 4000);
+    });
+  </script>
+  <meta name="keywords" content="sports complex drainage calculator, athletic field closure cost, sports facility drainage ROI">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TD8Q7FCQ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a aria-label='Hydro Fix home' class='nav-logo' href='/'><svg style="display:block;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="180" height="41" viewBox="0 0 1150 260" xml:space="preserve">
+<desc>HydroFix Alt 1 - HYDRO navy, FIX teal</desc>
+<defs>
+</defs>
+<g transform="matrix(1 0 0 1 640 512)" id="background-logo"  >
+<rect style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-opacity: 0; fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  x="-640" y="-512" rx="0" ry="0" width="1280" height="1024" />
+</g>
+<g transform="matrix(0.902 0 0 0.902 110 130)" id="logo-logo"  >
+<g style=""  paint-order="stroke"   >
+		<g transform="matrix(0.5256105787118807 0 0 0.5256105787118807 0.013186011651896479 -9.548771325538041)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(14,31,47); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-526.2774288334338, -371.8330078)" d="M 389.3052673 511.2958679 C 389.3052673 511.2958679 427.2749023 490.5591736 492.229187 497.4960327 C 557.1834717 504.4328918 620.5611572 542.7528076 620.5611572 542.7528076 L 389.3052673 511.2958679 z M 654.1296387 353.7208252 C 647.0235596 340.58770749999996 638.9212646999999 327.7336426 630.3161011 315.4040222 C 605.357544 321.7782287 575.0913085999999 321.0237732 548.0758056999999 316.96591179999996 C 511.7285461999999 311.69427479999996 474.07687379999993 300.63864129999996 436.19747929999994 296.41067499999997 C 417.5783996999999 320.6579895 399.9741821999999 347.7117614 387.82354739999994 375.3858337 C 473.5455322 355.4011536 565.1539307 322.1629639 654.1296387 353.7208252 z M 616.0635986 297.2537842 C 583.6395874 253.9820557 558.5897216 228.21386719999998 526.2944335999999 200.913208 C 521.3821410999999 205.1785583 489.75311279999994 233.0888977 457.86096189999995 271.5933533 C 471.427063 274.2622986 484.60903929999995 277.70309449999996 497.5655211999999 281.176178 C 535.4984741 291.2707214 575.4211426 303.5532532 616.0635986 297.2537842 z M 679.5233154 428.4390259 C 678.1525268 427.20791629999997 676.7721557 426.0124512 675.3840332 424.8467407 L 678.4067383 422.184906 C 643.9445801 394.45294190000004 594.7324219000001 389.3736572 594.7324219000001 389.3736572 L 594.7308350000001 389.38314820000005 C 524.4056397 378.90563970000005 445.43634040000006 405.79449460000006 376.21566780000006 413.19241330000006 C 372.1201783000001 428.88626100000005 370.63418590000003 446.20452880000005 371.85617070000006 459.29449460000006 C 382.99584970000006 454.55841060000006 393.5561524000001 452.26528930000006 403.68032840000006 451.00341790000004 C 498.03759770000005 436.18862910000007 590.0238648000001 518.7708129 678.3648072000001 474.9994811 C 681.8930054 459.0707092 681.7359619 442.6685181 679.5233154 428.4390259 z" stroke-linecap="round" />
+</g>
+		<g transform="matrix(0.5256105787118807 0 0 0.5256105787118807 0 2.842171e-14)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(61,157,141); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-526.2523417971641, -390.0000153)" d="M 642.4685059 534.4841309 L 643.5454712 534.3754882999999 L 642.7427978999999 535.1014403999999 C 611.1013184 563.7227172999999 569.9592286 579.4851683999999 526.8951415999999 579.4851683999999 C 480.16796869999985 579.4851683999999 436.4987487999999 561.2994383999999 403.9320373999999 528.2782591999999 C 398.5920410999999 522.8639525999998 393.6707458999999 517.1503904999998 389.3052673999999 511.2958677999999 L 388.95843509999986 510.8306272999999 L 389.53024299999987 510.7330930999999 L 389.6646118999999 510.7101743999999 L 389.9236145999999 510.6660764999999 C 391.10055549999987 510.4188840999999 392.2903442999999 510.2279355999999 393.3902283999999 510.0602414999999 C 397.4067688999999 509.31866439999993 401.4993286999999 508.6663205999999 405.83218399999987 507.9754025999999 L 407.82153339999985 507.6580807999999 C 414.70370499999984 506.5714108999999 422.2191468999998 506.0204464999999 430.15884419999986 506.0204464999999 C 436.43276999999983 506.02078219999987 443.0827027999999 506.3648373999999 449.9239198999999 507.04324309999987 C 462.9480897999999 508.3187862999999 477.7373353999999 510.85147059999986 496.4657289999999 515.0138546999999 C 503.3680421999999 516.5455929999999 510.2526552999999 518.1638181 517.5410158999999 519.8768307999999 C 527.0333254999999 522.1077877999999 536.8485109999999 524.4147946999999 546.8730472 526.5559078999999 C 568.5392459 531.1730343999999 585.537659 533.7616573999999 601.9891971 534.9493404999998 C 607.9801639 535.3850704999999 613.9846805 535.6062008999999 619.8360599 535.6062008999999 C 627.4844971 535.6062012 635.098877 535.2288208 642.4685059 534.4841309 z M 469.3257446 350.3189697 C 488.2670898 354.4448547 507.1776428 359.9363708 525.4656372000001 365.24691770000004 C 562.2788086 375.93679810000003 600.3453369000001 386.99078370000007 639.4911499000001 386.99078370000007 C 649.3807983000002 386.99078370000007 659.1810913 386.28115850000006 668.6204834000001 384.88153080000006 L 669.0369873000001 384.81970220000005 L 668.8831787 384.42776490000006 C 659.4993896000001 360.49154660000005 644.8298950000001 334.6990357000001 625.2822876 307.76629640000004 L 625.185791 307.63348390000004 L 625.0215454 307.62823490000005 C 622.1974487 307.53991700000006 619.2369385000001 307.49508670000006 616.2221069000001 307.49508670000006 C 600.1853637 307.49508670000006 583.4134521000001 308.76318360000005 567.1941528000001 309.99005130000006 C 550.5537719000001 311.24835210000003 533.3467407 312.5494995000001 516.4672241000001 312.5494995000001 C 483.9311218000001 312.5494995000001 458.33358760000004 307.50064090000006 435.91085810000004 296.66061400000007 L 435.66482540000004 296.54187010000004 L 435.49896240000004 296.75845340000006 C 424.1116028 311.6262207000001 414.04989620000003 326.3421936000001 405.59362790000006 340.49774170000006 L 405.30505370000003 340.98031620000006 L 405.86712650000004 341.00418090000005 C 424.2264404 341.7812195 447.3561401 345.1762085 469.3257446 350.3189697 z M 451.4226685 279.8872681 L 451.59759529999997 279.9565125 C 467.0176087 285.90292359999995 484.1372987 288.7941285 503.93304449999994 288.7941285 C 523.4464721999999 288.7941285 543.5565185999999 286.0209962 563.0045167 283.3390199 C 575.7227174 281.5851747 588.8739015 279.77185069999996 601.7078247999999 278.7570192 L 602.2843628999999 278.7114259 L 601.9185792 278.2633363 C 574.8612062 245.1151582 554.4155274 224.0879213 526.4812013 200.6808931 L 526.2828980999999 200.51486219999998 L 526.0878907999999 200.68443309999998 C 522.0291138999999 204.2089998 485.44512959999986 236.35981759999999 451.15069599999987 279.3580934 L 450.8923341999999 279.6818849 L 451.2794191999999 279.8298646 L 451.4226685 279.8872681 z M 678.7348633 422.1171875 L 678.6638794 421.7730103 L 678.3233032 421.8603516 C 661.9537964000001 426.0674134 644.9862671000001 428.1121827 626.4512939000001 428.1121827 C 589.9142456000001 428.1121827 552.8455810000002 419.9111024 516.9972534000001 411.9802552 C 481.0582886000001 404.0291138 443.89572140000007 395.8074036 407.1705627000001 395.80673229999996 C 398.14205930000014 395.80642709999995 389.2902221000001 396.3082887 380.8611145000001 397.2976381 L 380.6523743000001 397.32217419999995 L 380.5836487000001 397.52078259999996 C 373.4478150000001 418.10971079999996 370.3050537000001 437.52151499999997 371.24304200000006 455.21667489999993 L 371.52178960000003 459.31704719999993 L 371.55255130000006 459.77017219999993 L 371.97656250000006 459.6072388999999 C 372.49871830000006 459.4060364999999 425.03454590000007 439.49792489999993 496.8182373000001 439.37066659999994 C 559.1991577000001 439.6939087999999 621.8928833000001 452.2944031999999 678.1184692 475.80953989999995 L 678.4855346 475.96298229999996 L 678.5742187000001 475.57495129999995 C 682.3163452 459.2218628 682.374939 439.7374268 678.7348633 422.1171875 z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+<g transform="matrix(1.921 0 0 1.921 659 130)" id="text-logo"  >
+<g style=""  paint-order="stroke"   >
+		<g transform="matrix(1 0 0 1 0 0)" id="text-logo-path-0"  >
+<path style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(14,31,47); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-234.69, 22.4)" d="M 16 -44.8 L 3.2 -44.8 L 3.2 0 L 16 0 L 16 -16.64 L 30.08 -16.64 L 30.08 0 L 42.88 0 L 42.88 -28.16 L 16 -28.16 Z M 42.88 -44.8 L 30.08 -44.8 L 30.08 -33.34 L 42.88 -33.34 Z M 58.37 -44.8 L 75.01 -10.43 L 75.01 0 L 87.81 0 L 87.81 -11.71 L 71.81 -44.8 Z M 91.01 -44.8 L 85.44 -33.34 L 98.88 -33.34 L 104.45 -44.8 Z M 119.87 -28.16 L 119.87 0 L 139.01 0 C 154.94 0 163.01 -7.55 163.01 -22.4 C 163.01 -37.25 154.94 -44.8 139.01 -44.8 L 119.87 -44.8 L 119.87 -33.34 L 139.01 -33.34 C 146.43 -33.34 150.21 -29.7 150.21 -22.4 C 150.21 -15.17 146.43 -11.46 139.01 -11.46 L 132.67 -11.46 L 132.67 -28.16 Z M 201.6 -44.8 L 177.98 -44.8 L 177.98 -33.28 L 200.26 -33.28 C 203.84 -33.28 205.76 -31.62 205.76 -28.16 C 205.76 -24.83 203.84 -23.04 200.26 -23.04 L 184.38 -23.04 L 184.38 -11.52 L 191.04 -11.52 L 200.38 0 L 215.74 0 L 206.14 -11.84 C 214.66 -13.18 219.01 -18.62 219.01 -28.1 C 219.01 -39.17 213.12 -44.8 201.6 -44.8 Z M 258.88 0.64 C 274.82 0.64 282.88 -7.1 282.88 -22.4 C 282.88 -37.7 274.75 -45.44 258.88 -45.44 C 243.01 -45.44 234.88 -37.7 234.88 -22.4 C 234.88 -7.17 242.94 0.64 258.88 0.64 Z M 258.88 -11.65 C 251.46 -11.65 247.68 -15.3 247.68 -22.4 C 247.68 -29.57 251.46 -33.15 258.88 -33.15 C 266.3 -33.15 270.08 -29.57 270.08 -22.4 C 270.08 -15.3 266.3 -11.65 258.88 -11.65 Z" stroke-linecap="round" />
+<path style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(61,157,141); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-234.69, 22.4)" d="M 369.54 -33.28 L 369.54 -44.8 L 337.22 -44.8 L 337.22 -33.28 Z M 350.02 -16.64 L 363.14 -16.64 L 363.14 -28.16 L 337.22 -28.16 L 337.22 0 L 350.02 0 Z M 398.78 -44.8 L 385.98 -44.8 L 385.98 0 L 398.78 0 Z M 429.89 -44.8 L 415.17 -44.8 L 432.64 -22.78 L 414.53 0 L 429.25 0 L 440 -13.57 L 450.82 0 L 465.54 0 Z M 451.46 -44.8 L 442.37 -33.41 L 457.09 -33.41 L 466.18 -44.8 Z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+</svg></a>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="#" class="nav-dropdown-trigger">Services <svg width="11" height="11" viewBox="0 0 12 12" fill="none" style="vertical-align:middle;margin-left:3px"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <ul class="nav-dropdown-menu" style="min-width:340px;padding:10px;">
+          <li style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-light);padding:6px 14px 10px;">Services</li>
+          <li><a href='/residential'><span class="dd-icon">🏠</span><div><strong>Residential</strong><span>Homeowner drainage solutions</span></div></a></li>
+          <li><a href='/commercial'><span class="dd-icon">🏢</span><div><strong>Commercial</strong><span>Warehouses, parking lots & more</span></div></a></li>
+          <li><a href='/golf'><span class="dd-icon">⛳</span><div><strong>Golf Courses</strong><span>Fairways, greens & cart paths</span></div></a></li>
+          <li><a href='/sports'><span class="dd-icon">🏟️</span><div><strong>Sports Complexes</strong><span>Athletic fields & facilities</span></div></a></li>
+          <li style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-light);padding:12px 14px 6px;border-top:1px solid var(--border);margin-top:4px;">Free Calculators</li>
+          <li><a href='/golf-calculator'><span class="dd-icon">⛳</span><div><strong>Golf Revenue Calculator</strong><span>See what rain closures cost your course</span></div></a></li>
+          <li><a href='/sports-calculator'><span class="dd-icon">🏟️</span><div><strong>Sports Complex Calculator</strong><span>See what poor drainage costs your complex</span></div></a></li>
+        </ul>
+      </li>
+      <li class="nav-dropdown">
+        <a href="#" class="nav-dropdown-trigger">Calculators <svg width="11" height="11" viewBox="0 0 12 12" fill="none" style="vertical-align:middle;margin-left:3px"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <ul class="nav-dropdown-menu" style="min-width:240px;">
+          <li><a href='/golf-calculator'><span class="dd-icon">⛳</span><div><strong>Golf Course</strong><span>See what rain closures cost annually</span></div></a></li>
+          <li><a href='/sports-calculator'><span class="dd-icon">🏟️</span><div><strong>Sports Complex</strong><span>See what poor drainage costs your complex</span></div></a></li>
+          <li><a href='/solar-calculator'><span class="dd-icon">☀️</span><div><strong>Solar Farm</strong><span>See your ROI with the Hydro Fix System</span></div></a></li>
+        </ul>
+      </li>
+      <li><a href='/blog'>Blog</a></li>
+      <li><a href='/contact'>Contact</a></li>
+    </ul>
+    <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank" class="nav-cta">Schedule a Call</a>
+    <button class="nav-hamburger" aria-label="Menu" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href='/'>Home</a>
+  <div class="mobile-section-label">Services</div>
+  <a class='mobile-sub' href='/residential'>🏡 Residential</a>
+  <a class='mobile-sub' href='/commercial'>🏢 Commercial</a>
+  <a class='mobile-sub' href='/golf'>⛳ Golf Courses</a>
+  <a class='mobile-sub' href='/sports'>🏟️ Sports Complexes</a>
+  <div class="mobile-section-label">Calculators</div>
+  <a class='mobile-sub' href='/golf-calculator'>⛳ Golf Course Calculator</a>
+  <a class='mobile-sub' href='/sports-calculator'>🏟️ Sports Complex Calculator</a>
+  <a class='mobile-sub' href='/solar-calculator'>☀️ Solar Farm Calculator</a>
+  <a href='/blog'>Blog</a>
+  <a href='/contact'>Contact</a>
+  <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank" style="color:var(--teal);font-weight:600;">Schedule a Call →</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <p class="label" style="color:var(--teal-light)">Sports Complex Drainage</p>
+    <h1>Fields that drain fast. <em>Games that stay on schedule.</em></h1>
+    <p class="sub">Standing water cancels games, frustrates parents, and kills revenue. Hydro Fix installs permanent subsurface drainage that keeps your fields playable — even after heavy Georgia rainfall.</p>
+    <div class="hero-btns">
+      <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank" class="btn btn-teal btn-lg">Schedule a Free Field Assessment</a>
+      <a class='btn btn-outline-white' href='/contact'>Contact Us</a>
+    </div>
+  </div>
+</div>
+
+<!-- CALCULATOR -->
+<section class="calc-section">
+  <div class="inner">
+    <p class="label reveal">Revenue Impact Calculator</p>
+    <h2 class="reveal">How much is poor drainage <em>actually costing you?</em></h2>
+    <p class="lead reveal" style="margin-bottom:24px">Adjust the sliders to match your complex. Switch tabs to see your current annual loss and what Hydro Fix recovers.</p>
+
+    <!-- FACILITY TYPE -->
+    <div class="fac-row reveal">
+      <span class="fac-row-label">Facility type:</span>
+      <button class="fac-pill active" data-type="multi">Multi-Sport</button>
+      <button class="fac-pill" data-type="baseball">Baseball / Softball</button>
+      <button class="fac-pill" data-type="soccer">Soccer</button>
+      <button class="fac-pill" data-type="school">School / Municipal</button>
+    </div>
+
+    <!-- VIEW TABS -->
+    <div class="calc-tabs reveal">
+      <button class="calc-tab active" id="tab-loss" onclick="setView('loss')">Current annual loss</button>
+      <button class="calc-tab" id="tab-savings" onclick="setView('savings')">With Hydro Fix</button>
+    </div>
+
+    <!-- SLIDERS -->
+    <div class="calc-inputs reveal">
+      <div class="calc-field">
+        <label>Rain closure days per year</label>
+        <div class="field-val" id="days-val">35 days</div>
+        <input type="range" id="days" min="5" max="80" step="1" value="35">
+      </div>
+      <div class="calc-field">
+        <label>Tournaments / events per year</label>
+        <div class="field-val" id="tourn-val">12</div>
+        <input type="range" id="tourn" min="0" max="60" step="1" value="12">
+      </div>
+      <div class="calc-field">
+        <label>Revenue per tournament</label>
+        <div class="field-val" id="tournrev-val">$4,500</div>
+        <input type="range" id="tournrev" min="500" max="20000" step="250" value="4500">
+      </div>
+      <div class="calc-field">
+        <label>Field rental rate (per slot)</label>
+        <div class="field-val" id="rental-val">$120</div>
+        <input type="range" id="rental" min="25" max="500" step="5" value="120">
+      </div>
+      <div class="calc-field">
+        <label>Rental slots per week</label>
+        <div class="field-val" id="slots-val">18</div>
+        <input type="range" id="slots" min="2" max="80" step="1" value="18">
+      </div>
+      <div class="calc-field">
+        <label>Concession revenue per event day</label>
+        <div class="field-val" id="concession-val">$650</div>
+        <input type="range" id="concession" min="0" max="5000" step="50" value="650">
+      </div>
+    </div>
+
+    <!-- METRIC CARDS -->
+    <div class="calc-metrics reveal">
+      <div class="calc-metric metric-loss">
+        <div class="calc-metric-label">Game & tournament revenue lost</div>
+        <div class="calc-metric-val" id="m-games">—</div>
+        <div class="calc-metric-sub" id="m-games-sub">—</div>
+      </div>
+      <div class="calc-metric metric-warn">
+        <div class="calc-metric-label">Concession & ancillary lost</div>
+        <div class="calc-metric-val" id="m-concession">—</div>
+        <div class="calc-metric-sub" id="m-concession-sub">—</div>
+      </div>
+      <div class="calc-metric metric-teal">
+        <div class="calc-metric-label">Rain days impacting play</div>
+        <div class="calc-metric-val" id="m-days">—</div>
+        <div class="calc-metric-sub">days per year</div>
+      </div>
+    </div>
+
+    <!-- TOTAL BAR -->
+    <div class="calc-total reveal">
+      <div>
+        <div class="calc-total-label" id="total-label">Total annual loss from drainage</div>
+        <div class="calc-total-sub" id="total-sub">games + tournaments + concessions + maintenance</div>
+      </div>
+      <div class="calc-total-val" id="total-val">—</div>
+    </div>
+
+    <!-- BOTTOM GRID -->
+    <div class="calc-bottom">
+      <div>
+        <!-- LOSS BREAKDOWN -->
+        <div class="calc-breakdown reveal" id="breakdown-loss">
+          <div class="calc-br-row"><span class="br-label">Tournament revenue lost</span><span class="br-val" id="b-tourn">—</span></div>
+          <div class="calc-br-row"><span class="br-label">Field rental revenue lost</span><span class="br-val" id="b-rental">—</span></div>
+          <div class="calc-br-row"><span class="br-label">Concession revenue lost</span><span class="br-val" id="b-concession">—</span></div>
+          <div class="calc-br-row"><span class="br-label">Annual drainage maintenance (est.)</span><span class="br-val">$8,000–$18,000</span></div>
+        </div>
+
+        <!-- SAVINGS BREAKDOWN -->
+        <div class="calc-breakdown reveal" id="breakdown-savings" style="display:none">
+          <div class="calc-br-row"><span class="br-label">Tournament revenue recovered</span><span class="br-val" id="s-tourn">—</span></div>
+          <div class="calc-br-row"><span class="br-label">Field rental revenue recovered</span><span class="br-val" id="s-rental">—</span></div>
+          <div class="calc-br-row"><span class="br-label">Concession revenue recovered</span><span class="br-val" id="s-concession">—</span></div>
+          <div class="calc-br-row"><span class="br-label">Maintenance eliminated</span><span class="br-val">$8,000–$18,000/yr</span></div>
+          <div class="calc-br-row"><span class="br-label">Hydro Fix installation (one-time est.)</span><span class="br-val" id="s-install">—</span></div>
+        </div>
+
+        <!-- PAYBACK -->
+        <div class="payback-box" id="payback-box" style="display:none">
+          <h4>Estimated payback period</h4>
+          <div class="payback-years" id="payback-years">—</div>
+          <p id="payback-desc">—</p>
+        </div>
+      </div>
+
+      <!-- CHART -->
+      <div class="calc-chart-box reveal">
+        <div class="calc-chart-eyebrow" id="chart-eyebrow">Annual loss by category</div>
+        <div class="calc-chart-wrap">
+          <canvas id="impactChart" role="img" aria-label="Bar chart showing sports complex annual revenue loss by category"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA ROW -->
+    <div class="calc-cta-row reveal">
+      <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank" class="btn btn-teal btn-lg">Schedule a Free Field Assessment</a>
+      <p>We'll walk your fields, identify the highest-priority drainage areas, and give you a clear picture of what permanent drainage costs — and what it recovers every season after.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM SECTION -->
+<section class="section">
+  <div class="inner">
+    <p class="label reveal">The Sports Complex Problem</p>
+    <h2 class="reveal">Water is the enemy of <em>consistent play.</em></h2>
+    <p class="lead reveal">Standing water, slow-draining infields, and waterlogged outfields don't just frustrate coaches and parents — they cancel revenue, damage turf, and push teams to better-draining facilities.</p>
+    <div class="card-grid-3 reveal">
+      <div class="card card-teal"><div class="card-icon">🏆</div><h4>Cancelled Tournaments</h4><p>A single rain event can wipe out an entire weekend of tournament revenue — entry fees, concessions, and facility rentals all gone at once.</p></div>
+      <div class="card card-teal"><div class="card-icon">⚽</div><h4>Mud & Standing Water</h4><p>Waterlogged fields damage turf, create injury liability, and leave a lasting impression on teams deciding where to register next season.</p></div>
+      <div class="card card-teal"><div class="card-icon">🔧</div><h4>Endless Maintenance</h4><p>Regrading, reseeding, and temporary drainage fixes year after year — treating symptoms instead of solving the actual drainage problem.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY HYDRO FIX -->
+<section class="section dark">
+  <div class="inner">
+    <div class="split reveal">
+      <div>
+        <p class="label">Why Hydro Fix Works for Sports Fields</p>
+        <h2>Pressure-fed drainage built for <em>high-traffic fields.</em></h2>
+        <p class="lead">No gravel, no fabric, no clogging. Hydro Fix installs with minimal excavation and starts working immediately — without rebuilding your fields.</p>
+        <div class="feature-list">
+          <div class="feature"><div class="feature-icon">💧</div><div><h4>Works without slope</h4><p>Fields rarely have ideal grades — Hydro Fix moves water via pressure regardless of pitch.</p></div></div>
+          <div class="feature"><div class="feature-icon">🏗️</div><div><h4>Doesn't crush under load</h4><p>HydroBlox maintains structural integrity under constant foot traffic and field equipment — unlike perforated pipe.</p></div></div>
+          <div class="feature"><div class="feature-icon">♾️</div><div><h4>Never clogs, never fails</h4><p>No filters to clean, no pipes to flush. The system works the same on day 1 as it does on year 10.</p></div></div>
+          <div class="feature"><div class="feature-icon">⚡</div><div><h4>Retrofit without full teardown</h4><p>Address specific problem zones without rebuilding the entire field. Minimal downtime, maximum impact.</p></div></div>
+        </div>
+      </div>
+      <div class="split-img">🏟️</div>
+    </div>
+  </div>
+</section>
+
+<!-- BIG STAT -->
+<section class="section big-stat-section">
+  <div class="inner split reveal">
+    <div>
+      <div class="big-stat">24hrs</div>
+      <div class="big-stat-sub">typical field recovery time after<br>heavy rain with Hydro Fix</div>
+    </div>
+    <div>
+      <p class="label">The Business Case</p>
+      <h2>Every cancelled game is <em>real revenue walking out.</em></h2>
+      <p style="margin-bottom:20px">Game cancellations aren't just an inconvenience — they're direct revenue loss on field rentals, concessions, and registration fees, plus the invisible cost of teams that quietly choose a different complex next season.</p>
+      <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank" class="btn btn-dark">Schedule a Field Assessment</a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <p class="label" style="color:var(--teal-light);justify-content:center">Keep Your Fields Playable</p>
+  <h2>Solve drainage before it <em>costs you another season.</em></h2>
+  <p class="sub">We'll evaluate your complex, identify the highest-priority areas, and design a drainage system that keeps you open.</p>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+    <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank" class="btn btn-teal btn-lg">Schedule a Free Field Assessment</a>
+    <a class='btn btn-outline-white btn-lg' href='/contact'>Get in Touch</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <a href="/" class="footer-logo" aria-label="Hydro Fix home"><svg style="display:block;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="160" height="36" viewBox="0 0 1150 260" xml:space="preserve">
+<desc>HydroFix Alt 2 - HYDRO white, FIX teal (dark background)</desc>
+<defs>
+</defs>
+<g transform="matrix(1 0 0 1 640 512)" id="background-logo"  >
+<rect style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-opacity: 0; fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  x="-640" y="-512" rx="0" ry="0" width="1280" height="1024" />
+</g>
+<g transform="matrix(0.902 0 0 0.902 110 130)" id="logo-logo"  >
+<g style=""  paint-order="stroke"   >
+		<g transform="matrix(0.5256105787118807 0 0 0.5256105787118807 0.013186011651896479 -9.548771325538041)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-526.2774288334338, -371.8330078)" d="M 389.3052673 511.2958679 C 389.3052673 511.2958679 427.2749023 490.5591736 492.229187 497.4960327 C 557.1834717 504.4328918 620.5611572 542.7528076 620.5611572 542.7528076 L 389.3052673 511.2958679 z M 654.1296387 353.7208252 C 647.0235596 340.58770749999996 638.9212646999999 327.7336426 630.3161011 315.4040222 C 605.357544 321.7782287 575.0913085999999 321.0237732 548.0758056999999 316.96591179999996 C 511.7285461999999 311.69427479999996 474.07687379999993 300.63864129999996 436.19747929999994 296.41067499999997 C 417.5783996999999 320.6579895 399.9741821999999 347.7117614 387.82354739999994 375.3858337 C 473.5455322 355.4011536 565.1539307 322.1629639 654.1296387 353.7208252 z M 616.0635986 297.2537842 C 583.6395874 253.9820557 558.5897216 228.21386719999998 526.2944335999999 200.913208 C 521.3821410999999 205.1785583 489.75311279999994 233.0888977 457.86096189999995 271.5933533 C 471.427063 274.2622986 484.60903929999995 277.70309449999996 497.5655211999999 281.176178 C 535.4984741 291.2707214 575.4211426 303.5532532 616.0635986 297.2537842 z M 679.5233154 428.4390259 C 678.1525268 427.20791629999997 676.7721557 426.0124512 675.3840332 424.8467407 L 678.4067383 422.184906 C 643.9445801 394.45294190000004 594.7324219000001 389.3736572 594.7324219000001 389.3736572 L 594.7308350000001 389.38314820000005 C 524.4056397 378.90563970000005 445.43634040000006 405.79449460000006 376.21566780000006 413.19241330000006 C 372.1201783000001 428.88626100000005 370.63418590000003 446.20452880000005 371.85617070000006 459.29449460000006 C 382.99584970000006 454.55841060000006 393.5561524000001 452.26528930000006 403.68032840000006 451.00341790000004 C 498.03759770000005 436.18862910000007 590.0238648000001 518.7708129 678.3648072000001 474.9994811 C 681.8930054 459.0707092 681.7359619 442.6685181 679.5233154 428.4390259 z" stroke-linecap="round" />
+</g>
+		<g transform="matrix(0.5256105787118807 0 0 0.5256105787118807 0 2.842171e-14)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(61,157,141); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-526.2523417971641, -390.0000153)" d="M 642.4685059 534.4841309 L 643.5454712 534.3754882999999 L 642.7427978999999 535.1014403999999 C 611.1013184 563.7227172999999 569.9592286 579.4851683999999 526.8951415999999 579.4851683999999 C 480.16796869999985 579.4851683999999 436.4987487999999 561.2994383999999 403.9320373999999 528.2782591999999 C 398.5920410999999 522.8639525999998 393.6707458999999 517.1503904999998 389.3052673999999 511.2958677999999 L 388.95843509999986 510.8306272999999 L 389.53024299999987 510.7330930999999 L 389.6646118999999 510.7101743999999 L 389.9236145999999 510.6660764999999 C 391.10055549999987 510.4188840999999 392.2903442999999 510.2279355999999 393.3902283999999 510.0602414999999 C 397.4067688999999 509.31866439999993 401.4993286999999 508.6663205999999 405.83218399999987 507.9754025999999 L 407.82153339999985 507.6580807999999 C 414.70370499999984 506.5714108999999 422.2191468999998 506.0204464999999 430.15884419999986 506.0204464999999 C 436.43276999999983 506.02078219999987 443.0827027999999 506.3648373999999 449.9239198999999 507.04324309999987 C 462.9480897999999 508.3187862999999 477.7373353999999 510.85147059999986 496.4657289999999 515.0138546999999 C 503.3680421999999 516.5455929999999 510.2526552999999 518.1638181 517.5410158999999 519.8768307999999 C 527.0333254999999 522.1077877999999 536.8485109999999 524.4147946999999 546.8730472 526.5559078999999 C 568.5392459 531.1730343999999 585.537659 533.7616573999999 601.9891971 534.9493404999998 C 607.9801639 535.3850704999999 613.9846805 535.6062008999999 619.8360599 535.6062008999999 C 627.4844971 535.6062012 635.098877 535.2288208 642.4685059 534.4841309 z M 469.3257446 350.3189697 C 488.2670898 354.4448547 507.1776428 359.9363708 525.4656372000001 365.24691770000004 C 562.2788086 375.93679810000003 600.3453369000001 386.99078370000007 639.4911499000001 386.99078370000007 C 649.3807983000002 386.99078370000007 659.1810913 386.28115850000006 668.6204834000001 384.88153080000006 L 669.0369873000001 384.81970220000005 L 668.8831787 384.42776490000006 C 659.4993896000001 360.49154660000005 644.8298950000001 334.6990357000001 625.2822876 307.76629640000004 L 625.185791 307.63348390000004 L 625.0215454 307.62823490000005 C 622.1974487 307.53991700000006 619.2369385000001 307.49508670000006 616.2221069000001 307.49508670000006 C 600.1853637 307.49508670000006 583.4134521000001 308.76318360000005 567.1941528000001 309.99005130000006 C 550.5537719000001 311.24835210000003 533.3467407 312.5494995000001 516.4672241000001 312.5494995000001 C 483.9311218000001 312.5494995000001 458.33358760000004 307.50064090000006 435.91085810000004 296.66061400000007 L 435.66482540000004 296.54187010000004 L 435.49896240000004 296.75845340000006 C 424.1116028 311.6262207000001 414.04989620000003 326.3421936000001 405.59362790000006 340.49774170000006 L 405.30505370000003 340.98031620000006 L 405.86712650000004 341.00418090000005 C 424.2264404 341.7812195 447.3561401 345.1762085 469.3257446 350.3189697 z M 451.4226685 279.8872681 L 451.59759529999997 279.9565125 C 467.0176087 285.90292359999995 484.1372987 288.7941285 503.93304449999994 288.7941285 C 523.4464721999999 288.7941285 543.5565185999999 286.0209962 563.0045167 283.3390199 C 575.7227174 281.5851747 588.8739015 279.77185069999996 601.7078247999999 278.7570192 L 602.2843628999999 278.7114259 L 601.9185792 278.2633363 C 574.8612062 245.1151582 554.4155274 224.0879213 526.4812013 200.6808931 L 526.2828980999999 200.51486219999998 L 526.0878907999999 200.68443309999998 C 522.0291138999999 204.2089998 485.44512959999986 236.35981759999999 451.15069599999987 279.3580934 L 450.8923341999999 279.6818849 L 451.2794191999999 279.8298646 L 451.4226685 279.8872681 z M 678.7348633 422.1171875 L 678.6638794 421.7730103 L 678.3233032 421.8603516 C 661.9537964000001 426.0674134 644.9862671000001 428.1121827 626.4512939000001 428.1121827 C 589.9142456000001 428.1121827 552.8455810000002 419.9111024 516.9972534000001 411.9802552 C 481.0582886000001 404.0291138 443.89572140000007 395.8074036 407.1705627000001 395.80673229999996 C 398.14205930000014 395.80642709999995 389.2902221000001 396.3082887 380.8611145000001 397.2976381 L 380.6523743000001 397.32217419999995 L 380.5836487000001 397.52078259999996 C 373.4478150000001 418.10971079999996 370.3050537000001 437.52151499999997 371.24304200000006 455.21667489999993 L 371.52178960000003 459.31704719999993 L 371.55255130000006 459.77017219999993 L 371.97656250000006 459.6072388999999 C 372.49871830000006 459.4060364999999 425.03454590000007 439.49792489999993 496.8182373000001 439.37066659999994 C 559.1991577000001 439.6939087999999 621.8928833000001 452.2944031999999 678.1184692 475.80953989999995 L 678.4855346 475.96298229999996 L 678.5742187000001 475.57495129999995 C 682.3163452 459.2218628 682.374939 439.7374268 678.7348633 422.1171875 z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+<g transform="matrix(1.921 0 0 1.921 659 130)" id="text-logo"  >
+<g style=""  paint-order="stroke"   >
+		<g transform="matrix(1 0 0 1 0 0)" id="text-logo-path-0"  >
+<path style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-234.69, 22.4)" d="M 16 -44.8 L 3.2 -44.8 L 3.2 0 L 16 0 L 16 -16.64 L 30.08 -16.64 L 30.08 0 L 42.88 0 L 42.88 -28.16 L 16 -28.16 Z M 42.88 -44.8 L 30.08 -44.8 L 30.08 -33.34 L 42.88 -33.34 Z M 58.37 -44.8 L 75.01 -10.43 L 75.01 0 L 87.81 0 L 87.81 -11.71 L 71.81 -44.8 Z M 91.01 -44.8 L 85.44 -33.34 L 98.88 -33.34 L 104.45 -44.8 Z M 119.87 -28.16 L 119.87 0 L 139.01 0 C 154.94 0 163.01 -7.55 163.01 -22.4 C 163.01 -37.25 154.94 -44.8 139.01 -44.8 L 119.87 -44.8 L 119.87 -33.34 L 139.01 -33.34 C 146.43 -33.34 150.21 -29.7 150.21 -22.4 C 150.21 -15.17 146.43 -11.46 139.01 -11.46 L 132.67 -11.46 L 132.67 -28.16 Z M 201.6 -44.8 L 177.98 -44.8 L 177.98 -33.28 L 200.26 -33.28 C 203.84 -33.28 205.76 -31.62 205.76 -28.16 C 205.76 -24.83 203.84 -23.04 200.26 -23.04 L 184.38 -23.04 L 184.38 -11.52 L 191.04 -11.52 L 200.38 0 L 215.74 0 L 206.14 -11.84 C 214.66 -13.18 219.01 -18.62 219.01 -28.1 C 219.01 -39.17 213.12 -44.8 201.6 -44.8 Z M 258.88 0.64 C 274.82 0.64 282.88 -7.1 282.88 -22.4 C 282.88 -37.7 274.75 -45.44 258.88 -45.44 C 243.01 -45.44 234.88 -37.7 234.88 -22.4 C 234.88 -7.17 242.94 0.64 258.88 0.64 Z M 258.88 -11.65 C 251.46 -11.65 247.68 -15.3 247.68 -22.4 C 247.68 -29.57 251.46 -33.15 258.88 -33.15 C 266.3 -33.15 270.08 -29.57 270.08 -22.4 C 270.08 -15.3 266.3 -11.65 258.88 -11.65 Z" stroke-linecap="round" />
+<path style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(61,157,141); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-234.69, 22.4)" d="M 369.54 -33.28 L 369.54 -44.8 L 337.22 -44.8 L 337.22 -33.28 Z M 350.02 -16.64 L 363.14 -16.64 L 363.14 -28.16 L 337.22 -28.16 L 337.22 0 L 350.02 0 Z M 398.78 -44.8 L 385.98 -44.8 L 385.98 0 L 398.78 0 Z M 429.89 -44.8 L 415.17 -44.8 L 432.64 -22.78 L 414.53 0 L 429.25 0 L 440 -13.57 L 450.82 0 L 465.54 0 Z M 451.46 -44.8 L 442.37 -33.41 L 457.09 -33.41 L 466.18 -44.8 Z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+</svg></a>
+        <p class="footer-desc">Permanent, pressure-fed drainage systems that never clog, crush, or fail. Made from 100% recycled materials. Serving the Southeast.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a href='/residential'>Residential</a>
+        <a href='/commercial'>Commercial</a>
+        <a href='/golf'>Golf Courses</a>
+        <a href='/sports'>Sports Complexes</a>
+        <a href='/sports-calculator'>Sports Complex Calculator</a>
+        <a href='/golf-calculator'>Golf Revenue Calculator</a>
+      </div>
+      <div class="footer-col">
+        <h5>Service Areas</h5>
+        <a href='/service-areas'>All Service Areas</a>
+        <a href='/cities/canton'>Canton</a>
+        <a href='/cities/woodstock'>Woodstock</a>
+        <a href='/cities/marietta'>Marietta</a>
+        <a href='/cities/alpharetta'>Alpharetta</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href='/blog'>Blog</a>
+        <a href='/contact'>Contact Us</a>
+        <a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank">Schedule a Call</a>
+        <a href="/legal/privacy-policy">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Hydro Fix. the Southeast. All rights reserved.</p>
+      <div style="display:flex;gap:20px"><a href="/legal/privacy-policy">Privacy</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta"><a href="https://calendar.app.google/yHwfh8ZnLQXPHaW78" target="_blank">Schedule Free Assessment</a></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+let chart, currentView = 'loss';
+
+const fmt  = n => '$' + Math.round(n).toLocaleString();
+const fmtK = n => { const a = Math.abs(n); if(a >= 1000000) return '$'+(n/1000000).toFixed(1)+'M'; if(a >= 1000) return '$'+Math.round(n/1000)+'K'; return fmt(n); };
+
+// Presets per facility type
+const PRESETS = {
+  multi:    { days:35, tourn:12, tournrev:4500, rental:120, slots:18, concession:650 },
+  baseball: { days:35, tourn:18, tournrev:5500, rental:100, slots:22, concession:800 },
+  soccer:   { days:35, tourn:10, tournrev:6000, rental:140, slots:20, concession:500 },
+  school:   { days:35, tourn:6,  tournrev:2500, rental:80,  slots:10, concession:300 }
+};
+
+function getVals() {
+  return {
+    days:      +document.getElementById('days').value,
+    tourn:     +document.getElementById('tourn').value,
+    tournrev:  +document.getElementById('tournrev').value,
+    rental:    +document.getElementById('rental').value,
+    slots:     +document.getElementById('slots').value,
+    concession:+document.getElementById('concession').value
+  };
+}
+
+function compute(v) {
+  // Tournaments cancelled: assume 25% of rain days hit a tournament
+  const tournCancelled  = Math.round(v.tourn * (v.days / 120));
+  const tournLoss       = tournCancelled * v.tournrev;
+
+  // Rental slots lost: rain days × daily slots (slots/7) × 50% cancel rate
+  const rentalLoss      = v.days * (v.slots / 7) * v.rental * 0.5;
+
+  // Concession: 60% of rain days hurt concessions, lose 65% of that day's revenue
+  const concessionLoss  = v.days * 0.60 * v.concession * 0.65;
+
+  // Maintenance estimate
+  const maintCost       = 13000; // midpoint $8k–$18k
+
+  const total = tournLoss + rentalLoss + concessionLoss + maintCost;
+  const installEst = Math.round(Math.max(total * 1.6, 18000) / 5000) * 5000;
+  const paybackYrs = Math.ceil(installEst / total);
+
+  return { tournCancelled, tournLoss, rentalLoss, concessionLoss, maintCost, total, installEst, paybackYrs };
+}
+
+function update() {
+  const v = getVals(), c = compute(v);
+
+  // Slider display values
+  document.getElementById('days-val').textContent       = v.days + ' days';
+  document.getElementById('tourn-val').textContent      = v.tourn.toLocaleString();
+  document.getElementById('tournrev-val').textContent   = '$' + v.tournrev.toLocaleString();
+  document.getElementById('rental-val').textContent     = '$' + v.rental;
+  document.getElementById('slots-val').textContent      = v.slots.toLocaleString();
+  document.getElementById('concession-val').textContent = '$' + v.concession.toLocaleString();
+
+  // Metric cards
+  document.getElementById('m-games').textContent         = fmtK(c.tournLoss + c.rentalLoss);
+  document.getElementById('m-games-sub').textContent     = c.tournCancelled + ' tournaments + rental slots lost';
+  document.getElementById('m-concession').textContent    = fmtK(c.concessionLoss);
+  document.getElementById('m-concession-sub').textContent= Math.round(v.days * 0.60) + ' impacted event days';
+  document.getElementById('m-days').textContent          = v.days;
+
+  // Breakdown rows
+  document.getElementById('b-tourn').textContent      = fmtK(c.tournLoss);
+  document.getElementById('b-rental').textContent     = fmtK(c.rentalLoss);
+  document.getElementById('b-concession').textContent = fmtK(c.concessionLoss);
+  document.getElementById('s-tourn').textContent      = fmtK(c.tournLoss);
+  document.getElementById('s-rental').textContent     = fmtK(c.rentalLoss);
+  document.getElementById('s-concession').textContent = fmtK(c.concessionLoss);
+  document.getElementById('s-install').textContent    = fmtK(c.installEst) + ' est.';
+
+  // Payback
+  document.getElementById('payback-years').textContent = c.paybackYrs + (c.paybackYrs === 1 ? ' year' : ' years');
+  document.getElementById('payback-desc').textContent  = 'Based on ' + fmtK(c.installEst) + ' installation vs ' + fmtK(c.total) + ' recovered annually.';
+
+  // Total bar
+  if(currentView === 'loss') {
+    document.getElementById('total-val').textContent   = fmtK(c.total);
+    document.getElementById('total-val').className     = 'calc-total-val';
+    document.getElementById('total-label').textContent = 'Total annual loss from drainage';
+    document.getElementById('total-sub').textContent   = 'games + tournaments + concessions + maintenance';
+  } else {
+    document.getElementById('total-val').textContent   = fmtK(c.total);
+    document.getElementById('total-val').className     = 'calc-total-val good';
+    document.getElementById('total-label').textContent = 'Annual savings with Hydro Fix';
+    document.getElementById('total-sub').textContent   = 'recovered every year after installation';
+  }
+
+  // Chart
+  const labels = ['Tournament\nloss','Rental\nloss','Concession\nloss','Maintenance'];
+  const data   = [c.tournLoss, c.rentalLoss, c.concessionLoss, c.maintCost];
+  const colors = currentView === 'loss'
+    ? ['#b91c1c','#92400e','#0e1f2f','#7a94a8']
+    : ['#2d7d6f','#3d9d8d','#1c3448','#e8f4f2'];
+
+  if(chart) {
+    chart.data.datasets[0].data = data;
+    chart.data.datasets[0].backgroundColor = colors;
+    chart.update();
+  } else {
+    chart = new Chart(document.getElementById('impactChart'), {
+      type: 'bar',
+      data: { labels, datasets: [{ data, backgroundColor: colors, borderRadius: 6, borderSkipped: false }] },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' ' + fmtK(ctx.raw) } } },
+        scales: {
+          x: { ticks: { color: '#7a94a8', font: { size: 11, family: "'Inter', system-ui" }, autoSkip: false }, grid: { display: false }, border: { display: false } },
+          y: { ticks: { color: '#7a94a8', font: { size: 11, family: "'Inter', system-ui" }, callback: v => fmtK(v) }, grid: { color: 'rgba(14,31,47,0.06)' }, border: { display: false } }
+        }
+      }
+    });
+  }
+}
+
+function setView(view) {
+  currentView = view;
+  document.getElementById('tab-loss').classList.toggle('active', view === 'loss');
+  document.getElementById('tab-savings').classList.toggle('active', view === 'savings');
+  document.getElementById('breakdown-loss').style.display    = view === 'loss'    ? 'block' : 'none';
+  document.getElementById('breakdown-savings').style.display = view === 'savings' ? 'block' : 'none';
+  document.getElementById('payback-box').style.display       = view === 'savings' ? 'block' : 'none';
+  document.getElementById('chart-eyebrow').textContent       = view === 'loss'    ? 'Annual loss by category' : 'Annual savings recovered';
+  update();
+}
+
+// Facility type pills
+document.querySelectorAll('.fac-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.fac-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    const p = PRESETS[pill.dataset.type];
+    Object.entries(p).forEach(([id, val]) => { document.getElementById(id).value = val; });
+    update();
+  });
+});
+
+// Nav dropdown
+document.addEventListener('click', e => { if(!e.target.closest('.nav-dropdown')) document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open')); });
+document.querySelectorAll('.nav-dropdown-trigger').forEach(t => { t.addEventListener('click', e => { e.preventDefault(); const p = t.closest('.nav-dropdown'), was = p.classList.contains('open'); document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open')); if(!was) p.classList.add('open'); }); });
+
+// Slider listeners
+['days','tourn','tournrev','rental','slots','concession'].forEach(id => document.getElementById(id).addEventListener('input', update));
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('v'); }); }, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Init
+update();
+</script>
+</body>
+</html>

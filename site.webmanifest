@@ -1,0 +1,30 @@
+{
+  "name": "Hydro Fix",
+  "short_name": "Hydro Fix",
+  "description": "Permanent pressure-fed drainage solutions for the Southeast U.S.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f3ee",
+  "theme_color": "#0e1f2f",
+  "icons": [
+    {
+      "src": "/img/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/img/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/img/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
