@@ -14,6 +14,7 @@ on:
 permissions:
   contents: write         # push the post branch
   pull-requests: write    # open the PR
+  id-token: write         # required by anthropics/claude-code-action for its OIDC token exchange
 
 concurrency:
   group: weekly-blog
