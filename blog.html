@@ -139,19 +139,19 @@
   <div class="inner">
 
     <div class="filter-bar">
-<button class="filter-btn active" data-tag="all">All (55)</button>
-<button class="filter-btn" data-tag="Agriculture">Agriculture (4)</button>
-<button class="filter-btn" data-tag="Commercial">Commercial (7)</button>
+<button class="filter-btn active" data-tag="all">All (69)</button>
+<button class="filter-btn" data-tag="Agriculture">Agriculture (6)</button>
+<button class="filter-btn" data-tag="Commercial">Commercial (11)</button>
 <button class="filter-btn" data-tag="Comparison">Comparison (1)</button>
 <button class="filter-btn" data-tag="Design">Design (1)</button>
-<button class="filter-btn" data-tag="Engineering">Engineering (7)</button>
-<button class="filter-btn" data-tag="Golf">Golf (6)</button>
-<button class="filter-btn" data-tag="Guide">Guide (1)</button>
+<button class="filter-btn" data-tag="Engineering">Engineering (8)</button>
+<button class="filter-btn" data-tag="Golf">Golf (7)</button>
+<button class="filter-btn" data-tag="Guide">Guide (2)</button>
 <button class="filter-btn" data-tag="Installation">Installation (1)</button>
 <button class="filter-btn" data-tag="Municipal">Municipal (6)</button>
-<button class="filter-btn" data-tag="Residential">Residential (7)</button>
+<button class="filter-btn" data-tag="Residential">Residential (14)</button>
 <button class="filter-btn" data-tag="Sports">Sports (6)</button>
-<button class="filter-btn" data-tag="Sustainability">Sustainability (5)</button>
+<button class="filter-btn" data-tag="Sustainability">Sustainability (6)</button>
     </div>
 
     <p class="results-count" id="results-count">Showing all 69 articles</p>
@@ -861,6 +861,17 @@
   const cards = document.querySelectorAll('.blog-card');
   const countEl = document.getElementById('results-count');
 
+  // Auto-compute counts from the actual cards so filter labels + the results
+  // line can never go stale as posts are added.
+  const counts = {};
+  cards.forEach(c => { const t = c.dataset.tag; if (t) counts[t] = (counts[t] || 0) + 1; });
+  btns.forEach(btn => {
+    const tag = btn.dataset.tag;
+    const n = tag === 'all' ? cards.length : (counts[tag] || 0);
+    btn.textContent = btn.textContent.replace(/\s*\(\d+\)\s*$/, '') + ' (' + n + ')';
+  });
+  if (countEl) countEl.textContent = 'Showing all ' + cards.length + ' articles';
+
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
       btns.forEach(b => b.classList.remove('active'));
@@ -868,14 +879,11 @@
       const tag = btn.dataset.tag;
       let visible = 0;
       cards.forEach(card => {
-        if (tag === 'all' || card.dataset.tag === tag) {
-          card.classList.remove('hidden');
-          visible++;
-        } else {
-          card.classList.add('hidden');
-        }
+        if (tag === 'all' || card.dataset.tag === tag) { card.classList.remove('hidden'); visible++; }
+        else { card.classList.add('hidden'); }
       });
-      const label = tag === 'all' ? 'all 69 articles' : visible + ' article' + (visible !== 1 ? 's' : '') + ' in ' + tag;
+      const label = tag === 'all' ? 'all ' + cards.length + ' articles'
+                                  : visible + ' article' + (visible !== 1 ? 's' : '') + ' in ' + tag;
       countEl.textContent = 'Showing ' + label;
     });
   });
