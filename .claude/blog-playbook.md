@@ -182,10 +182,13 @@ Exactly three files change. Nothing else.
    ```
    `⟦Category⟧` must be an existing filter tag: **Residential, Commercial, Golf, Sports,
    Agriculture, Municipal, Sustainability, Engineering, Installation, Comparison, Design, Guide.**
-   b. **Increment the article count** everywhere it appears (currently `56 articles` / `all 56
-   articles`) → the new number. It appears ~7 times: meta description, `og:description`,
-   `twitter:description`, the Article JSON-LD description, the hero sub-paragraph,
-   `#results-count` text, and the JS `'all N articles'` label. Update all of them.
+   b. **Increment the SEO article count** in the static head/hero text only: the meta
+   description, `og:description`, `twitter:description`, the Article JSON-LD description,
+   and the hero sub-paragraph (`<p class="sub">`). These are static SEO copy — bump the
+   number to match the new total.
+   **Do NOT hand-edit the category filter buttons or the `#results-count` line** — those
+   counts are computed by JavaScript from the actual `.blog-card` elements on load
+   (added 2026-09-13), so they stay correct automatically. Leave their numbers alone.
 3. **Edit `sitemap.xml`** — add one `<url>` block, alphabetically/logically near the other
    `/blog/` entries:
    ```
