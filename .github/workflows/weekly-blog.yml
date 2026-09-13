@@ -58,6 +58,25 @@ jobs:
             --dangerously-skip-permissions \
             --allowedTools "Read,Write,Edit,Glob,Grep"
 
+      # Auto-refill the topic queue when it runs low, so it never needs manual
+      # top-ups. Only calls Claude (extra API cost) when undone topics < threshold.
+      - name: Refill topic queue when low
+        if: env.skip != 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          set -e
+          undone=$(grep -cvE '^#|^Convention|^writes|^Add new|^[[:space:]]*$|^\[done\]' .claude/blog-topics.md || true)
+          echo "Undone topics remaining: $undone"
+          if [ "${undone:-0}" -lt 8 ]; then
+            echo "Below threshold (8) — generating more topics."
+            claude -p "The file .claude/blog-topics.md is a blog topic queue for the Hydro Fix drainage company (US Southeast: GA, FL, NC, SC, TN; audience segments: residential, commercial, golf, sports, municipal, agriculture, sustainability, engineering). APPEND 12 new blog topic ideas to the END of .claude/blog-topics.md, one per line, with NO [done] prefix. Each must be a specific, on-brand drainage/stormwater topic. Before writing, read the existing lines in .claude/blog-topics.md AND list the files in the blog/ directory, and ensure none of your 12 topics duplicate or closely overlap an existing queue line or an existing blog/<slug>.html post. Do not modify or reorder existing lines; only append. Do not touch any other file. Do not run git." \
+              --dangerously-skip-permissions \
+              --allowedTools "Read,Write,Edit,Glob,Grep"
+          else
+            echo "Queue healthy ($undone undone) — no refill needed."
+          fi
+
       - name: Open and auto-merge the pull request
         if: env.skip != 'true'
         env:
