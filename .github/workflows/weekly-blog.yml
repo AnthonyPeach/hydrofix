@@ -58,14 +58,14 @@ jobs:
             --dangerously-skip-permissions \
             --allowedTools "Read,Write,Edit,Glob,Grep"
 
-      - name: Open a pull request
+      - name: Open and auto-merge the pull request
         if: env.skip != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           if git diff --quiet && git diff --cached --quiet; then
-            echo "No changes produced (topic queue may be empty) — nothing to open."
+            echo "No changes produced (topic queue may be empty) — nothing to publish."
             exit 0
           fi
           slug=$(git status --porcelain -- 'blog/*.html' \
@@ -78,14 +78,23 @@ jobs:
           git switch -c "$branch"
           git add -A
           git commit -m "Add blog post: $slug" \
-                     -m "Automated draft via the weekly blog pipeline (.claude/blog-playbook.md). Review the Netlify Deploy Preview before merging." \
+                     -m "Automated post via the weekly blog pipeline (.claude/blog-playbook.md)." \
                      -m "Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
           git push -u origin "$branch"
-          gh pr create --base main --head "$branch" \
+          pr_url=$(gh pr create --base main --head "$branch" \
             --title "Blog: $slug" \
             --body "$(printf '%s\n' \
-              "Automated weekly draft following \`.claude/blog-playbook.md\`." \
+              "Automated post following \`.claude/blog-playbook.md\`. Auto-merged by the pipeline; Netlify publishes it to myhydrofix.com on merge." \
               "" \
-              "**Before merging:** open the Netlify Deploy Preview linked on this PR, read the post, and confirm the internal links and layout look right. Merging to \`main\` publishes it to myhydrofix.com." \
-              "" \
-              "🤖 Generated with [Claude Code](https://claude.com/claude-code)")"
+              "🤖 Generated with [Claude Code](https://claude.com/claude-code)")")
+          echo "Opened $pr_url"
+          # Fully hands-off: merge as soon as GitHub reports it mergeable
+          # (no required status checks are configured on this repo).
+          for i in 1 2 3 4 5; do
+            if gh pr merge "$branch" --merge --delete-branch; then
+              echo "Merged and deleted $branch — Netlify will deploy main."; exit 0
+            fi
+            echo "Merge attempt $i not ready; waiting..."; sleep 10
+          done
+          echo "::error::PR $pr_url opened but auto-merge did not complete after retries."
+          exit 1
