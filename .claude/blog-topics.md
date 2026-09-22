@@ -18,7 +18,7 @@ Add new topics at the bottom. Keep ~10+ undone at all times.
 [done] Freeze-Thaw and Winter Drainage Problems in the Southeast
 [done] Drainage Easements and Property Lines: A Southeast Owner's Guide
 [done] Sump Pump vs. Pressure-Fed Drainage for Basements
-Driveway and Hardscape Drainage Solutions
+[done] Driveway and Hardscape Drainage Solutions
 Drainage for Sloped and Hillside Lots
 Rain Gardens vs. Subsurface Drainage: What Actually Works
 The True Cost of Ignoring a Drainage Problem
