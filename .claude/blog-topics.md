@@ -19,7 +19,7 @@ Add new topics at the bottom. Keep ~10+ undone at all times.
 [done] Drainage Easements and Property Lines: A Southeast Owner's Guide
 [done] Sump Pump vs. Pressure-Fed Drainage for Basements
 [done] Driveway and Hardscape Drainage Solutions
-Drainage for Sloped and Hillside Lots
+[done] Drainage for Sloped and Hillside Lots
 Rain Gardens vs. Subsurface Drainage: What Actually Works
 The True Cost of Ignoring a Drainage Problem
 How Poor Drainage Hurts Property Value
