@@ -22,7 +22,7 @@ Add new topics at the bottom. Keep ~10+ undone at all times.
 [done] Drainage for Sloped and Hillside Lots
 [done] Rain Gardens vs. Subsurface Drainage: What Actually Works
 [done] The True Cost of Ignoring a Drainage Problem
-How Poor Drainage Hurts Property Value
+[done] How Poor Drainage Hurts Property Value
 Hotel and Resort Grounds Drainage
 Self-Storage Facility Drainage
 Car Dealership Lot Drainage
